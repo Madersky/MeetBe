@@ -1,0 +1,133 @@
+.user-avatar {
+  //avatar uzytkownika
+  margin-left: 0.1vw;
+  margin-top: 0.1vw;
+  background-color: #9933cc;
+  display: inline-block;
+  height: 50px;
+  min-height: 50px;
+  width: 50px;
+  min-width: 50px;
+  border-width: 4px;
+  border-style: groove;
+  border-radius: 1vw;
+  border-color: gray;
+
+  // grid-column-start: 1;
+  // grid-column-end: span 1;
+  // grid-row-start: 1;
+  // grid-row-end: span 1;
+}
+.user-data {
+  // email użytkownika
+  display: inline-block;
+  align-items: center;
+  color: white;
+  width: 150px;
+  min-width: 10vw;
+  margin-left: 0.3vw;
+  border-width: 5px;
+  border-style: groove;
+  border-radius: 15px;
+  border-color: #9933cc;
+  a {
+    font-size: calc(12px + 0.2vw);
+    color: white;
+    text-decoration: none;
+  }
+}
+.admin-buttons {
+  // przyciski dla admina przy nazwie użytkownika
+
+  display: inline-block;
+  width: 20vw;
+  height: 5vh;
+  margin-left: 0.5vw;
+
+  .admin-edit-post {
+    
+    color: white;
+    width: 6vw;
+    min-width: 3vw;
+    height: 5vh;
+    background-color: #880788;
+    border-width: 3px;
+    border-style: groove;
+    border-radius: 8px;
+    margin-left: 0.2vw;
+    font-size: calc(6px + 0.2vw);
+    transition: ease-in-out 0.1 s;
+    &:hover {
+      transition: ease-in-out 0.1s;
+      background-color: #b407b4;
+    }
+  }
+  .admin-delete-post {
+    color: white;
+    width: 6vw;
+    min-width: 3vw;
+    height: 5vh;
+    background-color: #880788;
+    border-width: 3px;
+    border-style: groove;
+    border-radius: 8px;
+    margin-left: 0.2vw;
+    font-size: calc(6px + 0.2vw);
+    transition: ease-in-out 0.1s;
+    &:hover {
+      transition: ease-in-out 0.1s;
+      background-color: #b407b4;
+    }
+  }
+  .admin-ban-user {
+    color: white;
+    width: 6vw;
+    min-width: 3vw;
+    height: 5vh;
+    background-color: #880788;
+    border-width: 3px;
+    border-style: groove;
+    border-radius: 8px;
+    margin-left: 0.2vw;
+    font-size: calc(6px + 0.2vw);
+    transition: ease-in-out 0.1s;
+    &:hover {
+      transition: ease-in-out 0.1s;
+      background-color: #b407b4;
+    }
+  }
+}
+
+.post {
+  // wiadomość użytkownika
+  background-color: #b48fff;
+  margin: 0.3vw 0.3vw 0.3vw;
+  min-height: 200px;
+  font-size: calc(18px + 0.2vw);
+  border-style: solid;
+  border-radius: 1.5vw;
+  padding: 0.2vw;
+  border-color: #9933cc;
+}
+.bttn-edit-post {
+  // guzik edit post
+  display: inline-block;
+  font-size: calc(4px + 0.6vw);
+  color: white;
+  background-color: #660066;
+  width: calc(20px + 4vw);
+  height: calc(20px + 2vw);
+  margin: 1vw 1vw;
+  font-size: calc(14px + 0.1vw);
+  border-color: #9966ff;
+  border-radius: 1vw;
+  border-style: groove;
+}
+.comments {
+  background-color: #6633cc;
+  border-color: #9933cc;
+  border-style: solid;
+  border-radius: 1vw;
+  border-width: 5px;
+  padding: 0.5vw;
+}
