@@ -7,29 +7,29 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: blog.dev
+    - host: meetbe.dev
       http:
         paths:
           - path: /api/users/?(.*)
             backend:
               serviceName: auth-srv
               servicePort: 3000
-          - path: /api/posts/?(.*)
-            backend:
-              serviceName: posts-srv
-              servicePort: 3000
-          - path: /api/comments/?(.*)
-            backend:
-              serviceName: comments-srv
-              servicePort: 3000
+          # - path: /api/posts/?(.*)
+          #   backend:
+          #     serviceName: posts-srv
+          #     servicePort: 3000
+          # - path: /api/comments/?(.*)
+          #   backend:
+          #     serviceName: comments-srv
+          #     servicePort: 3000
           - path: /api/profiles/?(.*)
             backend:
               serviceName: profiles-srv
               servicePort: 3000
-          - path: /api/groups/?(.*)
-            backend:
-              serviceName: groups-srv
-              servicePort: 3000
+          # - path: /api/groups/?(.*)
+          #   backend:
+          #     serviceName: groups-srv
+          #     servicePort: 3000
           - path: /?(.*)
             backend:
               serviceName: client-srv

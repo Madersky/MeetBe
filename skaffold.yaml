@@ -16,22 +16,22 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: madersky/posts
-      context: posts
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.ts"
-            dest: .
-    - image: madersky/comments
-      context: comments
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.ts"
-            dest: .
+    # - image: madersky/posts
+    #   context: posts
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: "src/**/*.ts"
+    #         dest: .
+    # - image: madersky/comments
+    #   context: comments
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: "src/**/*.ts"
+    #         dest: .
     - image: madersky/profiles
       context: profiles
       docker:
@@ -40,14 +40,14 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: madersky/groups
-      context: groups
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.ts"
-            dest: .
+    # - image: madersky/groups
+    #   context: groups
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: "src/**/*.ts"
+    #         dest: .
     - image: madersky/client
       context: client
       docker:
