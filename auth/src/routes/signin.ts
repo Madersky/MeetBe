@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
-import { validateRequest, BadRequestError } from "@lmportal/common";
+import { validateRequest, BadRequestError } from "@meetbe/common";
 
 import { Password } from "../services/password";
 import { User } from "../models/userModel";

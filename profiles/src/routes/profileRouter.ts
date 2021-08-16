@@ -1,9 +1,5 @@
 import express from "express";
-import {
-  requireAuth,
-  validateRequest,
-  BadRequestError,
-} from "@lmportal/common";
+import { requireAuth, validateRequest, BadRequestError } from "@meetbe/common";
 
 const validator = require("../controllers/profileValidator");
 const profileController = require("../controllers/profileController");

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { Profile } from "../model/profileModel";
-import { BadRequestError } from "@lmportal/common";
+import { BadRequestError } from "@meetbe/common";
+import { ProfileCreatedPublisher } from "../events/publishers/profile-created-publisher";
 
 exports.createProfile = async (req: Request, res: Response) => {
   console.log("CREATING PROFILE");
@@ -50,6 +51,14 @@ exports.createProfile = async (req: Request, res: Response) => {
   console.log(profile);
 
   await profile.save();
+
+  // new ProfileCreatedPublisher(client).publish({
+  //   id: profile.id,
+  //   firstName: profile.firstName,
+  //   lastName : profile.lastName,
+  //   age: profile.age,
+  //   userId: profile.userId
+  // })
 
   res.status(201).send({ profile: profile || null });
 };

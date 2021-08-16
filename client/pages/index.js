@@ -13,7 +13,7 @@ const overlayHide = () => {
 
 const LandingPage = ({ currentUser }) => {
   return currentUser ? (
-    <h1>You are signed in</h1>
+    <h1>You are signed in {currentUser.email}</h1>
   ) : (
     <div className="welcome-container">
       <div className="content">
@@ -23,7 +23,7 @@ const LandingPage = ({ currentUser }) => {
         <div className="card-1">
           Add posts! <br></br>
           <br></br>
-Create your own content on Let's Meet!
+          Create your own content on Let's Meet!
         </div>
         <div className="card-2">
           Find friends! <br></br>

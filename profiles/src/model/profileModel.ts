@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 interface ProfileAttrs {
   email: string;
@@ -14,6 +14,7 @@ interface ProfileAttrs {
   hometown: string;
   school: string;
   profession: string;
+  currentJob: string;
   socialStatus: string;
   phoneNumber: string;
   userId: string;
@@ -37,6 +38,7 @@ interface ProfileDoc extends mongoose.Document {
   hometown: string;
   school: string;
   profession: string;
+  currentJob: string;
   socialStatus: string;
   phoneNumber: string;
   userId: string;
@@ -82,12 +84,10 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-
     interests: {
       type: String,
       required: false,
     },
-
     hometown: {
       type: String,
       required: false,
@@ -97,6 +97,10 @@ const profileSchema = new mongoose.Schema(
       required: false,
     },
     profession: {
+      type: String,
+      required: false,
+    },
+    currentJob: {
       type: String,
       required: false,
     },
@@ -130,7 +134,7 @@ profileSchema.statics.build = (attrs: ProfileAttrs) => {
 };
 
 const Profile = mongoose.model<ProfileDoc, ProfileModel>(
-  'Profile',
+  "Profile",
   profileSchema
 );
 

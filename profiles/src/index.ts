@@ -2,7 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieSession from "cookie-session";
 import { json } from "body-parser";
-import { currentUser, NotFoundError, errorHandler } from "@lmportal/common";
+import { currentUser, NotFoundError, errorHandler } from "@meetbe/common";
+import { natsWrapper } from "./natsWrapper";
 
 const profileRouter = require("./routes/profileRouter");
 const app = express();
@@ -30,6 +31,12 @@ const start = async () => {
     throw new Error("JWT_KEY must be defined");
   }
   try {
+    await natsWrapper.connect(
+      "meetbe",
+      "odaihwoidahw",
+      "https://nats-srv:4222"
+    );
+
     await mongoose.connect("mongodb://profiles-mongo-srv:27017/profiles", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
