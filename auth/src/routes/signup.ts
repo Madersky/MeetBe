@@ -29,6 +29,8 @@ router.post(
 
     const user = User.build({ email, password });
     await user.save();
+
+    //PUBLISHING EVENT user:created
     await new UserCreatedPublisher(natsWrapper.client).publish({
       userId: user.id,
       email: user.email,

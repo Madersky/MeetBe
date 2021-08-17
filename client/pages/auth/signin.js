@@ -12,7 +12,7 @@ const Signin = () => {
       email,
       password,
     },
-    onSuccess: () => Router.push('/content/home'),
+    onSuccess: () => Router.push('/'),
   });
 
   const onSubmit = async (event) => {
