@@ -14,7 +14,7 @@ const Signup = () => {
       email,
       password,
     },
-    onSuccess: () => Router.push('/profiles/editProfile'),
+    onSuccess: () => Router.push('/'),
   });
 
   const onSubmit = async (event) => {
