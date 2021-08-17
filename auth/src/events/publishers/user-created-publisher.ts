@@ -1,5 +1,6 @@
-import { Publisher, UserCreatedEvent, Subjects } from "@meetbe/common";
-
-export class userCreatedPublisher extends Publisher<UserCreatedEvent> {
-  subject: Subjects.UserCreated = Subjects.UserCreated;
+import { Subjects } from '@meetbe/common';
+import { Publisher } from '@meetbe/common';
+import { UserCreatedEvent } from '@meetbe/common';
+export class UserCreatedPublisher extends Publisher<UserCreatedEvent> {
+  readonly subject = Subjects.UserCreated;
 }

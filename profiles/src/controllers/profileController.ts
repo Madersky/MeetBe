@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Profile } from "../model/profileModel";
 import { BadRequestError } from "@meetbe/common";
-import { ProfileCreatedPublisher } from "../events/publishers/profile-created-publisher";
 
 exports.createProfile = async (req: Request, res: Response) => {
   console.log("CREATING PROFILE");
@@ -17,6 +16,7 @@ exports.createProfile = async (req: Request, res: Response) => {
     hometown,
     school,
     profession,
+    currentJob,
     socialStatus,
     phoneNumber,
   } = req.body;
@@ -43,6 +43,7 @@ exports.createProfile = async (req: Request, res: Response) => {
     hometown: hometown,
     school: school,
     profession: profession,
+    currentJob: currentJob,
     socialStatus: socialStatus,
     phoneNumber: phoneNumber,
     userId: req.currentUser!.id,
