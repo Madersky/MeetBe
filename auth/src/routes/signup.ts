@@ -37,6 +37,7 @@ router.post(
       email: user.email,
       firstname: user.firstname,
       lastname: user.lastname,
+      version: user.version,
     });
 
     // Generate JWT

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { createTrue } from 'typescript';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import { Password } from '../services/password';
 
 //an interface that describes the properties
@@ -24,6 +24,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 interface UserDoc extends mongoose.Document {
   email: string;
+  version: number;
   firstname: string;
   lastname: string;
   password: string;
@@ -59,6 +60,9 @@ const userSchema = new mongoose.Schema(
     },
   }
 );
+
+userSchema.set('versionKey', 'version');
+userSchema.plugin(updateIfCurrentPlugin);
 
 userSchema.pre('save', async function (done) {
   if (this.isModified('password')) {
