@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 interface ProfileAttrs {
   email: string;
@@ -134,7 +134,7 @@ profileSchema.statics.build = (attrs: ProfileAttrs) => {
 };
 
 const Profile = mongoose.model<ProfileDoc, ProfileModel>(
-  "Profile",
+  'Profile',
   profileSchema
 );
 

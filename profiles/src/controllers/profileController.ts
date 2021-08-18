@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from "express";
-import { Profile } from "../model/profileModel";
-import { BadRequestError } from "@meetbe/common";
+import { Request, Response, NextFunction } from 'express';
+import { Profile } from '../models/profile';
+import { BadRequestError } from '@meetbe/common';
 
 exports.createProfile = async (req: Request, res: Response) => {
-  console.log("CREATING PROFILE");
+  console.log('CREATING PROFILE');
   const {
     firstName,
     lastName,
@@ -26,7 +26,7 @@ exports.createProfile = async (req: Request, res: Response) => {
   });
 
   if (existingProfile) {
-    throw new BadRequestError("Profile already created");
+    throw new BadRequestError('Profile already created');
   }
 
   const profile = Profile.build({
@@ -79,7 +79,7 @@ exports.getAllProfiles = async (
 
 exports.getProfileByUserId = async (req: Request, res: Response) => {
   try {
-    const profile = await Profile.where("userId").equals(req.params.id);
+    const profile = await Profile.where('userId').equals(req.params.id);
 
     res.status(200).send({ profile: profile });
   } catch (err) {
@@ -89,7 +89,7 @@ exports.getProfileByUserId = async (req: Request, res: Response) => {
 
 exports.getProfileByEmail = async (req: Request, res: Response) => {
   try {
-    const profile = await Profile.where("email").equals(req.params.email);
+    const profile = await Profile.where('email').equals(req.params.email);
     res.status(200).send({ profile: profile || null });
   } catch (err) {
     res.status(404).send(`ERROR! ${err}`);

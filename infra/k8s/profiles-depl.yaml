@@ -16,6 +16,16 @@ spec:
         - name: profiles
           image: madersky/profiles
           env:
+            - name: NATS_URL
+              value: 'https://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: meetbe
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MONGO_URI
+              value: 'mongodb://profiles-mongo-srv:27017/profiles'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
