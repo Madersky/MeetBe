@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
+import { UserDoc, User } from './user';
 
 interface ProfileAttrs {
-  email: string;
-  firstname: string;
-  lastname: string;
+  id: string;
+  user: UserDoc;
   age: string;
   birthDate: string;
   message: string;
@@ -17,7 +17,6 @@ interface ProfileAttrs {
   currentJob: string;
   socialStatus: string;
   phoneNumber: string;
-  userId: string;
 }
 
 interface ProfileModel extends mongoose.Model<ProfileDoc> {
@@ -25,9 +24,7 @@ interface ProfileModel extends mongoose.Model<ProfileDoc> {
 }
 
 interface ProfileDoc extends mongoose.Document {
-  email: string;
-  firstname: string;
-  lastname: string;
+  user: UserDoc;
   age: string;
   birthDate: string;
   message: string;
@@ -41,22 +38,13 @@ interface ProfileDoc extends mongoose.Document {
   currentJob: string;
   socialStatus: string;
   phoneNumber: string;
-  userId: string;
 }
 
 const profileSchema = new mongoose.Schema(
   {
-    email: {
-      type: String,
-      required: true,
-    },
-    firstname: {
-      type: String,
-      required: true,
-    },
-    lastname: {
-      type: String,
-      required: true,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
     },
     message: {
       type: String,
@@ -112,10 +100,6 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    userId: {
-      type: String,
-      required: true,
-    },
   },
 
   {
@@ -128,9 +112,24 @@ const profileSchema = new mongoose.Schema(
     },
   }
 );
-
 profileSchema.statics.build = (attrs: ProfileAttrs) => {
-  return new Profile(attrs);
+  return new Profile({
+    _id: attrs.id,
+    user: attrs.user,
+    age: attrs.age,
+    birthDate: attrs.birthDate,
+    message: attrs.message,
+    profilePhoto: attrs.profilePhoto,
+    createdAt: new Date(Date.now()).toString(),
+    hobbys: attrs.hobbys,
+    interests: attrs.interests,
+    hometown: attrs.hometown,
+    school: attrs.school,
+    profession: attrs.profession,
+    currentJob: attrs.currentJob,
+    socialStatus: attrs.socialStatus,
+    phoneNumber: attrs.phoneNumber,
+  });
 };
 
 const Profile = mongoose.model<ProfileDoc, ProfileModel>(

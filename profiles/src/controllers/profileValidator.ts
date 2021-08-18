@@ -1,8 +1,8 @@
 const { body, oneOf } = require('express-validator');
 
 exports.validateProfile = [
-  body('firstname').trim().notEmpty().withMessage('Write your name please'),
-  body('lastname').trim().notEmpty().withMessage('Write your lastname please'),
+  // body('firstname').trim().notEmpty().withMessage('Write your name please'),
+  // body('lastname').trim().notEmpty().withMessage('Write your lastname please'),
   body('message').trim(),
   body('age')
     .optional({ checkFalsy: true })

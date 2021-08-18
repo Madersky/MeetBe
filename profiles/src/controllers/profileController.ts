@@ -6,8 +6,6 @@ import { BadRequestError } from '@meetbe/common';
 exports.createProfile = async (req: Request, res: Response) => {
   console.log('CREATING PROFILE');
   const {
-    firstname,
-    lastname,
     message,
     age,
     birthDate,
@@ -22,18 +20,20 @@ exports.createProfile = async (req: Request, res: Response) => {
     phoneNumber,
   } = req.body;
 
-  const existingProfile = await Profile.findOne({
-    userId: req.currentUser!.id,
-  });
+  const existingProfile = await Profile.findById(req.currentUser!.id);
+  // userID: req.currentUser!.id,
 
   if (existingProfile) {
     throw new BadRequestError('Profile already created');
   }
+  const user = await User.findById(req.currentUser!.id);
 
+  if (!user) {
+    throw new Error('User not found');
+  }
   const profile = Profile.build({
-    email: req.currentUser!.email,
-    firstname: firstname,
-    lastname: lastname,
+    id: user.id,
+    user: user,
     age: age,
     birthDate: birthDate,
     message: message,
@@ -47,7 +47,6 @@ exports.createProfile = async (req: Request, res: Response) => {
     currentJob: currentJob,
     socialStatus: socialStatus,
     phoneNumber: phoneNumber,
-    userId: req.currentUser!.id,
   });
 
   console.log(profile);
@@ -71,9 +70,9 @@ exports.getAllProfiles = async (
   next: NextFunction
 ) => {
   try {
-    const allProfiles = await Profile.find();
-    const allUsers = await User.find();
-    res.status(200).send({ profiles: allProfiles, users: allUsers || null });
+    const allProfiles = await Profile.find().populate('user');
+    // const allUsers = await User.find();
+    res.status(200).send({ profiles: allProfiles || null });
   } catch (err) {
     res.status(404).send(`ERROR!! ${err}`);
   }
