@@ -1,11 +1,11 @@
-import nats, { Stan } from "node-nats-streaming";
+import nats, { Stan } from 'node-nats-streaming';
 
 class NatsWrapper {
   private _client?: Stan;
 
   get client() {
     if (!this._client) {
-      throw new Error("There is no connected client right now");
+      throw new Error('There is no connected client right now');
     }
     return this._client;
   }
@@ -13,14 +13,12 @@ class NatsWrapper {
   connect(clusterId: string, clientId: string, url: string) {
     this._client = nats.connect(clusterId, clientId, { url });
 
-    // SPRAWDZIC VOID
-
     return new Promise<void>((resolve, reject) => {
-      this.client.on("connect", () => {
-        console.log("Connected to NATS");
+      this.client.on('connect', () => {
+        console.log('Connected to NATS');
         resolve();
       });
-      this.client.on("error", (err) => {
+      this.client.on('error', (err) => {
         reject(err);
       });
     });
