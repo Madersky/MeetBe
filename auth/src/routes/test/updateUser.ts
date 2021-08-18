@@ -1,9 +1,13 @@
 import express, { Request, Response } from 'express';
 import { currentUser } from '@meetbe/common';
+
 import { User } from '../../models/userModel';
+import { UserUpdatedPublisher } from '../../events/publishers/user-updated-publisher';
+import { natsWrapper } from '../../natsWrapper';
 
 const router = express.Router();
 
+// DZIAŁA, ZMIENIC POD APLIKACJE
 router.patch(
   '/api/users/updateuser/:id',
   currentUser,
@@ -17,6 +21,13 @@ router.patch(
     }
     user.set({ firstname });
     await user.save();
+    new UserUpdatedPublisher(natsWrapper.client).publish({
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      version: user.version,
+      id: user.id,
+    });
     res.status(201).send({ user });
   }
 );
