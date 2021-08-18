@@ -9,7 +9,7 @@ router.patch(
   currentUser,
   async (req: Request, res: Response) => {
     // try {
-    const user = await User.findOne({ id: req.params.id });
+    const user = await User.findById(req.params.id);
 
     const { firstname } = req.body;
 
@@ -17,7 +17,7 @@ router.patch(
       throw new Error('User not found');
     }
     user.set({ firstname });
-    user.save();
+    await user.save();
     res.status(201).send({ user });
     // } catch (err) {
     //   res.status(400).send({ err });
