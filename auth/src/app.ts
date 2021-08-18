@@ -8,7 +8,9 @@ import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
-import { allUserRouter } from './routes/all-users';
+
+import { allUserRouter } from './routes/test/all-users';
+import { updateUserRouter } from './routes/test/updateUser';
 
 const app = express();
 app.set('trust proxy', true);
@@ -19,7 +21,7 @@ app.use(
     secure: process.env.NODE_ENV !== 'test',
   })
 );
-
+app.use(updateUserRouter);
 app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
