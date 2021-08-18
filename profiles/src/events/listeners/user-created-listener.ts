@@ -7,14 +7,15 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
   queueGroupName = 'profiles-service';
 
   async onMessage(data: UserCreatedEvent['data'], msg: Message) {
-    const { id, username, email } = data;
+    const { id, firstname, lastname, email } = data;
     const user = User.build({
       id,
-      username,
       email,
+      lastname,
+      firstname,
     });
     await user.save();
-
+    console.log(user);
     msg.ack();
   }
 }

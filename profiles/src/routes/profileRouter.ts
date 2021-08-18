@@ -1,12 +1,12 @@
-import express from "express";
-import { requireAuth, validateRequest, BadRequestError } from "@meetbe/common";
+import express from 'express';
+import { requireAuth, validateRequest, BadRequestError } from '@meetbe/common';
 
-const validator = require("../controllers/profileValidator");
-const profileController = require("../controllers/profileController");
+const validator = require('../controllers/profileValidator');
+const profileController = require('../controllers/profileController');
 const router = express.Router();
 
 router
-  .route("/")
+  .route('/')
   .get(requireAuth, profileController.getAllProfiles)
   .post(
     requireAuth,
@@ -16,7 +16,7 @@ router
   );
 
 router
-  .route("/id/:id")
+  .route('/id/:id')
   .get(requireAuth, profileController.getProfileByUserId)
   .patch(
     requireAuth,
@@ -26,7 +26,7 @@ router
   );
 
 router
-  .route("/email/:email")
+  .route('/email/:email')
   .get(requireAuth, profileController.getProfileByEmail);
 
 module.exports = router;

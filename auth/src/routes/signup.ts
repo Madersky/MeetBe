@@ -19,7 +19,7 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, firstname, lastname, password } = req.body;
 
     const existingUser = await User.findOne({ email });
 
@@ -27,14 +27,17 @@ router.post(
       throw new BadRequestError('Email in use');
     }
 
-    const user = User.build({ email, password });
+    const user = User.build({ email, firstname, lastname, password });
     await user.save();
 
-    //PUBLISHING EVENT user:created
-    // await new UserCreatedPublisher(natsWrapper.client).publish({
-    //   userId: user.id,
-    //   email: user.email,
-    // });
+    // PUBLISHING EVENT user:created
+
+    await new UserCreatedPublisher(natsWrapper.client).publish({
+      id: user.id,
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname,
+    });
 
     // Generate JWT
     const userJwt = jwt.sign(

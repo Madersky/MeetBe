@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { createTrue } from 'typescript';
 import { Password } from '../services/password';
 
 //an interface that describes the properties
@@ -6,6 +7,8 @@ import { Password } from '../services/password';
 
 interface UserAttrs {
   email: string;
+  firstname: string;
+  lastname: string;
   password: string;
 }
 
@@ -21,6 +24,8 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 interface UserDoc extends mongoose.Document {
   email: string;
+  firstname: string;
+  lastname: string;
   password: string;
 }
 
@@ -29,6 +34,14 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
+    },
+    firstname: {
+      type: String,
+      require: true,
+    },
+    lastname: {
+      type: String,
+      require: true,
     },
     password: {
       type: String,
