@@ -3,12 +3,14 @@ import mongoose from 'mongoose';
 interface UserAttrs {
   id: string;
   email: string;
-  username: string;
+  firstname: string;
+  lastname: string;
 }
 
 export interface UserDoc extends mongoose.Document {
   email: string;
-  username: string;
+  firstname: string;
+  lastname: string;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -19,11 +21,15 @@ const userSchema = new mongoose.Schema(
   {
     email: {
       type: String,
-      require: false,
+      require: true,
     },
-    username: {
+    firstname: {
       type: String,
-      require: false,
+      require: true,
+    },
+    lastname: {
+      type: String,
+      require: true,
     },
   },
   {
@@ -40,7 +46,8 @@ userSchema.statics.build = (attrs: UserAttrs) => {
   return new User({
     _id: attrs.id,
     email: attrs.email,
-    username: attrs.username,
+    firstname: attrs.firstname,
+    lastname: attrs.lastname,
   });
 };
 

@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 interface ProfileAttrs {
   email: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   age: string;
   birthDate: string;
   message: string;
@@ -26,8 +26,8 @@ interface ProfileModel extends mongoose.Model<ProfileDoc> {
 
 interface ProfileDoc extends mongoose.Document {
   email: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   age: string;
   birthDate: string;
   message: string;
@@ -50,11 +50,11 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    firstName: {
+    firstname: {
       type: String,
       required: true,
     },
-    lastName: {
+    lastname: {
       type: String,
       required: true,
     },

@@ -1,12 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import { Profile } from '../models/profile';
+import { User } from '../models/user';
 import { BadRequestError } from '@meetbe/common';
 
 exports.createProfile = async (req: Request, res: Response) => {
   console.log('CREATING PROFILE');
   const {
-    firstName,
-    lastName,
+    firstname,
+    lastname,
     message,
     age,
     birthDate,
@@ -31,8 +32,8 @@ exports.createProfile = async (req: Request, res: Response) => {
 
   const profile = Profile.build({
     email: req.currentUser!.email,
-    firstName: firstName,
-    lastName: lastName,
+    firstname: firstname,
+    lastname: lastname,
     age: age,
     birthDate: birthDate,
     message: message,
@@ -71,7 +72,8 @@ exports.getAllProfiles = async (
 ) => {
   try {
     const allProfiles = await Profile.find();
-    res.status(200).send({ profiles: allProfiles || null });
+    const allUsers = await User.find();
+    res.status(200).send({ profiles: allProfiles, users: allUsers || null });
   } catch (err) {
     res.status(404).send(`ERROR!! ${err}`);
   }
