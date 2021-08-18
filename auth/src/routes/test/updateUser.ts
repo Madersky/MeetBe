@@ -8,7 +8,6 @@ router.patch(
   '/api/users/updateuser/:id',
   currentUser,
   async (req: Request, res: Response) => {
-    // try {
     const user = await User.findById(req.params.id);
 
     const { firstname } = req.body;
@@ -19,9 +18,6 @@ router.patch(
     user.set({ firstname });
     await user.save();
     res.status(201).send({ user });
-    // } catch (err) {
-    //   res.status(400).send({ err });
-    // }
   }
 );
 
