@@ -14,7 +14,7 @@ const overlayHide = () => {
 const LandingPage = ({ currentUser }) => {
   return currentUser ? (
     <div>
-      <Navbar user={currentUser.id} />
+      <Navbar userId={currentUser.id} />
       <h1>You are signed in {currentUser.email}</h1>
     </div>
   ) : (
