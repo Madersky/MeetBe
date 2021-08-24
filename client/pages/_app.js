@@ -1,5 +1,4 @@
 import buildClient from '../api/buildClient';
-import Navbar from '../components/Navbar';
 
 import '../scss/navbar-scss.scss';
 
@@ -20,7 +19,6 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
         href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
         rel="stylesheet"
       ></link>
-      <Navbar userId={currentUser.id} />
       <Component currentUser={currentUser} {...pageProps} />
     </div>
   );

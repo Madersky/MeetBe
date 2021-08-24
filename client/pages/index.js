@@ -1,5 +1,5 @@
 import buildClient from '../api/buildClient';
-
+import Navbar from '../components/Navbar';
 const overlayHide = () => {
   let overlay = document.getElementById('overlay');
   // hide.style.transition = 'ease 1s';
@@ -13,7 +13,10 @@ const overlayHide = () => {
 
 const LandingPage = ({ currentUser }) => {
   return currentUser ? (
-    <h1>You are signed in {currentUser.email}</h1>
+    <div>
+      <Navbar user={currentUser.id} />
+      <h1>You are signed in {currentUser.email}</h1>
+    </div>
   ) : (
     <div className="">POPRAWIĆ</div>
   );
