@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import EditProfile from '../../components/EditProfile';
+
 const Profile = ({ profile }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [editMode, setEditMode] = useState(false);
@@ -32,7 +34,7 @@ const Profile = ({ profile }) => {
               Birthdate: {profile.birthDate}
             </p>
             <p className="lead text-start fw-bold px-5">
-              Message: {profile.messa}
+              Message: {profile.message}
             </p>
             <p className="lead text-start fw-bold px-5">
               Profile Photo: {profile.profilePhoto}
@@ -81,6 +83,8 @@ const Profile = ({ profile }) => {
           >
             Click to edit
           </button>
+          <EditProfile />
+
           <p className="lead text-center p-5">KOLUMNA 2</p>
         </div>
       </div>

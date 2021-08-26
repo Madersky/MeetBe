@@ -1,11 +1,5 @@
 import { useState } from 'react';
 import Router from 'next/router';
-import {
-  ArrowRight,
-  PersonFill,
-  ChatRightDotsFill,
-  ShieldLockFill,
-} from 'react-bootstrap-icons';
 
 import useRequest from '../../hooks/use-request';
 
@@ -47,7 +41,7 @@ const Signup = () => {
             </label>
             <div className="input-group">
               <span className="input-group-text">
-                <ChatRightDotsFill />
+                <i className="bi bi-chat-right-dots-fill"></i>
               </span>
               <input
                 type="email"
@@ -63,7 +57,7 @@ const Signup = () => {
             </label>
             <div className="input-group">
               <span className="input-group-text">
-                <PersonFill />
+                <i className="bi bi-person-fill"></i>
               </span>
               <input
                 type="text"
@@ -79,7 +73,7 @@ const Signup = () => {
             </label>
             <div className="input-group">
               <span className="input-group-text">
-                <PersonFill />
+                <i className="bi bi-person-fill"></i>
               </span>
               <input
                 type="text"
@@ -95,10 +89,11 @@ const Signup = () => {
             </label>
             <div className="input-group">
               <span className="input-group-text">
-                <ShieldLockFill />
+                <i className="bi bi-shield-lock-fill"></i>
               </span>
 
               <input
+                placeholder="********"
                 id="passowrd"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -110,7 +105,7 @@ const Signup = () => {
             {/* {createProfileErrors} */}
             <div className="justify-content-center text-center">
               <button className="btn btn-light border my-5 ">
-                <ArrowRight size={20} />
+                <i className="bi bi-arrow-right"></i>
               </button>
             </div>
           </form>
