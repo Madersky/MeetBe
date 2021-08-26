@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useState } from "react";
+import axios from 'axios';
+import { useState } from 'react';
 
 const UseRequest = ({ url, method, body, onSuccess }) => {
   const [errors, setErrors] = useState(null);
@@ -15,7 +15,7 @@ const UseRequest = ({ url, method, body, onSuccess }) => {
 
       return response.data;
     } catch (err) {
-      // console.log("Error message z useRequesta");
+      // console.log('Error message z useRequesta');
       // console.log(err);
       setErrors(
         <div className="box-errors-credentials">
@@ -30,7 +30,7 @@ const UseRequest = ({ url, method, body, onSuccess }) => {
     }
   };
 
-  return { doRequest, errors };
+  return [doRequest, errors];
 };
 
 export default UseRequest;

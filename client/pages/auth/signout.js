@@ -3,7 +3,7 @@ import useRequest from '../../hooks/use-request';
 import Router from 'next/router';
 
 const SignOut = () => {
-  const { doRequest } = useRequest({
+  const [doRequest] = useRequest({
     url: '/api/users/signout',
     method: 'post',
     body: {},
