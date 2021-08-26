@@ -80,8 +80,7 @@ exports.getAllProfiles = async (
 
 exports.getProfileByUserId = async (req: Request, res: Response) => {
   try {
-    const profile = await Profile.where('userId').equals(req.params.id);
-
+    const profile = await Profile.findById(req.params.id).populate('user');
     res.status(200).send({ profile: profile });
   } catch (err) {
     res.status(404).send(`ERRROR! ${err}`);

@@ -69,11 +69,11 @@ const profileSchema = new mongoose.Schema(
       required: false,
     },
     hobbys: {
-      type: String,
+      type: Array,
       required: false,
     },
     interests: {
-      type: String,
+      type: Array,
       required: false,
     },
     hometown: {

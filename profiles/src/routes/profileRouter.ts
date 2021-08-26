@@ -9,7 +9,6 @@ router
   .route('/')
   .get(requireAuth, profileController.getAllProfiles)
   .post(
-    requireAuth,
     validator.validateProfile,
     validateRequest,
     profileController.createProfile
