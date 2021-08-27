@@ -37,7 +37,8 @@ const userSchema = new mongoose.Schema(
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id;
-        delete ret.id;
+        delete ret._id;
+        delete ret.__v;
       },
     },
   }
@@ -48,7 +49,7 @@ userSchema.plugin(updateIfCurrentPlugin);
 
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User({
-    _id: attrs.id,
+    id: attrs.id,
     email: attrs.email,
     firstname: attrs.firstname,
     lastname: attrs.lastname,

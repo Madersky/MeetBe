@@ -10,10 +10,10 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
   async onMessage(data: UserCreatedEvent['data'], msg: Message) {
     const { id, firstname, lastname, email } = data;
     const user = User.build({
-      id,
-      email,
-      lastname,
-      firstname,
+      id: id,
+      email: email,
+      lastname: lastname,
+      firstname: firstname,
     });
     await user.save();
 

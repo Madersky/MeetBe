@@ -81,15 +81,22 @@ const Navbar = ({ currentUser }) => {
     <div className="l-navbar" id="nav-bar">
       <nav className="nav">
         <div>
-          <Link href="/">
-            <NavButton className="bx bx-layer nav_logo-icon" />
-          </Link>
-
           {/* <a href="/" className="nav_logo">
             <i className="bx bx-layer nav_logo-icon"></i>
             <span className="nav_logo-name">MeetBe</span>
           </a> */}
-          <div className="nav_list">{links}</div>
+          <div className="nav_list">
+            <li>
+              <div className="nav_toggle ">
+                <i className="bx bx-menu nav_icon nav_logo-icon"></i>
+              </div>
+            </li>
+
+            <Link href="/">
+              <NavButton className="bx bx-layer nav_logo-icon" />
+            </Link>
+            {links}
+          </div>
         </div>
         <div className="nav_list">{authLinks}</div>
       </nav>

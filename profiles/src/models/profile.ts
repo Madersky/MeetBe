@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { UserDoc, User } from './user';
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 interface ProfileAttrs {
   id: string;
@@ -38,6 +39,7 @@ interface ProfileDoc extends mongoose.Document {
   currentJob: string;
   socialStatus: string;
   phoneNumber: string;
+  version: number;
 }
 
 const profileSchema = new mongoose.Schema(
@@ -112,9 +114,12 @@ const profileSchema = new mongoose.Schema(
     },
   }
 );
+
+profileSchema.set('versionKey', 'version');
+profileSchema.plugin(updateIfCurrentPlugin);
 profileSchema.statics.build = (attrs: ProfileAttrs) => {
   return new Profile({
-    _id: attrs.id,
+    id: attrs.id,
     user: attrs.user,
     age: attrs.age,
     birthDate: attrs.birthDate,

@@ -9,7 +9,7 @@ export class UserUpdatedListener extends Listener<UserUpdatedEvent> {
 
   async onMessage(data: UserUpdatedEvent['data'], msg: Message) {
     const { firstname, id, version } = data;
-    const user = await User.findOne({ _id: id, version: version - 1 });
+    const user = await User.findOne({ id: id, version: version - 1 });
 
     if (!user) {
       throw new Error('User not found' + version);
