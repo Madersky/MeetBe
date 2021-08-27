@@ -119,7 +119,7 @@ profileSchema.set('versionKey', 'version');
 profileSchema.plugin(updateIfCurrentPlugin);
 profileSchema.statics.build = (attrs: ProfileAttrs) => {
   return new Profile({
-    id: attrs.id,
+    _id: attrs.id,
     user: attrs.user,
     age: attrs.age,
     birthDate: attrs.birthDate,
