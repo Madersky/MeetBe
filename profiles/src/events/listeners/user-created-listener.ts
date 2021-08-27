@@ -18,7 +18,7 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
     await user.save();
 
     const profile = Profile.build({
-      id: user.id,
+      id: id,
       user: user,
       age: '',
       birthDate: '',

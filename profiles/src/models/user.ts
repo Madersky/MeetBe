@@ -49,7 +49,7 @@ userSchema.plugin(updateIfCurrentPlugin);
 
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User({
-    id: attrs.id,
+    _id: attrs.id,
     email: attrs.email,
     firstname: attrs.firstname,
     lastname: attrs.lastname,
