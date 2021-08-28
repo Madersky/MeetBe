@@ -9,10 +9,10 @@ const router = express.Router();
 
 // DZIAŁA, ZMIENIC POD APLIKACJE
 router.patch(
-  '/api/users/updateuser/:id',
+  '/api/users/updateuser/:_id',
   currentUser,
   async (req: Request, res: Response) => {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params._id);
 
     if (!user) {
       throw new Error('User not found');
@@ -24,7 +24,7 @@ router.patch(
       firstname: user.firstname,
       lastname: user.lastname,
       version: user.version,
-      id: user.id,
+      _id: user._id,
     });
     res.status(201).send({ user });
   }

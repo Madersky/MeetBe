@@ -23,19 +23,19 @@ exports.createProfile = async (req: Request, res: Response) => {
     phoneNumber,
   } = req.body;
 
-  const existingProfile = await Profile.findById(req.currentUser!.id);
+  const existingProfile = await Profile.findById(req.currentUser!._id);
   // userID: req.currentUser!.id,
 
   if (existingProfile) {
     throw new BadRequestError('Profile already created');
   }
-  const user = await User.findById(req.currentUser!.id);
+  const user = await User.findById(req.currentUser!._id);
 
   if (!user) {
     throw new Error('User not found');
   }
   const profile = Profile.build({
-    id: user.id,
+    _id: user._id,
     user: user,
     age: age,
     birthDate: birthDate,
@@ -86,7 +86,7 @@ exports.getAllProfiles = async (
 
 exports.getProfileByUserId = async (req: Request, res: Response) => {
   try {
-    const profile = await Profile.findById(req.params.id).populate('user');
+    const profile = await Profile.findById(req.params._id).populate('user');
     res.status(200).send({ profile: profile });
   } catch (err) {
     res.status(404).send(`ERRROR! ${err}`);
@@ -110,14 +110,14 @@ exports.patchProfile = async (req: Request, res: Response) => {
     // });
 
     // TESTING
-    await Profile.findById(req.params.id)
+    await Profile.findById(req.params._id)
       .populate('user')
       .exec(async function (err, profile) {
         if (err) {
           throw new Error(`${err}`);
         }
         const user = await User.findByIdAndUpdate(
-          profile!.user.id,
+          profile!.user._id,
           req.body.user
         );
         delete req.body.user;

@@ -9,7 +9,7 @@ export class ProfileUpdatedListener extends Listener<ProfileUpdatedEvent> {
 
   async onMessage(data: ProfileUpdatedEvent['data'], msg: Message) {
     const user = await User.findOne({
-      id: data.user.id,
+      _id: data.user._id,
       version: data.user.version,
     });
     if (!user) {

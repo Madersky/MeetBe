@@ -3,7 +3,7 @@ import { UserDoc, User } from './user';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 interface ProfileAttrs {
-  id: string;
+  _id: string;
   user: UserDoc;
   age: string;
   birthDate: string;
@@ -107,8 +107,6 @@ const profileSchema = new mongoose.Schema(
   {
     toJSON: {
       transform(doc, ret) {
-        ret.id = ret._id;
-        delete ret._id;
         delete ret.__v;
       },
     },
@@ -119,7 +117,7 @@ profileSchema.set('versionKey', 'version');
 profileSchema.plugin(updateIfCurrentPlugin);
 profileSchema.statics.build = (attrs: ProfileAttrs) => {
   return new Profile({
-    _id: attrs.id,
+    _id: attrs._id,
     user: attrs.user,
     age: attrs.age,
     birthDate: attrs.birthDate,
