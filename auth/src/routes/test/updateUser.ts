@@ -14,12 +14,10 @@ router.patch(
   async (req: Request, res: Response) => {
     const user = await User.findById(req.params.id);
 
-    const { firstname } = req.body;
-
     if (!user) {
       throw new Error('User not found');
     }
-    user.set({ firstname });
+    user.set(req.body);
     await user.save();
     new UserUpdatedPublisher(natsWrapper.client).publish({
       email: user.email,

@@ -8,14 +8,14 @@ export class UserUpdatedListener extends Listener<UserUpdatedEvent> {
   queueGroupName = 'profiles-service';
 
   async onMessage(data: UserUpdatedEvent['data'], msg: Message) {
-    const { firstname, id, version } = data;
-    const user = await User.findOne({ id: id, version: version - 1 });
+    const { firstname, email, lastname, id, version } = data;
+    const user = await User.findOne({ _id: id, version: version - 1 });
 
     if (!user) {
       throw new Error('User not found' + version);
     }
 
-    user.set({ firstname });
+    user.set({ firstname, lastname, email });
     await user.save();
 
     console.log(`Listener ${user}`);
