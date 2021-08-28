@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 interface UserAttrs {
-  id: string;
+  _id: string;
   email: string;
   firstname: string;
   lastname: string;
@@ -36,8 +36,6 @@ const userSchema = new mongoose.Schema(
   {
     toJSON: {
       transform(doc, ret) {
-        ret.id = ret._id;
-        delete ret._id;
         delete ret.__v;
       },
     },
@@ -49,7 +47,7 @@ userSchema.plugin(updateIfCurrentPlugin);
 
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User({
-    id: attrs.id,
+    _id: attrs._id,
     email: attrs.email,
     firstname: attrs.firstname,
     lastname: attrs.lastname,

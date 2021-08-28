@@ -10,7 +10,7 @@ import { signoutRouter } from './routes/signout';
 import { signupRouter } from './routes/signup';
 
 import { allUserRouter } from './routes/test/all-users';
-import { updateUserRouter } from './routes/test/updateUser';
+import { updateUserRouter } from './routes/updateUser';
 
 const app = express();
 app.set('trust proxy', true);

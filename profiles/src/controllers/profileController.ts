@@ -23,19 +23,19 @@ exports.createProfile = async (req: Request, res: Response) => {
     phoneNumber,
   } = req.body;
 
-  const existingProfile = await Profile.findById(req.currentUser!.id);
+  const existingProfile = await Profile.findById(req.currentUser!._id);
   // userID: req.currentUser!.id,
 
   if (existingProfile) {
     throw new BadRequestError('Profile already created');
   }
-  const user = await User.findById(req.currentUser!.id);
+  const user = await User.findById(req.currentUser!._id);
 
   if (!user) {
     throw new Error('User not found');
   }
   const profile = Profile.build({
-    id: user.id,
+    _id: user._id,
     user: user,
     age: age,
     birthDate: birthDate,
@@ -86,7 +86,7 @@ exports.getAllProfiles = async (
 
 exports.getProfileByUserId = async (req: Request, res: Response) => {
   try {
-    const profile = await Profile.findById(req.params.id).populate('user');
+    const profile = await Profile.findById(req.params._id).populate('user');
     res.status(200).send({ profile: profile });
   } catch (err) {
     res.status(404).send(`ERRROR! ${err}`);
@@ -104,32 +104,13 @@ exports.getProfileByEmail = async (req: Request, res: Response) => {
 
 exports.patchProfile = async (req: Request, res: Response) => {
   try {
-    const profile = await Profile.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const profile = await Profile.findById(req.params._id);
     if (!profile) {
       throw new Error('Profile not found');
     }
-    await new ProfileUpdatePublisher(natsWrapper.client).publish({
-      user: profile.user,
-      age: profile.age,
-      birthDate: profile.birthDate,
-      message: profile.message,
-      profilePhoto: profile.profilePhoto,
-      createdAt: profile.createdAt,
-      hobbys: profile.hobbys,
-      interests: profile.interests,
-      hometown: profile.hometown,
-      school: profile.school,
-      profession: profile.profession,
-      currentJob: profile.currentJob,
-      socialStatus: profile.socialStatus,
-      phoneNumber: profile.phoneNumber,
-      version: profile.version,
-    });
-
-    res.status(200).send({ profile: profile || null });
+    profile.set(req.body);
+    await profile.save();
+    res.status(200).send({ profile: profile });
   } catch (err) {
     res.status(404).send(`ERROR! ${err}`);
   }

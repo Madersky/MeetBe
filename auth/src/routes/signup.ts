@@ -33,7 +33,7 @@ router.post(
     // PUBLISHING EVENT user:created
 
     await new UserCreatedPublisher(natsWrapper.client).publish({
-      id: user.id,
+      _id: user._id,
       email: user.email,
       firstname: user.firstname,
       lastname: user.lastname,
@@ -43,7 +43,7 @@ router.post(
     // Generate JWT
     const userJwt = jwt.sign(
       {
-        id: user.id,
+        _id: user._id,
         email: user.email,
       },
       process.env.JWT_KEY!

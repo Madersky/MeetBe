@@ -15,7 +15,7 @@ router
   );
 
 router
-  .route('/id/:id')
+  .route('/id/:_id')
   .get(requireAuth, profileController.getProfileByUserId)
   .patch(
     requireAuth,
