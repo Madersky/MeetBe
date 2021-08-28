@@ -8,7 +8,6 @@ import { natsWrapper } from '../natsWrapper';
 
 const router = express.Router();
 
-// DZIAŁA, ZMIENIC POD APLIKACJE
 router.patch(
   '/api/users/updateuser/:_id',
   currentUser,
