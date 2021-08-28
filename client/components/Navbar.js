@@ -35,7 +35,7 @@ const Navbar = ({ currentUser }) => {
     currentUser && {
       label: 'Profile',
       icon: 'bx bx-user nav_icon',
-      href: `/profiles/${currentUser.id}`,
+      href: `/profiles/${currentUser._id}`,
     },
   ]
     .filter((linkConfig) => linkConfig)
