@@ -6,9 +6,18 @@ const Profile = ({ profile }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
-  const changeIsOpen = () => setIsOpen(!isOpen);
-  const changeEditMode = () => setEditMode(!editMode);
+  const fieldNames = Object.keys(profile);
 
+  const paragraphHiddenList = fieldNames.map((e) => {
+    // split(/(?=[A-Z])/) - wrzuca do tablicy po napotkaniu dużej litery
+    const text = e.split(/(?=[A-Z])/).join(' ');
+
+    return e === 'user' || e === '_id' || e === 'version' ? null : (
+      <p key={profile._id++} className="lead text-start fw-bold px-5">{`${
+        text.slice(0, 1).toUpperCase() + text.slice(1)
+      }: ${profile[`${e}`]}`}</p>
+    );
+  });
   return (
     <div className="container text-muted px-5">
       <h1 className="display-2 text-center fst-italic mt-3">Profil</h1>
@@ -26,42 +35,8 @@ const Profile = ({ profile }) => {
             <p className="lead text-start fw-bold px-5">
               Email: {profile.user.email}{' '}
             </p>
-            <p className="lead text-start fw-bold px-5">Age: {profile.age}</p>
-            <p className="lead text-start fw-bold px-5">
-              School: {profile.school}
-            </p>
-
             <div className={`${isOpen ? 'collapse' : ''}`} id="viewMore">
-              <p className="lead text-start fw-bold px-5">
-                Birthdate: {profile.birthDate}
-              </p>
-              <p className="lead text-start fw-bold px-5">
-                Message: {profile.message}
-              </p>
-              <p className="lead text-start fw-bold px-5">
-                Profile Photo: {profile.profilePhoto}
-              </p>
-              <p className="lead text-start fw-bold px-5">
-                Hobbys: {profile.hobbys}
-              </p>
-              <p className="lead text-start fw-bold px-5">
-                Interests: {profile.interests}
-              </p>
-              <p className="lead text-start fw-bold px-5">
-                Hometown: {profile.hometown}
-              </p>
-              <p className="lead text-start fw-bold px-5">
-                Profession: {profile.profession}
-              </p>
-              <p className="lead text-start fw-bold px-5">
-                Current Job: {profile.currentJob}{' '}
-              </p>
-              <p className="lead text-start fw-bold px-5">
-                Social status: {profile.socialStatus}
-              </p>
-              <p className="lead text-start fw-bold px-5">
-                Phone number: {profile.phoneNumber}{' '}
-              </p>
+              {paragraphHiddenList}
             </div>
             <div className="text-center">
               <button
@@ -71,7 +46,7 @@ const Profile = ({ profile }) => {
                 data-bs-target="#viewMore"
                 aria-expanded="true"
                 aria-controls="viewMore"
-                onClick={changeIsOpen}
+                onClick={() => setIsOpen(!isOpen)}
               >
                 {`${isOpen ? 'View more info' : 'close'}`}
               </button>
@@ -87,7 +62,7 @@ const Profile = ({ profile }) => {
               <button
                 className="btn btn-primary text-center"
                 type="button"
-                onClick={changeEditMode}
+                onClick={() => setEditMode(!editMode)}
               >
                 Click to edit
               </button>
