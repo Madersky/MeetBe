@@ -32,7 +32,18 @@ const EditProfile = ({ profile }) => {
   });
   return (
     <div className="container">
-      <form onSubmit={onSubmit}>{formList}</form>
+      <form onSubmit={onSubmit} id="form1">
+        {formList}
+      </form>
+      <div className="text-center">
+        <button
+          className="btn btn-primary text-center"
+          type="submit"
+          form="form1"
+        >
+          Click to edit
+        </button>
+      </div>
     </div>
   );
 };

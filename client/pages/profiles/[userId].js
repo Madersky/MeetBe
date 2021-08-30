@@ -62,15 +62,6 @@ const Profile = ({ profile }) => {
           <div className="border pb-3">
             <p className="lead text-center pt-3">Edit profile</p>
             <EditProfile profile={profile} />
-            <div className="text-center">
-              <button
-                className="btn btn-primary text-center"
-                type="button"
-                onClick={() => setEditMode(!editMode)}
-              >
-                Click to edit
-              </button>
-            </div>
           </div>
         </div>
       </div>
