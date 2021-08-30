@@ -15,7 +15,10 @@ const Profile = ({ profile }) => {
     return fieldName === 'user' ||
       fieldName === '_id' ||
       fieldName === 'version' ? null : (
-      <p key={profile._id++} className="lead text-start fw-bold px-5">
+      <p
+        key={Math.random(profile._id)}
+        className="lead text-start fw-bold px-5"
+      >
         {`${text.slice(0, 1).toUpperCase() + text.slice(1)}
         : 
         ${profile[`${fieldName}`]}`}

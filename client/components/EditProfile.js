@@ -1,3 +1,4 @@
+import { useState } from 'react';
 const EditProfile = ({ profile }) => {
   const onSubmit = (e) => {
     e.preventDefault();
@@ -5,7 +6,7 @@ const EditProfile = ({ profile }) => {
   };
   const fieldNames = Object.keys(profile);
 
-  const formList = fieldNames.map((fieldName) => {
+  const formList = fieldNames.map((fieldName, num) => {
     // STRING W PRZYPADKU GDY W ŚRODKU BYŁA WIELKA LITERA
     // CO ŚWIADCZY O PODZIELENIU STRINGA SPACJĄ
     const text = fieldName.split(/(?=[A-Z])/).join(' ');
@@ -13,7 +14,7 @@ const EditProfile = ({ profile }) => {
     return fieldName === 'user' ||
       fieldName === '_id' ||
       fieldName === 'version' ? null : (
-      <div key={profile._id++}>
+      <div key={num}>
         <label className="form-label" htmlFor={fieldName.toLowerCase()}>
           {/* TWORZENIE WILEKIEJ LITERY NA POCZĄTKU STRINGA */}
           {`${text.slice(0, 1).toUpperCase() + text.slice(1)}`}
