@@ -8,14 +8,18 @@ const Profile = ({ profile }) => {
 
   const fieldNames = Object.keys(profile);
 
-  const paragraphHiddenList = fieldNames.map((e) => {
+  const paragraphHiddenList = fieldNames.map((fieldName) => {
     // split(/(?=[A-Z])/) - wrzuca do tablicy po napotkaniu dużej litery
-    const text = e.split(/(?=[A-Z])/).join(' ');
+    const text = fieldName.split(/(?=[A-Z])/).join(' ');
 
-    return e === 'user' || e === '_id' || e === 'version' ? null : (
-      <p key={profile._id++} className="lead text-start fw-bold px-5">{`${
-        text.slice(0, 1).toUpperCase() + text.slice(1)
-      }: ${profile[`${e}`]}`}</p>
+    return fieldName === 'user' ||
+      fieldName === '_id' ||
+      fieldName === 'version' ? null : (
+      <p key={profile._id++} className="lead text-start fw-bold px-5">
+        {`${text.slice(0, 1).toUpperCase() + text.slice(1)}
+        : 
+        ${profile[`${fieldName}`]}`}
+      </p>
     );
   });
   return (
@@ -57,7 +61,7 @@ const Profile = ({ profile }) => {
         <div className="col  mb-5">
           <div className="border pb-3">
             <p className="lead text-center pt-3">Edit profile</p>
-            <EditProfile />
+            <EditProfile profile={profile} />
             <div className="text-center">
               <button
                 className="btn btn-primary text-center"
