@@ -51,7 +51,7 @@ const Hobbys = ({ hobbys, currentUser }) => {
       <p className="lead text-center pt-3">
         Hobbys:
         {activeHobbys.map((hobby) => {
-          return (
+          return hobby ? (
             <li key={hobby}>
               {hobby}
               <button
@@ -62,7 +62,7 @@ const Hobbys = ({ hobbys, currentUser }) => {
                 }}
               ></button>
             </li>
-          );
+          ) : null;
         })}
       </p>
       <form className="justify-content-center">
