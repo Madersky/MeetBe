@@ -6,7 +6,13 @@ const Profile = ({ profile, currentUser }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
-  const fieldNames = Object.keys(profile);
+  const hobbys = Array.from(profile.hobbys);
+  const interests = Array.from(profile.interests);
+
+  // console.log('essa');
+  // delete profile.hobbys;
+  // delete profile.interests;
+  let fieldNames = Object.keys(profile);
 
   const paragraphHiddenList = fieldNames.map((fieldName) => {
     // split(/(?=[A-Z])/) - wrzuca do tablicy po napotkaniu dużej litery
@@ -14,7 +20,9 @@ const Profile = ({ profile, currentUser }) => {
 
     return fieldName === 'user' ||
       fieldName === '_id' ||
-      fieldName === 'version' ? null : (
+      fieldName === 'version' ||
+      fieldName === 'hobbys' ||
+      fieldName === 'interests' ? null : (
       <p
         key={Math.random(profile._id)}
         className="lead text-start fw-bold px-5"
@@ -31,7 +39,7 @@ const Profile = ({ profile, currentUser }) => {
       <div className="my-3 border-bottom border-dark"></div>
       <div className="row gx-5">
         {/* <div className="container"> */}
-        <div className="col  mb-5">
+        <div className="col-lg mb-5">
           <div className="border pb-3">
             <p className="lead text-start fw-bold px-5 pt-5">
               Firstname: {profile.user.firstname}
@@ -61,7 +69,21 @@ const Profile = ({ profile, currentUser }) => {
           </div>
         </div>
         {/* </div> */}
-        <div className="col  mb-5">
+      </div>
+      <div className="row gx-5">
+        <div className="col-lg mb-5">
+          <div className="border pb-3">
+            <p className="lead text-center pt-3">Hobbys</p>
+          </div>
+        </div>
+        <div className="col-lg mb-5">
+          <div className="border pb-3">
+            <p className="lead text-center pt-3">Interests</p>
+          </div>
+        </div>
+      </div>
+      <div className="row gx-5">
+        <div className="col-md mb-5">
           <div className="border pb-3">
             <p className="lead text-center pt-3">Edit profile</p>
             <EditProfile profile={profile} />
