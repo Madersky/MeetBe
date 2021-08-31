@@ -1,4 +1,5 @@
 import { useState } from 'react';
+<<<<<<< HEAD
 import Router from 'next/router';
 
 import useRequest from '../hooks/use-request';
@@ -192,11 +193,34 @@ const EditProfile = ({ profile, userId }) => {
         </div>
         <label className="form-label" htmlFor="phone number">
           Phone number
+=======
+const EditProfile = ({ profile }) => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log('onSubmit');
+  };
+  const fieldNames = Object.keys(profile);
+
+  const formList = fieldNames.map((fieldName, num) => {
+    // STRING W PRZYPADKU GDY W ŚRODKU BYŁA WIELKA LITERA
+    // CO ŚWIADCZY O PODZIELENIU STRINGA SPACJĄ
+    const text = fieldName.split(/(?=[A-Z])/).join(' ');
+
+    return fieldName === 'user' ||
+      fieldName === '_id' ||
+      fieldName === 'version' ? null : (
+      <div key={num}>
+        <label className="form-label" htmlFor={fieldName.toLowerCase()}>
+          {/* TWORZENIE WILEKIEJ LITERY NA POCZĄTKU STRINGA */}
+          {`${text.slice(0, 1).toUpperCase() + text.slice(1)}`}
+>>>>>>> a76fd781fba75fddce9c75255a500d5452f153a5
         </label>
         <div className="input-group mb-3">
           <input
+            id={fieldName.toLowerCase()}
             type="text"
             className="form-control"
+<<<<<<< HEAD
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             placeholder="999999999"
@@ -208,7 +232,29 @@ const EditProfile = ({ profile, userId }) => {
         <button className="btn btn-primary text-center">Click to edit</button>
 
         {patchProfilesErrors}
+=======
+            aria-label={fieldName.toLowerCase()}
+            aria-describedby="basic-addon1"
+          ></input>
+        </div>
+      </div>
+    );
+  });
+  return (
+    <div className="container">
+      <form onSubmit={onSubmit} id="form1">
+        {formList}
+>>>>>>> a76fd781fba75fddce9c75255a500d5452f153a5
       </form>
+      <div className="text-center">
+        <button
+          className="btn btn-primary text-center"
+          type="submit"
+          form="form1"
+        >
+          Click to edit
+        </button>
+      </div>
     </div>
   );
 };
