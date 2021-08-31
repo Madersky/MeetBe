@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import EditProfile from '../../components/EditProfile';
 
-const Profile = ({ profile }) => {
+const Profile = ({ profile, currentUser }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
@@ -82,16 +82,7 @@ const Profile = ({ profile }) => {
         <div className="col  mb-5">
           <div className="border pb-3">
             <p className="lead text-center pt-3">Edit profile</p>
-            <EditProfile />
-            <div className="text-center">
-              <button
-                className="btn btn-primary text-center"
-                type="button"
-                onClick={changeEditMode}
-              >
-                Click to edit
-              </button>
-            </div>
+            <EditProfile profile="profile" userId={currentUser._id} />
           </div>
         </div>
       </div>
@@ -108,6 +99,7 @@ Profile.getInitialProps = async (context, client, currentUser) => {
 
   return {
     ...profileRes.data,
+    currentUser,
   };
 };
 

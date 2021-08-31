@@ -15,8 +15,8 @@ const UseRequest = ({ url, method, body, onSuccess }) => {
 
       return response.data;
     } catch (err) {
-      // console.log('Error message z useRequesta');
-      // console.log(err);
+      console.log('Error message z useRequesta');
+      console.log(err);
       setErrors(
         <div className="box-errors-credentials">
           <h4>Something went wrong...</h4>

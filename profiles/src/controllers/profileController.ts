@@ -104,13 +104,38 @@ exports.getProfileByEmail = async (req: Request, res: Response) => {
 
 exports.patchProfile = async (req: Request, res: Response) => {
   try {
-    const profile = await Profile.findById(req.params._id);
+    let profile = await Profile.findById(req.params._id);
+
     if (!profile) {
       throw new Error('Profile not found');
     }
-    profile.set(req.body);
+
+    profile = await Profile.findByIdAndUpdate(
+      req.params._id,
+      {
+        $push: { hobbys: req.body.hobbys, interests: req.body.interests },
+        age: req.body.age || profile.age,
+        school: req.body.school || profile.school,
+        birthdate: req.body.birthdate,
+        message: req.body.message,
+        hometown: req.body.hometown,
+        profession: req.body.profession,
+        currentJob: req.body.currentJob,
+        socialStatus: req.body.socialStatus,
+        phoneNumber: req.body.phoneNumber,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!profile) {
+      throw new Error('Profile not found');
+    }
+    // profile.set(req.body);
     await profile.save();
-    res.status(200).send({ profile: profile });
+    res.status(200).send({ profile: profile || null });
   } catch (err) {
     res.status(404).send(`ERROR! ${err}`);
   }
