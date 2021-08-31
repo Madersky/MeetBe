@@ -64,11 +64,7 @@ const Profile = ({ profile, currentUser }) => {
         <div className="col  mb-5">
           <div className="border pb-3">
             <p className="lead text-center pt-3">Edit profile</p>
-<<<<<<< HEAD
-            <EditProfile profile="profile" userId={currentUser._id} />
-=======
             <EditProfile profile={profile} />
->>>>>>> a76fd781fba75fddce9c75255a500d5452f153a5
           </div>
         </div>
       </div>
