@@ -104,38 +104,55 @@ exports.getProfileByEmail = async (req: Request, res: Response) => {
 
 exports.patchProfile = async (req: Request, res: Response) => {
   try {
-    let profile = await Profile.findById(req.params._id);
-
-    if (!profile) {
-      throw new Error('Profile not found');
-    }
-
-    profile = await Profile.findByIdAndUpdate(
-      req.params._id,
-      {
-        $push: { hobbys: req.body.hobbys, interests: req.body.interests },
-        age: req.body.age || profile.age,
-        school: req.body.school || profile.school,
-        birthdate: req.body.birthdate,
-        message: req.body.message,
-        hometown: req.body.hometown,
-        profession: req.body.profession,
-        currentJob: req.body.currentJob,
-        socialStatus: req.body.socialStatus,
-        phoneNumber: req.body.phoneNumber,
-      },
-      {
-        new: true,
-        runValidators: true,
+    const newObj: Record<string, any> = {};
+    Object.keys(req.body).forEach((fieldName) => {
+      if (req.body[fieldName] !== null) {
+        newObj[fieldName] = req.body[fieldName];
       }
-    );
+    });
+    if (newObj.hobbys !== null) {
+      const hobbys: [string] = newObj.hobbys;
+      delete newObj.hobbys;
+      const profile = await Profile.findByIdAndUpdate(
+        req.params._id,
+        {
+          ...newObj,
+          $addToSet: {
+            hobbys: hobbys,
+          },
+        },
+        { new: true }
+      );
+      if (!profile) {
+        throw new Error('Profile not found');
+      }
+      await profile.save();
+      res.status(200).send({ profile: profile || null });
+    } else {
+      const profile = await Profile.findByIdAndUpdate(
+        req.params._id,
+        newObj,
+        // {
+        //   $push: { hobbys: req.body.hobbys, interests: req.body.interests },
+        //   age: req.body.age,
+        //   school: req.body.school,
+        //   birthdate: req.body.birthdate,
+        //   message: req.body.message,
+        //   hometown: req.body.hometown,
+        //   profession: req.body.profession,
+        //   currentJob: req.body.currentJob,
+        //   socialStatus: req.body.socialStatus,
+        //   phoneNumber: req.body.phoneNumber,
+        // },
+        { new: true }
+      );
 
-    if (!profile) {
-      throw new Error('Profile not found');
+      if (!profile) {
+        throw new Error('Profile not found');
+      }
+      await profile.save();
+      res.status(200).send({ profile: profile || null });
     }
-    // profile.set(req.body);
-    await profile.save();
-    res.status(200).send({ profile: profile || null });
   } catch (err) {
     res.status(404).send(`ERROR! ${err}`);
   }
