@@ -140,3 +140,21 @@ exports.patchProfile = async (req: Request, res: Response) => {
     res.status(404).send(`ERROR! ${err}`);
   }
 };
+
+exports.deleteProfileProperty = async (req: Request, res: Response) => {
+  try {
+    const profile = await Profile.findById(req.params._id);
+    if (!profile) {
+      throw new Error('Profile not found');
+    }
+
+    await profile.updateOne({
+      $pull: { hobbys: req.body.hobbys[0] },
+    });
+    console.log(req.body.hobbys);
+    await profile.save();
+    res.status(200).send({ profile: profile || null });
+  } catch (err) {
+    res.status(404).send(`ERROR! deleteProfileProperty ${err}`);
+  }
+};

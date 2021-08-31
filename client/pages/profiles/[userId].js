@@ -1,18 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Router from 'next/router';
 
-import EditProfile from '../../components/EditProfile';
+import useRequest from '../../hooks/use-request';
+import EditProfile from '../../components/profiles/EditProfile';
+import Hobbys from '../../components/profiles/hobbys';
 
 const Profile = ({ profile, currentUser }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
+  // const isInitialMount = useRef(true);
+
   const hobbys = Array.from(profile.hobbys);
   const interests = Array.from(profile.interests);
 
-  // console.log('essa');
-  // delete profile.hobbys;
-  // delete profile.interests;
   let fieldNames = Object.keys(profile);
+
+  const [deleteInterests, deleteInterestsError] = useRequest({
+    url: `/api/profiles/id/${currentUser._id}`,
+    method: 'delete',
+    body: {
+      interests: [],
+    },
+  });
+
+  const onClickDeleteInterests = () => {
+    // deleteInterests();
+  };
 
   const paragraphHiddenList = fieldNames.map((fieldName) => {
     // split(/(?=[A-Z])/) - wrzuca do tablicy po napotkaniu dużej litery
@@ -73,12 +87,17 @@ const Profile = ({ profile, currentUser }) => {
       <div className="row gx-5">
         <div className="col-lg mb-5">
           <div className="border pb-3">
-            <p className="lead text-center pt-3">Hobbys</p>
+            <Hobbys hobbys={hobbys} currentUser={currentUser} />
           </div>
         </div>
         <div className="col-lg mb-5">
           <div className="border pb-3">
-            <p className="lead text-center pt-3">Interests</p>
+            <p className="lead text-center pt-3">
+              Interests:
+              {interests.map((interest) => {
+                return <li key={interest}>{interest}</li>;
+              })}
+            </p>
           </div>
         </div>
       </div>
@@ -86,7 +105,7 @@ const Profile = ({ profile, currentUser }) => {
         <div className="col-md mb-5">
           <div className="border pb-3">
             <p className="lead text-center pt-3">Edit profile</p>
-            <EditProfile profile={profile} />
+            <EditProfile profile={profile} currentUser={currentUser} />
           </div>
         </div>
       </div>
