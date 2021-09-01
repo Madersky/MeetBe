@@ -119,20 +119,6 @@ const EditProfile = ({ profile, currentUser }) => {
             aria-describedby="basic-addon1"
           ></input>
         </div>
-        <label className="form-label" htmlFor="interests">
-          Interests
-        </label>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            value={interests}
-            onChange={(e) => setInterests(e.target.value)}
-            placeholder="programowanie"
-            aria-label="Interests"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div>
         <label className="form-label" htmlFor="hometown">
           Hometown
         </label>

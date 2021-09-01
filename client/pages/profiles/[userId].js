@@ -90,16 +90,6 @@ const Profile = ({ profile, currentUser }) => {
             <Hobbys hobbys={hobbys} currentUser={currentUser} />
           </div>
         </div>
-        <div className="col-lg mb-5">
-          <div className="border pb-3">
-            <p className="lead text-center pt-3">
-              Interests:
-              {interests.map((interest) => {
-                return <li key={interest}>{interest}</li>;
-              })}
-            </p>
-          </div>
-        </div>
       </div>
       <div className="row gx-5">
         <div className="col-md mb-5">
