@@ -6,6 +6,8 @@ const Hobbys = ({ hobbys, currentUser }) => {
   const [activeHobbys, setActiveHobbys] = useState(hobbys);
   const [hobby, setHobby] = useState('');
 
+  const isInitialMount = useRef(true);
+
   //   const [patchProfileRequest, patchProfilesErrors] = useRequest({
   //     url: `/api/profiles/id/${currentUser._id}`,
   //     method: 'patch',
@@ -17,8 +19,6 @@ const Hobbys = ({ hobbys, currentUser }) => {
   //       Router.reload();
   //     },
   //   });
-
-  const isInitialMount = useRef(true);
 
   const [deleteHobby, deleteHobbyError] = useRequest({
     url: `/api/profiles/id/${currentUser._id}`,
@@ -65,7 +65,7 @@ const Hobbys = ({ hobbys, currentUser }) => {
           ) : null;
         })}
       </p>
-      <form className="justify-content-center">
+      {/* <form className="justify-content-center">
         <label className="form-label" htmlFor="hobbys">
           Hobbys
         </label>
@@ -74,14 +74,14 @@ const Hobbys = ({ hobbys, currentUser }) => {
             type="text"
             className="form-control"
             value={hobbys}
-            onChange={(e) => setHobbys(e.target.value)}
+            onChange={(e) => setHobby(e.target.value)}
             placeholder="programowanie"
             aria-label="Hobbys"
             aria-describedby="basic-addon1"
           ></input>
         </div>
         <button className="btn btn-primary">Add hobby</button>
-      </form>
+      </form> */}
     </div>
   );
 };

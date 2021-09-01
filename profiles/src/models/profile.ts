@@ -11,7 +11,6 @@ interface ProfileAttrs {
   profilePhoto?: any;
   createdAt: string;
   hobbys: [string];
-  interests: [string];
   hometown: string;
   school: string;
   profession: string;
@@ -32,7 +31,6 @@ interface ProfileDoc extends mongoose.Document {
   profilePhoto?: any;
   createdAt: string;
   hobbys: [string];
-  interests: [string];
   hometown: string;
   school: string;
   profession: string;
@@ -71,10 +69,6 @@ const profileSchema = new mongoose.Schema(
       required: false,
     },
     hobbys: {
-      type: Array,
-      required: false,
-    },
-    interests: {
       type: Array,
       required: false,
     },
@@ -125,7 +119,6 @@ profileSchema.statics.build = (attrs: ProfileAttrs) => {
     profilePhoto: attrs.profilePhoto,
     createdAt: new Date(Date.now()).toString(),
     hobbys: attrs.hobbys,
-    interests: attrs.interests,
     hometown: attrs.hometown,
     school: attrs.school,
     profession: attrs.profession,

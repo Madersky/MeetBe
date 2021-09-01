@@ -16,7 +16,6 @@ const EditProfile = ({ profile, currentUser }) => {
   const [socialStatus, setSocialStatus] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [hobbys, setHobbys] = useState([]);
-  const [interests, setInterests] = useState([]);
 
   const [patchProfileRequest, patchProfilesErrors] = useRequest({
     url: `/api/profiles/id/${currentUser._id}`,
@@ -33,11 +32,10 @@ const EditProfile = ({ profile, currentUser }) => {
       socialStatus: socialStatus || profile.socialStatus,
       phoneNumber: phoneNumber || profile.phoneNumber,
       hobbys: hobbys || profile.hobbys,
-      interests: interests || profile.interests,
     },
     onSuccess: () => {
       console.log('profile updated');
-      Router.reload();
+      // Router.reload();
     },
   });
 

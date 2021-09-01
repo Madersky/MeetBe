@@ -12,21 +12,8 @@ const Profile = ({ profile, currentUser }) => {
   // const isInitialMount = useRef(true);
 
   const hobbys = Array.from(profile.hobbys);
-  const interests = Array.from(profile.interests);
 
   let fieldNames = Object.keys(profile);
-
-  const [deleteInterests, deleteInterestsError] = useRequest({
-    url: `/api/profiles/id/${currentUser._id}`,
-    method: 'delete',
-    body: {
-      interests: [],
-    },
-  });
-
-  const onClickDeleteInterests = () => {
-    // deleteInterests();
-  };
 
   const paragraphHiddenList = fieldNames.map((fieldName) => {
     // split(/(?=[A-Z])/) - wrzuca do tablicy po napotkaniu dużej litery
@@ -35,8 +22,7 @@ const Profile = ({ profile, currentUser }) => {
     return fieldName === 'user' ||
       fieldName === '_id' ||
       fieldName === 'version' ||
-      fieldName === 'hobbys' ||
-      fieldName === 'interests' ? null : (
+      fieldName === 'hobbys' ? null : (
       <p
         key={Math.random(profile._id)}
         className="lead text-start fw-bold px-5"
