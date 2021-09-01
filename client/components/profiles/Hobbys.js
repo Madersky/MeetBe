@@ -48,11 +48,11 @@ const Hobbys = ({ hobbys, currentUser }) => {
 
   return (
     <div>
-      <p className="lead text-center pt-3">
-        Hobbys:
+      <h1 className="lead text-center pt-3">Hobbys:</h1>
+      <div className="text-center">
         {activeHobbys.map((hobby) => {
           return hobby ? (
-            <li key={hobby}>
+            <p key={hobby}>
               {hobby}
               <button
                 className="btn bi bi-patch-minus"
@@ -61,10 +61,10 @@ const Hobbys = ({ hobbys, currentUser }) => {
                   setChosenHobby(e.target.value);
                 }}
               ></button>
-            </li>
+            </p>
           ) : null;
         })}
-      </p>
+      </div>
       {/* <form className="justify-content-center">
         <label className="form-label" htmlFor="hobbys">
           Hobbys

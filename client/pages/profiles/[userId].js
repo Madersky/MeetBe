@@ -3,7 +3,7 @@ import Router from 'next/router';
 
 import useRequest from '../../hooks/use-request';
 import EditProfile from '../../components/profiles/EditProfile';
-import Hobbys from '../../components/profiles/hobbys';
+import Hobbys from '../../components/profiles/Hobbys';
 
 const Profile = ({ profile, currentUser }) => {
   const [isOpen, setIsOpen] = useState(true);

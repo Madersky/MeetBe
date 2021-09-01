@@ -35,7 +35,7 @@ const EditProfile = ({ profile, currentUser }) => {
     },
     onSuccess: () => {
       console.log('profile updated');
-      // Router.reload();
+      Router.reload();
     },
   });
 
