@@ -45,6 +45,7 @@ const EditProfile = ({ profile, currentUser }) => {
     patchProfileRequest();
   };
 
+  console.log('validationErrorsFields: ', validationErrorsFields);
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
@@ -54,7 +55,6 @@ const EditProfile = ({ profile, currentUser }) => {
       );
 
       // console.log('patchProfilesErrors: ', patchProfilesErrors);
-      console.log('validationErrorsFields: ', validationErrorsFields);
     }
   });
 
@@ -235,7 +235,7 @@ const EditProfile = ({ profile, currentUser }) => {
         >
           Click to edit
         </button>
-
+        <h1>{patchProfilesErrors && `${patchProfilesErrors.fields}`}</h1>
         {patchProfilesErrors && patchProfilesErrors.error}
       </form>
     </div>
