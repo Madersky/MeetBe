@@ -108,15 +108,15 @@ exports.patchProfile = async (req: Request, res: Response) => {
         newObj[fieldName] = req.body[fieldName];
       }
     });
-    if (newObj.hobbys !== null) {
-      const hobbys: [string] = newObj.hobbys;
-      delete newObj.hobbys;
+    if (newObj.hobby !== null) {
+      const hobby: [string] = newObj.hobby;
+      delete newObj.hobby;
       const profile = await Profile.findByIdAndUpdate(
         req.params._id,
         {
           ...newObj,
           $addToSet: {
-            hobbys: hobbys,
+            hobbys: hobby,
           },
         },
         { new: true }
@@ -164,9 +164,9 @@ exports.deleteProfileProperty = async (req: Request, res: Response) => {
     }
 
     await profile.updateOne({
-      $pull: { hobbys: req.body.hobbys[0] },
+      $pull: { hobbys: req.body.hobby },
     });
-    console.log(req.body.hobbys);
+    console.log(`Usunieto takie hobby: ${req.body.hobby}`);
     await profile.save();
     res.status(200).send({ profile: profile || null });
   } catch (err) {

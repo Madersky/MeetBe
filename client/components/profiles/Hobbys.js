@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import useRequest from '../../hooks/use-request';
 
-const Hobbys = ({ hobbys, currentUser, profile }) => {
+const Hobbys = ({ hobbys, currentUser }) => {
   const [chosenHobby, setChosenHobby] = useState('');
   const [activeHobbys, setActiveHobbys] = useState(hobbys);
   const [hobby, setHobby] = useState('');
@@ -12,7 +12,7 @@ const Hobbys = ({ hobbys, currentUser, profile }) => {
     url: `/api/profiles/id/${currentUser._id}`,
     method: 'patch',
     body: {
-      hobbys: hobby || profile.hobbys,
+      hobby: hobby,
     },
     onSuccess: () => {
       console.log('profile updated');
@@ -23,7 +23,7 @@ const Hobbys = ({ hobbys, currentUser, profile }) => {
     url: `/api/profiles/id/${currentUser._id}`,
     method: 'put',
     body: {
-      hobbys: [chosenHobby],
+      hobby: chosenHobby,
     },
     onSuccess: () => {},
   });
@@ -31,9 +31,8 @@ const Hobbys = ({ hobbys, currentUser, profile }) => {
   const onClickAddHobby = (e) => {
     e.preventDefault();
 
-    console.log('update hobby z komponentu hobby');
     patchProfileHobbyRequest();
-    setActiveHobbys((arr) => [...arr, hobby]);
+    setActiveHobbys([...activeHobbys, hobby]);
     setHobby('');
   };
 
@@ -58,7 +57,27 @@ const Hobbys = ({ hobbys, currentUser, profile }) => {
       <div className="container">
         <div className="text-align-start">
           <div className="row mb-5">
-            <div className="col">
+            {activeHobbys.map((hobby) => {
+              return hobby ? (
+                <div className="col-6">
+                  <div
+                    key={hobby}
+                    className="bg-primary text-white text-center rounded m-2"
+                  >
+                    {hobby}
+                    <button
+                      className="btn bi bi-patch-minus"
+                      value={hobby}
+                      onClick={(e) => {
+                        setChosenHobby(e.target.value);
+                      }}
+                    ></button>
+                    {deleteHobbyError}
+                  </div>
+                </div>
+              ) : null;
+            })}
+            {/* <div className="col">
               {activeHobbys.map((hobby) => {
                 return hobby ? (
                   <div
@@ -76,26 +95,7 @@ const Hobbys = ({ hobbys, currentUser, profile }) => {
                   </div>
                 ) : null;
               })}
-            </div>
-            <div className="col">
-              {activeHobbys.map((hobby) => {
-                return hobby ? (
-                  <div
-                    key={hobby}
-                    className="bg-primary text-white text-center rounded m-2"
-                  >
-                    {hobby}
-                    <button
-                      className="btn bi bi-patch-minus"
-                      value={hobby}
-                      onClick={(e) => {
-                        setChosenHobby(e.target.value);
-                      }}
-                    ></button>
-                  </div>
-                ) : null;
-              })}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -119,6 +119,7 @@ const Hobbys = ({ hobbys, currentUser, profile }) => {
           <button className="btn btn-primary" onClick={onClickAddHobby}>
             Add hobby
           </button>
+          {patchProfilesHobbyErrors}
           {/* <button className="btn btn-primary">Save</button> */}
         </div>
       </form>

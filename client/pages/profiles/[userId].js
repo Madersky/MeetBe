@@ -73,11 +73,7 @@ const Profile = ({ profile, currentUser }) => {
       <div className="row gx-5">
         <div className="col-lg-6 mb-5">
           <div className="border pb-3">
-            <Hobbys
-              hobbys={hobbys}
-              profile="profile"
-              currentUser={currentUser}
-            />
+            <Hobbys hobbys={hobbys} currentUser={currentUser} />
           </div>
         </div>
       </div>
