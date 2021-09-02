@@ -71,9 +71,13 @@ const Profile = ({ profile, currentUser }) => {
         {/* </div> */}
       </div>
       <div className="row gx-5">
-        <div className="col-lg mb-5">
+        <div className="col-lg-6 mb-5">
           <div className="border pb-3">
-            <Hobbys hobbys={hobbys} currentUser={currentUser} />
+            <Hobbys
+              hobbys={hobbys}
+              profile="profile"
+              currentUser={currentUser}
+            />
           </div>
         </div>
       </div>
