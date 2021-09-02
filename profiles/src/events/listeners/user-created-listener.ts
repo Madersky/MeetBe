@@ -22,7 +22,7 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
       user: user,
       age: '',
       birthDate: '',
-      message: '',
+      aboutMe: '',
       profilePhoto: '',
       createdAt: new Date(Date.now()).toString(),
       hobbys: [''],

@@ -116,7 +116,11 @@ const Hobbys = ({ hobbys, currentUser }) => {
               aria-describedby="basic-addon1"
             ></input>
           </div>
-          <button className="btn btn-primary" onClick={onClickAddHobby}>
+          <button
+            className="btn btn-primary"
+            onClick={onClickAddHobby}
+            disabled={hobby ? null : 'disabled'}
+          >
             Add hobby
           </button>
           {patchProfilesHobbyErrors}

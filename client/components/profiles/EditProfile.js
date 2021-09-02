@@ -8,14 +8,13 @@ const EditProfile = ({ profile, currentUser }) => {
   const [age, setAge] = useState('');
   const [school, setSchool] = useState('');
   const [birthdate, setBirthdate] = useState('');
-  const [message, setMessage] = useState('');
+  const [aboutMe, setAboutMe] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
   const [hometown, setHometown] = useState('');
   const [profession, setProfession] = useState('');
   const [currentJob, setCurrentJob] = useState('');
   const [socialStatus, setSocialStatus] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [hobbys, setHobbys] = useState([]);
 
   const [patchProfileRequest, patchProfilesErrors] = useRequest({
     url: `/api/profiles/id/${currentUser._id}`,
@@ -24,14 +23,13 @@ const EditProfile = ({ profile, currentUser }) => {
       age: age || profile.age,
       school: school || profile.school,
       birthdate: birthdate || profile.birthdate,
-      message: message || profile.message,
+      aboutMe: aboutMe || profile.aboutMe,
       profilePhoto: profilePhoto || profile.profilePhoto,
       hometown: hometown || profile.hometown,
       profession: profession || profile.profession,
       currentJob: currentJob || profile.currentJob,
       socialStatus: socialStatus || profile.socialStatus,
       phoneNumber: phoneNumber || profile.phoneNumber,
-      hobbys: hobbys || profile.hobbys,
     },
     onSuccess: () => {
       console.log('profile updated');
@@ -96,24 +94,10 @@ const EditProfile = ({ profile, currentUser }) => {
           <input
             type="text"
             className="form-control"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={aboutMe}
+            onChange={(e) => setAboutMe(e.target.value)}
             placeholder="siema jestem kozak"
             aria-label="About"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div>
-        <label className="form-label" htmlFor="hobbys">
-          Hobbys
-        </label>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            value={hobbys}
-            onChange={(e) => setHobbys(e.target.value)}
-            placeholder="programowanie"
-            aria-label="Hobbys"
             aria-describedby="basic-addon1"
           ></input>
         </div>
@@ -188,7 +172,12 @@ const EditProfile = ({ profile, currentUser }) => {
           ></input>
         </div>
 
-        <button className="btn btn-primary text-center">Click to edit</button>
+        <button
+          className="btn btn-primary text-center"
+          // disabled={phoneNumber ? null : 'disabled'}
+        >
+          Click to edit
+        </button>
 
         {patchProfilesErrors}
       </form>

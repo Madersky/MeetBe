@@ -7,7 +7,7 @@ interface ProfileAttrs {
   user: UserDoc;
   age: string;
   birthDate: string;
-  message: string;
+  aboutMe: string;
   profilePhoto?: any;
   createdAt: string;
   hobbys: [string];
@@ -27,7 +27,7 @@ interface ProfileDoc extends mongoose.Document {
   user: UserDoc;
   age: string;
   birthDate: string;
-  message: string;
+  aboutMe: string;
   profilePhoto?: any;
   createdAt: string;
   hobbys: [string];
@@ -46,7 +46,7 @@ const profileSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-    message: {
+    aboutMe: {
       type: String,
       required: false,
     },
@@ -115,7 +115,7 @@ profileSchema.statics.build = (attrs: ProfileAttrs) => {
     user: attrs.user,
     age: attrs.age,
     birthDate: attrs.birthDate,
-    message: attrs.message,
+    aboutMe: attrs.aboutMe,
     profilePhoto: attrs.profilePhoto,
     createdAt: new Date(Date.now()).toString(),
     hobbys: attrs.hobbys,

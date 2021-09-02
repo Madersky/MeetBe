@@ -9,7 +9,7 @@ import { BadRequestError } from '@meetbe/common';
 exports.createProfile = async (req: Request, res: Response) => {
   console.log('CREATING PROFILE');
   const {
-    message,
+    aboutMe,
     age,
     birthDate,
     profilePhoto,
@@ -38,7 +38,7 @@ exports.createProfile = async (req: Request, res: Response) => {
     user: user,
     age: age,
     birthDate: birthDate,
-    message: message,
+    aboutMe: aboutMe,
     profilePhoto: profilePhoto,
     createdAt: new Date(Date.now()).toString(),
     hobbys: hobbys,
@@ -135,7 +135,7 @@ exports.patchProfile = async (req: Request, res: Response) => {
         //   age: req.body.age,
         //   school: req.body.school,
         //   birthdate: req.body.birthdate,
-        //   message: req.body.message,
+        //   aboutMe: req.body.aboutMe,
         //   hometown: req.body.hometown,
         //   profession: req.body.profession,
         //   currentJob: req.body.currentJob,
