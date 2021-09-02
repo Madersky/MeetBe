@@ -105,6 +105,9 @@ const EditProfile = ({ profile, currentUser }) => {
           Hometown
         </label>
         <div className="input-group mb-3">
+          <span className="input-group-text">
+            <i className="bi bi-house-fill"></i>
+          </span>
           <input
             type="text"
             className="form-control"
@@ -133,6 +136,9 @@ const EditProfile = ({ profile, currentUser }) => {
           Current Job
         </label>
         <div className="input-group mb-3">
+          <span className="input-group-text">
+            <i className="bi bi-hammer"></i>
+          </span>
           <input
             type="text"
             className="form-control"
@@ -147,7 +153,24 @@ const EditProfile = ({ profile, currentUser }) => {
           Social status
         </label>
         <div className="input-group mb-3">
-          <input
+          <span className="input-group-text">
+            <i className="bi bi-heart-fill"></i>
+          </span>
+          <select
+            className="form-select"
+            id="social status"
+            onChange={(e) => setSocialStatus(e.target.value)}
+          >
+            <option value="Single" selected>
+              Single
+            </option>
+            <option value="in Relationship">in Relationship</option>
+            <option value="Engage">Engaged</option>
+            <option value="Widow">Widow</option>
+            <option value="Widower">Widower</option>
+            <option value="Married">Married</option>
+          </select>
+          {/* <input
             type="text"
             className="form-control"
             value={socialStatus}
@@ -155,12 +178,15 @@ const EditProfile = ({ profile, currentUser }) => {
             placeholder="engaged"
             aria-label="Social status"
             aria-describedby="basic-addon1"
-          ></input>
+          ></input> */}
         </div>
         <label className="form-label" htmlFor="phone number">
           Phone number
         </label>
         <div className="input-group mb-3">
+          <span className="input-group-text">
+            <i className="bi bi-telephone-fill"></i>
+          </span>
           <input
             type="text"
             className="form-control"
@@ -174,7 +200,21 @@ const EditProfile = ({ profile, currentUser }) => {
 
         <button
           className="btn btn-primary text-center"
-          // disabled={phoneNumber ? null : 'disabled'}
+          disabled={
+            phoneNumber ||
+            age ||
+            school ||
+            birthdate ||
+            aboutMe ||
+            profilePhoto ||
+            hometown ||
+            profession ||
+            currentJob ||
+            socialStatus ||
+            phoneNumber
+              ? null
+              : 'disabled'
+          }
         >
           Click to edit
         </button>
