@@ -1,5 +1,6 @@
-const { body, oneOf } = require('express-validator');
+const { body, oneOf, validationResult } = require('express-validator');
 
+import { Request, Response } from 'express';
 exports.validateProfile = [
   // body('firstname').trim().notEmpty().withMessage('Write your name please'),
   // body('lastname').trim().notEmpty().withMessage('Write your lastname please'),
@@ -22,4 +23,10 @@ exports.validateProfile = [
     'Social status have to be social status'
   ),
   body('phoneNumber').optional({ checkFalsy: true }).isInt(),
+  (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send(errors);
+    }
+  },
 ];

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Router from 'next/router';
 
 import useRequest from '../../hooks/use-request';
@@ -15,6 +15,11 @@ const EditProfile = ({ profile, currentUser }) => {
   const [currentJob, setCurrentJob] = useState('');
   const [socialStatus, setSocialStatus] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [example, setExample] = useState('');
+
+  const [validationErrorsFields, setValidationErrorsFields] = useState([]);
+
+  const isInitialMount = useRef(true);
 
   const [patchProfileRequest, patchProfilesErrors] = useRequest({
     url: `/api/profiles/id/${currentUser._id}`,
@@ -36,11 +41,22 @@ const EditProfile = ({ profile, currentUser }) => {
       Router.reload();
     },
   });
-
   const onSubmit = async (event) => {
     event.preventDefault();
     patchProfileRequest();
   };
+  useEffect(() => {
+    // if (isInitialMount.current) {
+    //   isInitialMount.current = false;
+    // } else {
+
+    setValidationErrorsFields(
+      patchProfilesErrors && patchProfilesErrors.fields
+    );
+    console.log('jazda', validationErrorsFields);
+    // }
+  }, [example]);
+
   return (
     <div className="container">
       <form onSubmit={onSubmit}>
@@ -219,7 +235,7 @@ const EditProfile = ({ profile, currentUser }) => {
           Click to edit
         </button>
 
-        {patchProfilesErrors}
+        {patchProfilesErrors && patchProfilesErrors.error}
       </form>
     </div>
   );
