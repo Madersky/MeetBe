@@ -15,7 +15,6 @@ const EditProfile = ({ profile, currentUser }) => {
   const [currentJob, setCurrentJob] = useState('');
   const [socialStatus, setSocialStatus] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [example, setExample] = useState('');
 
   const [validationErrorsFields, setValidationErrorsFields] = useState([]);
 
@@ -45,17 +44,19 @@ const EditProfile = ({ profile, currentUser }) => {
     event.preventDefault();
     patchProfileRequest();
   };
-  useEffect(() => {
-    // if (isInitialMount.current) {
-    //   isInitialMount.current = false;
-    // } else {
 
-    setValidationErrorsFields(
-      patchProfilesErrors && patchProfilesErrors.fields
-    );
-    console.log('jazda', validationErrorsFields);
-    // }
-  }, [example]);
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      setValidationErrorsFields(
+        patchProfilesErrors && patchProfilesErrors.fields
+      );
+
+      // console.log('patchProfilesErrors: ', patchProfilesErrors);
+      console.log('validationErrorsFields: ', validationErrorsFields);
+    }
+  });
 
   return (
     <div className="container">
