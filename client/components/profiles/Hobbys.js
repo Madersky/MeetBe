@@ -46,7 +46,6 @@ const Hobbys = ({ hobbys, currentUser }) => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      console.log('Use effect');
       onClickDeleteHobby();
     }
   }, [chosenHobby]);
@@ -77,25 +76,6 @@ const Hobbys = ({ hobbys, currentUser }) => {
                 </div>
               ) : null;
             })}
-            {/* <div className="col">
-              {activeHobbys.map((hobby) => {
-                return hobby ? (
-                  <div
-                    key={hobby}
-                    className="bg-primary text-white text-center rounded m-2"
-                  >
-                    {hobby}
-                    <button
-                      className="btn bi bi-patch-minus"
-                      value={hobby}
-                      onClick={(e) => {
-                        setChosenHobby(e.target.value);
-                      }}
-                    ></button>
-                  </div>
-                ) : null;
-              })}
-            </div> */}
           </div>
         </div>
       </div>
@@ -110,7 +90,6 @@ const Hobbys = ({ hobbys, currentUser }) => {
               className="form-control"
               value={hobby}
               onChange={(e) => setHobby(e.target.value)}
-              // style={{ width: 50 + 'px' }}
               placeholder="programowanie"
               aria-label="Hobbys"
               aria-describedby="basic-addon1"
@@ -124,64 +103,10 @@ const Hobbys = ({ hobbys, currentUser }) => {
             Add hobby
           </button>
           {patchProfilesHobbyErrors}
-          {/* <button className="btn btn-primary">Save</button> */}
         </div>
       </form>
     </div>
   );
 };
-
-// return (
-//   <div>
-//     <h1 className="lead text-center pt-3">Hobbys:</h1>
-//     <div className="container">
-//       <div className="text-align-start">
-//         {activeHobbys.map((hobby) => {
-//           return hobby ? (
-//             <div className="row mb-5">
-//               <div className="col-md-3">
-//                 <div
-//                   key={hobby}
-//                   className="bg-primary text-white text-center rounded"
-//                 >
-//                   {hobby}
-//                   <button
-//                     className="btn bi bi-patch-minus"
-//                     value={hobby}
-//                     onClick={(e) => {
-//                       setChosenHobby(e.target.value);
-//                     }}
-//                   ></button>
-//                 </div>
-//               </div>
-//             </div>
-//           ) : null;
-//         })}
-//       </div>
-//     </div>
-//     <form className="justify-content-center">
-//       <div className="container">
-//         <label className="form-label" htmlFor="hobbys">
-//           Add hobby
-//         </label>
-//         <div className="input-group mb-3">
-//           <input
-//             type="text"
-//             className="form-control"
-//             value={hobbys}
-//             onChange={(e) => setHobby(e.target.value)}
-//             // style={{ width: 50 + 'px' }}
-//             placeholder="programowanie"
-//             aria-label="Hobbys"
-//             aria-describedby="basic-addon1"
-//           ></input>
-//         </div>
-//         <button className="btn btn-primary">Add hobby</button>
-//         <button className="btn btn-primary">Save</button>
-//       </div>
-//     </form>
-//   </div>
-// );
-// };
 
 export default Hobbys;

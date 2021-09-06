@@ -15,7 +15,6 @@ interface ProfileAttrs {
   school: string;
   profession: string;
   currentJob: string;
-  socialStatus: string;
   phoneNumber: string;
 }
 
@@ -35,7 +34,6 @@ interface ProfileDoc extends mongoose.Document {
   school: string;
   profession: string;
   currentJob: string;
-  socialStatus: string;
   phoneNumber: string;
   version: number;
 }
@@ -88,10 +86,6 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    socialStatus: {
-      type: String,
-      required: false,
-    },
     phoneNumber: {
       type: String,
       required: false,
@@ -123,7 +117,6 @@ profileSchema.statics.build = (attrs: ProfileAttrs) => {
     school: attrs.school,
     profession: attrs.profession,
     currentJob: attrs.currentJob,
-    socialStatus: attrs.socialStatus,
     phoneNumber: attrs.phoneNumber,
   });
 };
