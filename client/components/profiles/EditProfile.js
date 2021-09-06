@@ -88,112 +88,81 @@ const EditProfile = ({ profile, currentUser }) => {
           setter={setAge}
           placeholder="18"
           error={patchProfilesErrors && patchProfilesErrors.message['age']}
+          iClass="bi-heart-fill"
         />
-        {/* <label className="form-label" htmlFor="age">
-          Age
-        </label>
-        <div className="input-group mb-3">
-          <input
-            id="age"
-            type="text"
-            className="form-control"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-            placeholder="18"
-            aria-label="age"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div> */}
-        <label className="form-label" htmlFor="school">
-          School
-        </label>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            value={school}
-            onChange={(e) => setSchool(e.target.value)}
-            placeholder="university"
-            aria-label="School"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div>
-        <label className="form-label" htmlFor="birthdate">
-          Birthdate
-        </label>
-        <div className="input-group mb-3">
-          <input
-            type="data"
-            className="form-control"
-            value={birthdate}
-            onChange={(e) => setBirthdate(e.target.value)}
-            placeholder="19.04.19999"
-            aria-label="Birthdate"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div>
-        <label className="form-label" htmlFor="about me">
-          About me
-        </label>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            value={aboutMe}
-            onChange={(e) => setAboutMe(e.target.value)}
-            placeholder="siema jestem kozak"
-            aria-label="About"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div>
-        <label className="form-label" htmlFor="hometown">
-          Hometown
-        </label>
-        <div className="input-group mb-3">
-          <span className="input-group-text">
-            <i className="bi bi-house-fill"></i>
-          </span>
-          <input
-            type="text"
-            className="form-control"
-            value={hometown}
-            onChange={(e) => setHometown(e.target.value)}
-            placeholder="Brzeg"
-            aria-label="Hometown"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div>
-        <label className="form-label" htmlFor="profession">
-          Profession
-        </label>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            value={profession}
-            onChange={(e) => setProfession(e.target.value)}
-            placeholder="Programista"
-            aria-label="Profession"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div>
-        <label className="form-label" htmlFor="current job">
-          Current Job
-        </label>
-        <div className="input-group mb-3">
-          <span className="input-group-text">
-            <i className="bi bi-hammer"></i>
-          </span>
-          <input
-            type="text"
-            className="form-control"
-            value={currentJob}
-            onChange={(e) => setCurrentJob(e.target.value)}
-            placeholder="Programista fullstack"
-            aria-label="Current Job"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div>
+        <CustomInput
+          name="School"
+          id="school"
+          type="text"
+          className="input-group mb-3"
+          value={school}
+          setter={setSchool}
+          placeholder="University"
+          error={patchProfilesErrors && patchProfilesErrors.message['school']}
+          iClass="bi-bookmarks-fill"
+        />
+        <CustomInput
+          name="Birthdate"
+          id="birthdate"
+          type="text"
+          className="input-group mb-3"
+          value={birthdate}
+          setter={setBirthdate}
+          placeholder="05.09.1999"
+          error={
+            patchProfilesErrors && patchProfilesErrors.message['birthDate']
+          }
+          iClass="bi-house-fill"
+        />
+        <CustomInput
+          name="About me"
+          id="aboutMe"
+          type="text"
+          className="input-group mb-3"
+          value={aboutMe}
+          setter={setAboutMe}
+          placeholder="Hello im fullstack DEV"
+          error={patchProfilesErrors && patchProfilesErrors.message['aboutMe']}
+          iClass="bi-textarea-t"
+        />
+        <CustomInput
+          name="Hometown"
+          id="hometown"
+          type="text"
+          className="input-group mb-3"
+          value={hometown}
+          setter={setHometown}
+          placeholder="Brzeg"
+          error={patchProfilesErrors && patchProfilesErrors.message['hometown']}
+          iClass="bi-house-fill"
+        />
+        <CustomInput
+          name="Profession"
+          id="profession"
+          type="text"
+          className="input-group mb-3"
+          value={profession}
+          setter={setProfession}
+          placeholder="Programista"
+          error={
+            patchProfilesErrors && patchProfilesErrors.message['profession']
+          }
+          iClass="bi-briefcase-fill"
+        />
+        <CustomInput
+          name="Current Job"
+          id="currentJob"
+          type="text"
+          className="input-group mb-3"
+          value={currentJob}
+          setter={setCurrentJob}
+          placeholder="Programista fullstack"
+          error={
+            patchProfilesErrors && patchProfilesErrors.message['currentJob']
+          }
+          iClass="bi-house-fill"
+        />
+
         <label className="form-label" htmlFor="social status">
           Social status
         </label>
@@ -206,7 +175,7 @@ const EditProfile = ({ profile, currentUser }) => {
             id="social status"
             onChange={(e) => setSocialStatus(e.target.value)}
           >
-            <option value="Single" selected>
+            <option value="Single" defaultValue="Single">
               Single
             </option>
             <option value="in Relationship">in Relationship</option>
@@ -215,15 +184,6 @@ const EditProfile = ({ profile, currentUser }) => {
             <option value="Widower">Widower</option>
             <option value="Married">Married</option>
           </select>
-          {/* <input
-            type="text"
-            className="form-control"
-            value={socialStatus}
-            onChange={(e) => setSocialStatus(e.target.value)}
-            placeholder="engaged"
-            aria-label="Social status"
-            aria-describedby="basic-addon1"
-          ></input> */}
         </div>
 
         <CustomInput
@@ -237,29 +197,12 @@ const EditProfile = ({ profile, currentUser }) => {
           error={
             patchProfilesErrors && patchProfilesErrors.message['phoneNumber']
           }
+          iClass="bi-house-fill"
         />
 
-        {/* <label className="form-label" htmlFor="phone number">
-          Phone number
-        </label>
-        <div className="input-group mb-3">
-          <span className="input-group-text">
-            <i className="bi bi-telephone-fill"></i>
-          </span>
-          <input
-            type="text"
-            className="form-control"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder="999999999"
-            aria-label="Phone Number"
-            aria-describedby="basic-addon1"
-          ></input>
-        </div> */}
-
         <button className="btn btn-primary text-center">Click to edit</button>
-        <h1>{patchProfilesErrors && `${patchProfilesErrors.fields}`}</h1>
-        {patchProfilesErrors && patchProfilesErrors.error}
+        {/* <h1>{patchProfilesErrors && `${patchProfilesErrors.fields}`}</h1>
+        {patchProfilesErrors && patchProfilesErrors.error} */}
       </form>
     </div>
   );
