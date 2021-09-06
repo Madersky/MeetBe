@@ -7,13 +7,21 @@ const CustomInput = ({
   setter,
   placeholder,
   error,
+  iClass,
 }) => {
   return (
     <div>
       <label className="form-label" htmlFor={id}>
         {name}
       </label>
+
       <div className={className}>
+        {iClass ? (
+          <span className="input-group-text">
+            <i className={`bi ${iClass}`}></i>
+          </span>
+        ) : null}
+
         <input
           id={id}
           type={type}
