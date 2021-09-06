@@ -3,10 +3,10 @@ import Image from 'next/image';
 const ImagePanel = ({ profileImage }) => {
   return (
     <div
-      className="d-flex justify-content-between align-items-center"
-      // style={{ position: 'relative', width: '200px', height: '200px' }}
+      // className=""
+      style={{ position: 'relative', minWidth: '200px', minHeight: '200px' }}
     >
-      <img
+      <Image
         layout="fill"
         src={`/${profileImage}`}
         alt="Profile Photo"

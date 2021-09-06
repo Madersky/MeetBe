@@ -5,6 +5,7 @@ import useRequest from '../../hooks/use-request';
 import EditProfile from '../../components/profiles/EditProfile';
 import Hobbys from '../../components/profiles/Hobbys';
 import ImagePanel from '../../components/profiles/ImagePanel';
+import UploadImage from '../../components/profiles/UploadImage';
 
 const Profile = ({ profile, currentUser }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -43,19 +44,20 @@ const Profile = ({ profile, currentUser }) => {
         <div className="col-lg-6 mb-5">
           <div className="border">
             <div className="row gx-1">
-              <div className="col-lg-6">
+              <div className="col-xl-5 d-flex justify-content-center align-items-center">
                 <ImagePanel
-                  profileImage={profile.profilePhoto || 'profilejpg'}
+                  profileImage={profile.profilePhoto || 'profile.jpg'}
                 />
               </div>
-              <div className="col-lg-6">
-                <p className="lead text-start fw-bold px-5 pt-5">
+              <div className="col-lg-7 ">
+                <UploadImage />
+                <p className="lead text-start fw-bold px-2 pt-5">
                   Firstname: {profile.user.firstname}
                 </p>
-                <p className="lead text-start fw-bold px-5">
+                <p className="lead text-start fw-bold px-2">
                   Lastname: {profile.user.lastname}
                 </p>
-                <p className="lead text-start fw-bold px-5">
+                <p className="lead text-start fw-bold px-2">
                   Email: {profile.user.email}{' '}
                 </p>
                 <div className={`${isOpen ? 'collapse' : ''}`} id="viewMore">
