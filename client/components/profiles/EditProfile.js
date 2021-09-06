@@ -1,8 +1,9 @@
+import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import Router from 'next/router';
 
 import useRequest from '../../hooks/use-request';
-import React from 'react';
+import CustomInput from './CustomInput';
 
 const EditProfile = ({ profile, currentUser }) => {
   const [age, setAge] = useState('');
@@ -40,28 +41,55 @@ const EditProfile = ({ profile, currentUser }) => {
       Router.reload();
     },
   });
+  // const example = async () => {
+  //   await setValidationErrorsFields(patchProfilesErrors && patchProfilesErrors);
+  // };
   const onSubmit = async (event) => {
     event.preventDefault();
     patchProfileRequest();
   };
 
-  console.log('validationErrorsFields: ', validationErrorsFields);
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      setValidationErrorsFields(
-        patchProfilesErrors && patchProfilesErrors.fields
-      );
+  // useEffect(
+  //   () => {
+  //     if (isInitialMount.current) {
+  //       isInitialMount.current = false;
+  //     } else {
+  //       console.log('haha', validationErrorsFields);
+  //     }
 
-      // console.log('patchProfilesErrors: ', patchProfilesErrors);
-    }
-  });
+  //     // example();
+  //     // setValidationErrorsFields(
+  //     //   patchProfilesErrors && patchProfilesErrors.fields
+  //     // );
+  //     // console.log('validationErrorsFields: ', validationErrorsFields);
 
+  //   },
+
+  //   // const example = async () => {
+  //   //   await setValidationErrorsFields(
+  //   //     patchProfilesErrors && patchProfilesErrors.fields
+  //   //   );
+  //   //   await console.log(validationErrorsFields);
+  //   // };
+
+  //   // example();
+  //   [validationErrorsFields]
+  // );
+  console.log('patchProfilesErrors: ', patchProfilesErrors);
   return (
     <div className="container">
       <form onSubmit={onSubmit}>
-        <label className="form-label" htmlFor="age">
+        <CustomInput
+          name="Age"
+          id="age"
+          type="text"
+          className="input-group mb-3"
+          value={age}
+          setter={setAge}
+          placeholder="18"
+          error={patchProfilesErrors && patchProfilesErrors.message['age']}
+        />
+        {/* <label className="form-label" htmlFor="age">
           Age
         </label>
         <div className="input-group mb-3">
@@ -75,7 +103,7 @@ const EditProfile = ({ profile, currentUser }) => {
             aria-label="age"
             aria-describedby="basic-addon1"
           ></input>
-        </div>
+        </div> */}
         <label className="form-label" htmlFor="school">
           School
         </label>
@@ -197,7 +225,21 @@ const EditProfile = ({ profile, currentUser }) => {
             aria-describedby="basic-addon1"
           ></input> */}
         </div>
-        <label className="form-label" htmlFor="phone number">
+
+        <CustomInput
+          name="Phone Number"
+          id="phoneNumber"
+          type="text"
+          className="input-group mb-3"
+          value={phoneNumber}
+          setter={setPhoneNumber}
+          placeholder="999999999"
+          error={
+            patchProfilesErrors && patchProfilesErrors.message['phoneNumber']
+          }
+        />
+
+        {/* <label className="form-label" htmlFor="phone number">
           Phone number
         </label>
         <div className="input-group mb-3">
@@ -213,28 +255,9 @@ const EditProfile = ({ profile, currentUser }) => {
             aria-label="Phone Number"
             aria-describedby="basic-addon1"
           ></input>
-        </div>
+        </div> */}
 
-        <button
-          className="btn btn-primary text-center"
-          disabled={
-            phoneNumber ||
-            age ||
-            school ||
-            birthdate ||
-            aboutMe ||
-            profilePhoto ||
-            hometown ||
-            profession ||
-            currentJob ||
-            socialStatus ||
-            phoneNumber
-              ? null
-              : 'disabled'
-          }
-        >
-          Click to edit
-        </button>
+        <button className="btn btn-primary text-center">Click to edit</button>
         <h1>{patchProfilesErrors && `${patchProfilesErrors.fields}`}</h1>
         {patchProfilesErrors && patchProfilesErrors.error}
       </form>
@@ -243,3 +266,18 @@ const EditProfile = ({ profile, currentUser }) => {
 };
 
 export default EditProfile;
+// disabled={
+//   phoneNumber ||
+//   age ||
+//   school ||
+//   birthdate ||
+//   aboutMe ||
+//   profilePhoto ||
+//   hometown ||
+//   profession ||
+//   currentJob ||
+//   socialStatus ||
+//   phoneNumber
+//     ? null
+//     : 'disabled'
+// }

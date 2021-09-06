@@ -16,12 +16,23 @@ const UseRequest = ({ url, method, body, onSuccess }) => {
       return response.data;
     } catch (err) {
       console.log('Error message z useRequesta');
-      // console.log(err.response.data.errors.map((err) => err.param));
       const fields = err.response.data.errors.map((err) => err.param);
+      const errorMessage = err.response.data.errors.map((err) => err.msg);
+      const objectFields = [];
+      const objectMessage = [];
+
+      for (let i = 0; i < errorMessage.length; i++) {
+        objectMessage[fields[i]] = errorMessage[i];
+      }
+
+      fields.forEach((element) => {
+        objectFields[element] = element;
+      });
+
       setErrors({
         error: (
           <div className="box-errors-credentials">
-            <h4>Something went wrong...</h4>
+            <p>Something went wrong...</p>
             <ul className="list-errors">
               {err.response.data.errors.map((err) => (
                 <li key={err.msg}>{err.msg}</li>
@@ -29,7 +40,8 @@ const UseRequest = ({ url, method, body, onSuccess }) => {
             </ul>
           </div>
         ),
-        fields: fields,
+        fields: objectFields,
+        message: objectMessage,
       });
     }
   };

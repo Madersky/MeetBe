@@ -102,6 +102,7 @@ exports.getProfileByEmail = async (req: Request, res: Response) => {
 
 exports.patchProfile = async (req: Request, res: Response) => {
   try {
+    // console.log('JESTEM W REQUESCIE');
     const newObj: Record<string, any> = {};
     Object.keys(req.body).forEach((fieldName) => {
       if (req.body[fieldName] !== null) {
