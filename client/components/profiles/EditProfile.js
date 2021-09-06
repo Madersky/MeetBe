@@ -19,7 +19,7 @@ const EditProfile = ({ profile, currentUser }) => {
 
   const [validationErrorsFields, setValidationErrorsFields] = useState([]);
 
-  const isInitialMount = useRef(true);
+  // const isInitialMount = useRef(true);
 
   const [patchProfileRequest, patchProfilesErrors] = useRequest({
     url: `/api/profiles/id/${currentUser._id}`,

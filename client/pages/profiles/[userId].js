@@ -4,6 +4,7 @@ import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
 import EditProfile from '../../components/profiles/EditProfile';
 import Hobbys from '../../components/profiles/Hobbys';
+import ImagePanel from '../../components/profiles/ImagePanel';
 
 const Profile = ({ profile, currentUser }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -40,31 +41,40 @@ const Profile = ({ profile, currentUser }) => {
       <div className="row gx-5">
         {/* <div className="container"> */}
         <div className="col-lg-6 mb-5">
-          <div className="border pb-3">
-            <p className="lead text-start fw-bold px-5 pt-5">
-              Firstname: {profile.user.firstname}
-            </p>
-            <p className="lead text-start fw-bold px-5">
-              Lastname: {profile.user.lastname}
-            </p>
-            <p className="lead text-start fw-bold px-5">
-              Email: {profile.user.email}{' '}
-            </p>
-            <div className={`${isOpen ? 'collapse' : ''}`} id="viewMore">
-              {paragraphHiddenList}
-            </div>
-            <div className="text-center">
-              <button
-                className="btn btn-outline-muted border-0 text-decoration-underline"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#viewMore"
-                aria-expanded="true"
-                aria-controls="viewMore"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {`${isOpen ? 'View more info' : 'close'}`}
-              </button>
+          <div className="border">
+            <div className="row gx-1">
+              <div className="col-lg-6">
+                <ImagePanel
+                  profileImage={profile.profilePhoto || 'profilejpg'}
+                />
+              </div>
+              <div className="col-lg-6">
+                <p className="lead text-start fw-bold px-5 pt-5">
+                  Firstname: {profile.user.firstname}
+                </p>
+                <p className="lead text-start fw-bold px-5">
+                  Lastname: {profile.user.lastname}
+                </p>
+                <p className="lead text-start fw-bold px-5">
+                  Email: {profile.user.email}{' '}
+                </p>
+                <div className={`${isOpen ? 'collapse' : ''}`} id="viewMore">
+                  {paragraphHiddenList}
+                </div>
+                <div className="text-center">
+                  <button
+                    className="btn btn-outline-muted border-0 text-decoration-underline"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#viewMore"
+                    aria-expanded="true"
+                    aria-controls="viewMore"
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    {`${isOpen ? 'View more info' : 'close'}`}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
