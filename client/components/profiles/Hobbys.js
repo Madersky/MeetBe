@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import useRequest from '../../hooks/use-request';
+import CustomInput from '../CustomInput';
 
 const Hobbys = ({ hobbys, currentUser }) => {
   const [chosenHobby, setChosenHobby] = useState('');
@@ -81,20 +82,20 @@ const Hobbys = ({ hobbys, currentUser }) => {
       </div>
       <form className="justify-content-center">
         <div className="container">
-          <label className="form-label" htmlFor="hobbys">
-            Add hobby
-          </label>
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              value={hobby}
-              onChange={(e) => setHobby(e.target.value)}
-              placeholder="programowanie"
-              aria-label="Hobbys"
-              aria-describedby="basic-addon1"
-            ></input>
-          </div>
+          <CustomInput
+            name="Add Hobby"
+            id="hobbys"
+            type="text"
+            className="input-group mb-3"
+            value={hobby}
+            setter={setHobby}
+            placeholder="Music"
+            error={
+              patchProfilesHobbyErrors &&
+              patchProfilesHobbyErrors.message['hobby']
+            }
+          />
+
           <button
             className="btn btn-primary"
             onClick={onClickAddHobby}
@@ -102,7 +103,6 @@ const Hobbys = ({ hobbys, currentUser }) => {
           >
             Add hobby
           </button>
-          {patchProfilesHobbyErrors}
         </div>
       </form>
     </div>

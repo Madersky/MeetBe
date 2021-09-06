@@ -1,5 +1,5 @@
-import express, { Request, Response } from 'express';
-import { body } from 'express-validator';
+import express, { Request, Response, NextFunction } from 'express';
+import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import { validateRequest, BadRequestError } from '@meetbe/common';
 import { User } from '../models/userModel';
@@ -16,6 +16,14 @@ router.post(
       .trim()
       .isLength({ min: 4, max: 20 })
       .withMessage('Password must be between 4 and 20 characters'),
+    (req: Request, res: Response, next: NextFunction) => {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).send(errors);
+      } else {
+        next();
+      }
+    },
   ],
   validateRequest,
   async (req: Request, res: Response) => {

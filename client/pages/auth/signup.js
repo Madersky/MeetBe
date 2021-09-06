@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Router from 'next/router';
+import CustomInput from '../../components/CustomInput';
 
 import useRequest from '../../hooks/use-request';
 
@@ -35,74 +36,53 @@ const Signup = () => {
             <h1 className="lead fs-1">Sign Up</h1>
 
             {/* EMAIL ADDRESS */}
+            <CustomInput
+              name="E-mail Address"
+              id="email"
+              type="text"
+              className="input-group mb-3"
+              value={email}
+              setter={setEmail}
+              placeholder="e.g. example@example.com"
+              error={createUserErrors && createUserErrors.message['email']}
+              iClass="bi-chat-right-dots-fill"
+            />
+            <CustomInput
+              name="Firstname"
+              id="firstname"
+              type="text"
+              className="input-group mb-3"
+              value={firstname}
+              setter={setFirstname}
+              placeholder="e.g. Andrew"
+              // error={createUserErrors && createUserErrors.message['password']}
+              iClass="bi-person-fill"
+            />
 
-            <label htmlFor="email" className="form-label mt-1">
-              E-mail Address
-            </label>
-            <div className="input-group">
-              <span className="input-group-text">
-                <i className="bi bi-chat-right-dots-fill"></i>
-              </span>
-              <input
-                type="email"
-                id="email"
-                placeholder="e.g. example@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="form-control"
-              />
-            </div>
-            <label htmlFor="firstname" className="form-label mt-1">
-              Firstname
-            </label>
-            <div className="input-group">
-              <span className="input-group-text">
-                <i className="bi bi-person-fill"></i>
-              </span>
-              <input
-                type="text"
-                id="firstname"
-                placeholder="e.g. Andrew"
-                value={firstname}
-                onChange={(e) => setFirstname(e.target.value)}
-                className="form-control"
-              />
-            </div>
-            <label htmlFor="lastname" className="form-label mt-1">
-              Lastname
-            </label>
-            <div className="input-group">
-              <span className="input-group-text">
-                <i className="bi bi-person-fill"></i>
-              </span>
-              <input
-                type="text"
-                id="lastname"
-                placeholder="e.g Muller"
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
-                className="form-control"
-              />
-            </div>
-            <label htmlFor="password" className="form-label mt-1">
-              Password
-            </label>
-            <div className="input-group">
-              <span className="input-group-text">
-                <i className="bi bi-shield-lock-fill"></i>
-              </span>
+            <CustomInput
+              name="Lastname"
+              id="lastname"
+              type="text"
+              className="input-group mb-3"
+              value={lastname}
+              setter={setLastname}
+              placeholder="e.g. Muller"
+              // error={createUserErrors && createUserErrors.message['password']}
+              iClass="bi-person-fill"
+            />
 
-              <input
-                placeholder="********"
-                id="passowrd"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                className="form-control"
-              />
-            </div>
-            {createUserErrors}
-            {/* {createProfileErrors} */}
+            <CustomInput
+              name="Password"
+              id="password"
+              type="password"
+              className="input-group mb-3"
+              value={password}
+              setter={setPassword}
+              placeholder="***********"
+              error={createUserErrors && createUserErrors.message['password']}
+              iClass="bi-shield-lock-fill"
+            />
+
             <div className="justify-content-center text-center">
               <button className="btn btn-light border my-5 ">
                 <i className="bi bi-arrow-right"></i>

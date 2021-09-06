@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import { validateRequest, BadRequestError } from '@meetbe/common';
@@ -16,6 +16,14 @@ router.post(
       .trim()
       .notEmpty()
       .withMessage('You must supply a password'),
+    (req: Request, res: Response, next: NextFunction) => {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).send(errors);
+      } else {
+        next();
+      }
+    },
   ],
   validateRequest,
   async (req: Request, res: Response) => {
