@@ -30,7 +30,6 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
       school: '',
       profession: '',
       currentJob: '',
-      socialStatus: '',
       phoneNumber: '',
     });
     await profile.save();

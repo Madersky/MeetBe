@@ -18,7 +18,6 @@ exports.createProfile = async (req: Request, res: Response) => {
     school,
     profession,
     currentJob,
-    socialStatus,
     phoneNumber,
   } = req.body;
 
@@ -46,7 +45,6 @@ exports.createProfile = async (req: Request, res: Response) => {
     school: school,
     profession: profession,
     currentJob: currentJob,
-    socialStatus: socialStatus,
     phoneNumber: phoneNumber,
   });
 
@@ -140,7 +138,6 @@ exports.patchProfile = async (req: Request, res: Response) => {
         //   hometown: req.body.hometown,
         //   profession: req.body.profession,
         //   currentJob: req.body.currentJob,
-        //   socialStatus: req.body.socialStatus,
         //   phoneNumber: req.body.phoneNumber,
         // },
         { new: true }
