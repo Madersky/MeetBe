@@ -17,7 +17,7 @@ exports.createProfile = async (req: Request, res: Response) => {
     hometown,
     school,
     profession,
-    experience,
+    experiences,
     currentJob,
     phoneNumber,
   } = req.body;
@@ -45,7 +45,7 @@ exports.createProfile = async (req: Request, res: Response) => {
     hometown: hometown,
     school: school,
     profession: profession,
-    experience: experience,
+    experiences: experiences,
     currentJob: currentJob,
     phoneNumber: phoneNumber,
   });
@@ -102,15 +102,15 @@ exports.getProfileByEmail = async (req: Request, res: Response) => {
 
 exports.patchProfile = async (req: Request, res: Response) => {
   try {
-    // console.log('JESTEM W REQUESCIE');
     const newObj: Record<string, any> = {};
     Object.keys(req.body).forEach((fieldName) => {
       if (req.body[fieldName] !== null) {
         newObj[fieldName] = req.body[fieldName];
       }
     });
-    if (newObj.hobby !== null) {
+    if (newObj.hobby !== null || newObj.experience !== null) {
       const hobby: [string] = newObj.hobby;
+      const experience: { description: string }[] = newObj.experience;
       delete newObj.hobby;
       const profile = await Profile.findByIdAndUpdate(
         req.params._id,

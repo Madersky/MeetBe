@@ -16,7 +16,6 @@ const Profile = ({ profile, currentUser }) => {
   const hobbys = Array.from(profile.hobbys);
 
   let fieldNames = Object.keys(profile);
-
   const paragraphHiddenList = fieldNames.map((fieldName) => {
     // split(/(?=[A-Z])/) - wrzuca do tablicy po napotkaniu dużej litery
     const text = fieldName.split(/(?=[A-Z])/).join(' ');
@@ -83,7 +82,7 @@ const Profile = ({ profile, currentUser }) => {
         </div>
         <div className="col-6 mb-5 border border-muted">
           <Experience
-            experience={profile.experience}
+            experiences={profile.experiences}
             currentUser={currentUser}
           />
         </div>
