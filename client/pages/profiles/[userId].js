@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Router from 'next/router';
 
-import useRequest from '../../hooks/use-request';
+import { Experience } from '../../components/profiles/Experience';
 import EditProfile from '../../components/profiles/EditProfile';
 import Hobbys from '../../components/profiles/Hobbys';
 import ImagePanel from '../../components/profiles/ImagePanel';
@@ -24,7 +24,8 @@ const Profile = ({ profile, currentUser }) => {
     return fieldName === 'user' ||
       fieldName === '_id' ||
       fieldName === 'version' ||
-      fieldName === 'hobbys' ? null : (
+      fieldName === 'hobbys' ||
+      fieldName === 'experience' ? null : (
       <p
         key={Math.random(profile._id)}
         className="lead text-start fw-bold px-5"
@@ -80,10 +81,9 @@ const Profile = ({ profile, currentUser }) => {
             </div>
           </div>
         </div>
-        {/* <div className="col-lg-6 mb-5">
-          <div className="border pb-3">{paragraphHiddenList}</div>
-        </div> */}
-        {/* </div> */}
+        <div className="col-6 mb-5 border border-muted">
+          <Experience experience={profile.experience} />
+        </div>
       </div>
       <div className="row gx-5">
         <div className="col-lg mb-5">

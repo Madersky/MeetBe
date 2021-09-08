@@ -17,6 +17,7 @@ exports.createProfile = async (req: Request, res: Response) => {
     hometown,
     school,
     profession,
+    experience,
     currentJob,
     phoneNumber,
   } = req.body;
@@ -44,6 +45,7 @@ exports.createProfile = async (req: Request, res: Response) => {
     hometown: hometown,
     school: school,
     profession: profession,
+    experience: experience,
     currentJob: currentJob,
     phoneNumber: phoneNumber,
   });

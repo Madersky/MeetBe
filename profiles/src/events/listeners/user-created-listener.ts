@@ -29,6 +29,7 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
       hometown: '',
       school: '',
       profession: '',
+      experience: { description: 'Description' },
       currentJob: '',
       phoneNumber: '',
     });

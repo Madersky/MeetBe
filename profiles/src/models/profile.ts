@@ -14,6 +14,8 @@ interface ProfileAttrs {
   hometown: string;
   school: string;
   profession: string;
+  // Type annotations EXAMPLE OF USES experience = [{description: "somesString"}]
+  experience: { description: string };
   currentJob: string;
   phoneNumber: string;
 }
@@ -33,6 +35,7 @@ interface ProfileDoc extends mongoose.Document {
   hometown: string;
   school: string;
   profession: string;
+  experience: { description: string };
   currentJob: string;
   phoneNumber: string;
   version: number;
@@ -82,6 +85,10 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    experience: {
+      type: mongoose.Schema.Types.Mixed,
+      required: false,
+    },
     currentJob: {
       type: String,
       required: false,
@@ -116,6 +123,7 @@ profileSchema.statics.build = (attrs: ProfileAttrs) => {
     hometown: attrs.hometown,
     school: attrs.school,
     profession: attrs.profession,
+    experience: attrs.experience,
     currentJob: attrs.currentJob,
     phoneNumber: attrs.phoneNumber,
   });
