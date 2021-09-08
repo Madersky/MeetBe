@@ -82,7 +82,10 @@ const Profile = ({ profile, currentUser }) => {
           </div>
         </div>
         <div className="col-6 mb-5 border border-muted">
-          <Experience experience={profile.experience} />
+          <Experience
+            experience={profile.experience}
+            currentUser={currentUser}
+          />
         </div>
       </div>
       <div className="row gx-5">
