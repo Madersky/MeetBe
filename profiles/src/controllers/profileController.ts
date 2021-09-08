@@ -11,7 +11,7 @@ exports.createProfile = async (req: Request, res: Response) => {
   const {
     aboutMe,
     age,
-    birthDate,
+    birthdate,
     profilePhoto,
     hobbys,
     hometown,
@@ -36,7 +36,7 @@ exports.createProfile = async (req: Request, res: Response) => {
     _id: user._id,
     user: user,
     age: age,
-    birthDate: birthDate,
+    birthdate: birthdate,
     aboutMe: aboutMe,
     profilePhoto: profilePhoto,
     createdAt: new Date(Date.now()).toString(),

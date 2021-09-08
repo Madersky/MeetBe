@@ -8,7 +8,7 @@ import CustomInput from '../CustomInput';
 const EditProfile = ({ profile, currentUser }) => {
   const [age, setAge] = useState('');
   const [school, setSchool] = useState('');
-  const [birthdate, setBirthdate] = useState('');
+  const [birthdate, setBirthdate] = useState(profile.birthDate);
   const [aboutMe, setAboutMe] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
   const [hometown, setHometown] = useState('');
@@ -41,7 +41,6 @@ const EditProfile = ({ profile, currentUser }) => {
     event.preventDefault();
     patchProfileRequest();
   };
-
   return (
     <div className="container">
       <form onSubmit={onSubmit}>
@@ -70,7 +69,7 @@ const EditProfile = ({ profile, currentUser }) => {
         <CustomInput
           name="Birthdate"
           id="birthdate"
-          type="text"
+          type="date"
           className="input-group mb-3"
           value={birthdate}
           setter={setBirthdate}
