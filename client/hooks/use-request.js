@@ -15,11 +15,6 @@ const UseRequest = ({ url, method, body, onSuccess }) => {
 
       return response.data;
     } catch (err) {
-      if (err instanceof Error) {
-        // DO ZROBIENIA CASE W PRZYPADKU GDY ZWRACA BadRequest Z SIGN IN
-      }
-
-      console.log('Error message z useRequesta');
       const fields = err.response.data.errors.map((err) => err.param);
       const errorMessage = err.response.data.errors.map((err) => err.msg);
       const objectFields = [];
@@ -33,14 +28,11 @@ const UseRequest = ({ url, method, body, onSuccess }) => {
         objectFields[element] = element;
       });
       setErrors({
-        error: (
-          <div className="box-errors-credentials">
-            <p>Something went wrong...</p>
-            <ul className="list-errors">
-              {err.response.data.errors.map((err) => (
-                <li key={err.msg}>{err.msg}</li>
-              ))}
-            </ul>
+        default: (
+          <div className="lead text-center text-danger fw-bold mt-3">
+            {err.response.data.errors.map((err) => (
+              <div key={err.message}>{err.message}</div>
+            ))}
           </div>
         ),
         fields: objectFields,
