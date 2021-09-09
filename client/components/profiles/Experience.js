@@ -1,5 +1,6 @@
 import UseRequest from '../../hooks/use-request';
 import CustomInput from '../CustomInput';
+import Accordion from '../Accordion';
 import { useState } from 'react';
 
 export const Experience = ({ experiences, currentUser }) => {
@@ -31,25 +32,15 @@ export const Experience = ({ experiences, currentUser }) => {
   //     setAcceptedDescription([description, title]);
   //   };
 
-  // NIE DZIAŁA DLA WIELU ACCORDIONÓW, ZROBIĆ COMPONENT ACCORDION
-
   const accordionList = experiences.map((experience) => {
     return (
-      <div key={experience.description} className="mt-1">
-        <button
-          className="btn btn-primary ms-5 "
-          onClick={() => setHeadingSecondIsOpen(!headingSecondIsOpen)}
-        >
-          {experience.title}
-        </button>
-        <div
-          id="collapseOne"
-          className={`${headingSecondIsOpen ? 'collapse' : ''}`}
-          aria-labelledby="headingOne"
-          data-bs-parent="#accordionExperience"
-        >
-          <div className="accordion-body">{experience.description}</div>
-        </div>
+      <div key={experience.title}>
+        <Accordion
+          setIsOpen={setHeadingOneIsOpen}
+          isOpen={headingOneIsOpen}
+          title={experience.title}
+          description={experience.description}
+        />
       </div>
     );
   });
@@ -57,12 +48,7 @@ export const Experience = ({ experiences, currentUser }) => {
   return (
     <div>
       <h3>This is EXPERIENCE Component</h3>
-      {/* ACCORDION */}
-
-      <div className="border border-dark">
-        {/* Pierwszy accordion */}
-        {accordionList}
-      </div>
+      <div className="border border-dark">{accordionList}</div>
       {/* UPDATE EXPERIENCE FORM */}
       {/* <form>
         <CustomInput
