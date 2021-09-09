@@ -135,12 +135,13 @@ exports.patchExperience = async (req: Request, res: Response) => {
       {
         $set: {
           'experiences.$[elem].description': experience.description,
+          'experiences.$[elem].title': experience.title,
         },
       },
       {
         new: true,
         multi: true,
-        arrayFilters: [{ 'elem.title': { $eq: experience.title } }],
+        arrayFilters: [{ 'elem.title': { $eq: req.params.title } }],
       }
     );
     if (!profile) {

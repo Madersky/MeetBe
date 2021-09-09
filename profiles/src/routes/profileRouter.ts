@@ -35,9 +35,11 @@ router
 
 router
   .route('/experience/:_id')
-  .patch(requireAuth, validateRequest, profileController.patchExperience)
   .post(requireAuth, validateRequest, profileController.createExperience);
 
+router
+  .route('/experience/:_id/:title')
+  .patch(requireAuth, validateRequest, profileController.patchExperience);
 router
   .route('/email/:email')
   .get(requireAuth, profileController.getProfileByEmail);

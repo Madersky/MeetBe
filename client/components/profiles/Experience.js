@@ -1,44 +1,25 @@
-import UseRequest from '../../hooks/use-request';
-import CustomInput from '../CustomInput';
 import Accordion from '../Accordion';
+import { EditExperience } from './EditExperience';
+import { CreateExperience } from './CreateExperience';
 import { useState } from 'react';
 
 export const Experience = ({ experiences, currentUser }) => {
-  const [description, setDescription] = useState('');
-  const [title, setTitle] = useState('');
-  const [acceptedDescription, setAcceptedDescription] = useState([]);
-  const [headingOneIsOpen, setHeadingOneIsOpen] = useState(true);
-  const [headingSecondIsOpen, setHeadingSecondIsOpen] = useState(true);
+  const [addMode, setAddMode] = useState(false);
 
-  const [patchExperienceRequest, patchExperienceErrors] = UseRequest({
-    url: `/api/profiles/id/${currentUser._id}`,
-    method: 'patch',
-    body: {
-      experience: {
-        description,
-        title,
-      },
-    },
-    onSuccess: (responseData) => {},
-  });
-
-  // UPDATE EXPERIENCE HELPER FUNCTION
-
-  //   const onFormSubmit = (e) => {
-  //     e.preventDefault();
-  //     patchExperienceRequest();
-  //     setAcceptedDescription([description, title]);
-  //   };
-
-  const accordionList = experiences.map((experience) => {
+  const accordionList = experiences.map((experience, id) => {
     return (
       <div key={experience.title}>
-        <Accordion
-          setIsOpen={setHeadingOneIsOpen}
-          isOpen={headingOneIsOpen}
-          title={experience.title}
-          description={experience.description}
-        />
+        <div className="row justify-content-end">
+          <div className="col-lg-6">
+            <Accordion
+              title={experience.title}
+              description={experience.description}
+            />
+          </div>
+          <div className="col-lg-6 ">
+            <EditExperience experience={experience} currentUser={currentUser} />
+          </div>
+        </div>
       </div>
     );
   });
@@ -48,38 +29,12 @@ export const Experience = ({ experiences, currentUser }) => {
       <h3>This is EXPERIENCE Component</h3>
       <div className="border border-dark">{accordionList}</div>
       {/* UPDATE EXPERIENCE FORM */}
-      {/* <form>
-        <CustomInput
-          name="Add description"
-          id="description"
-          type="textarea"
-          className="input-group mb-3"
-          value={description}
-          setter={setDescription}
-          placeholder="I was learning this for about 5 years"
-          // Bellow is not working, to fixed
-          error={
-            patchExperienceErrors &&
-            patchExperienceErrors.message['description']
-          }
-        />
-        <CustomInput
-          name="Add Title"
-          id="description"
-          type="textarea"
-          className="input-group mb-3"
-          value={title}
-          setter={setTitle}
-          placeholder="FrontEnd"
-          // Bellow is not working, to fixed
-          error={
-            patchExperienceErrors && patchExperienceErrors.message['title']
-          }
-        />
-        <button className="btn btn-primary" onClick={onFormSubmit}>
-          Click me to submit the form
-        </button>
-      </form> */}
+      <button className="btn btn-muted" onClick={() => setAddMode(!addMode)}>
+        <i className="bi bi-plus-circle" />
+      </button>
+      <div className={`${addMode ? '' : 'collapse'}`}>
+        <CreateExperience currentUser={currentUser} />
+      </div>
     </div>
   );
 };
