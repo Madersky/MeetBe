@@ -14,12 +14,10 @@ export const Experience = ({ experiences, currentUser }) => {
     url: `/api/profiles/id/${currentUser._id}`,
     method: 'patch',
     body: {
-      experiences: [
-        {
-          description,
-          title,
-        },
-      ],
+      experience: {
+        description,
+        title,
+      },
     },
     onSuccess: (responseData) => {},
   });

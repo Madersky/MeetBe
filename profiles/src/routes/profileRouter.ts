@@ -34,6 +34,11 @@ router
   .put(requireAuth, profileController.deleteProfileProperty);
 
 router
+  .route('/experience/:_id')
+  .patch(requireAuth, validateRequest, profileController.patchExperience)
+  .post(requireAuth, validateRequest, profileController.createExperience);
+
+router
   .route('/email/:email')
   .get(requireAuth, profileController.getProfileByEmail);
 

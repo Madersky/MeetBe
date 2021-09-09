@@ -100,6 +100,59 @@ exports.getProfileByEmail = async (req: Request, res: Response) => {
   }
 };
 
+exports.createExperience = async (req: Request, res: Response) => {
+  try {
+    const newExperience = req.body.experience;
+    const profile = await Profile.findByIdAndUpdate(
+      req.params._id,
+      {
+        $addToSet: {
+          experiences: newExperience,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    if (!profile) {
+      throw new Error('Profile not found!');
+    }
+    await profile.save();
+    res.status(200).send({ profile: profile || null });
+  } catch (err) {
+    res.status(400).send(`Error! ${err}`);
+  }
+};
+
+exports.patchExperience = async (req: Request, res: Response) => {
+  try {
+    const experience = req.body.experience;
+    console.log(experience);
+
+    // ZMIANA ISTANIEJĄEGO EXPERIENCE
+    const profile = await Profile.findByIdAndUpdate(
+      req.params._id,
+      {
+        $set: {
+          'experiences.$[elem].description': experience.description,
+        },
+      },
+      {
+        new: true,
+        multi: true,
+        arrayFilters: [{ 'elem.title': { $eq: experience.title } }],
+      }
+    );
+    if (!profile) {
+      throw new Error('Profile not found');
+    }
+    await profile.save();
+    res.status(200).send({ profile: profile || null });
+  } catch (err) {
+    res.status(400).send(`Error! ${err}`);
+  }
+};
+
 exports.patchProfile = async (req: Request, res: Response) => {
   try {
     const newObj: Record<string, any> = {};
@@ -110,7 +163,6 @@ exports.patchProfile = async (req: Request, res: Response) => {
     });
     if (newObj.hobby !== null || newObj.experience !== null) {
       const hobby: [string] = newObj.hobby;
-      const experience: { description: string }[] = newObj.experience;
       delete newObj.hobby;
       const profile = await Profile.findByIdAndUpdate(
         req.params._id,
