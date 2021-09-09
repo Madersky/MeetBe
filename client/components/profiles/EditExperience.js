@@ -19,7 +19,7 @@ export const EditExperience = ({ experience, currentUser }) => {
       },
     },
     onSuccess: (responseData) => {
-      Router.reload();
+      // Router.reload();
     },
   });
 

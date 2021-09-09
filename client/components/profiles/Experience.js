@@ -5,8 +5,12 @@ import { useState } from 'react';
 
 export const Experience = ({ experiences, currentUser }) => {
   const [addMode, setAddMode] = useState(false);
+  const [activeExperiences, setActiveExperiences] = useState(experiences);
 
-  const accordionList = experiences.map((experience, id) => {
+  const onCreateClick = (createdExperiences) => {
+    setActiveExperiences([...experiences, ...createdExperiences]);
+  };
+  const accordionList = activeExperiences.map((experience, id) => {
     return (
       <div key={experience.title}>
         <div className="row justify-content-end">
@@ -33,7 +37,10 @@ export const Experience = ({ experiences, currentUser }) => {
         <i className="bi bi-plus-circle" />
       </button>
       <div className={`${addMode ? '' : 'collapse'}`}>
-        <CreateExperience currentUser={currentUser} />
+        <CreateExperience
+          currentUser={currentUser}
+          onCreateClick={onCreateClick}
+        />
       </div>
     </div>
   );
