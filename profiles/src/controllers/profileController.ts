@@ -209,17 +209,22 @@ exports.patchProfile = async (req: Request, res: Response) => {
   }
 };
 
-exports.deleteProfilesHobby = async (req: Request, res: Response) => {
+exports.deleteValueFromArrayProfile = async (req: Request, res: Response) => {
   try {
-    const profile = await Profile.findById(req.params._id);
+    const tab = req.body.tab;
+    const value = req.body.value;
+
+    const profile = await Profile.findByIdAndUpdate(req.params._id, {
+      // [tab] tak się wpisuje zmienną jako pole w modelu
+      $pull: { [tab]: value },
+    });
     if (!profile) {
       throw new Error('Profile not found');
     }
 
-    await profile.updateOne({
-      $pull: { hobbys: req.body.hobby },
-    });
-    console.log(`Usunieto takie hobby: ${req.body.hobby}`);
+    console.log(
+      `Usunieto takie value: ${req.body.value}, z takiej tablicy: ${req.body.tab}`
+    );
     await profile.save();
     res.status(200).send({ profile: profile || null });
   } catch (err) {

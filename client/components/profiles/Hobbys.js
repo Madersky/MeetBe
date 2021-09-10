@@ -24,7 +24,8 @@ const Hobbys = ({ hobbys, currentUser }) => {
     url: `/api/profiles/id/${currentUser._id}`,
     method: 'put',
     body: {
-      hobby: chosenHobby,
+      tab: 'hobbys',
+      value: chosenHobby,
     },
     onSuccess: () => {},
   });

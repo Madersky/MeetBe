@@ -8,15 +8,8 @@ import Router from 'next/router';
 export const CreateExperience = ({ currentUser, onCreateClick }) => {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
-
-  // const [experience, setExperience] = useState({});
-
   const [createdExperiences, setCreatedExperiences] = useState([]);
   const [createExperienceRequest, createExperienceErrors] = UseRequest({
-    // TAKI NIE JEST BARDZIEJ SENSOWNY??
-    // WSKAZUJE NA KONKRETNEGO USERA I JEGO EXPERIENCE
-    // A NIE NA EXPERIENCE I DOPIERO JAKI USER
-    // url: `/api/profiles/${currentUser._id}experience`,
     url: `/api/profiles/${currentUser._id}/experience`,
     method: 'post',
     body: {
@@ -32,17 +25,13 @@ export const CreateExperience = ({ currentUser, onCreateClick }) => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     createExperienceRequest();
-    setCreatedExperiences([
-      ...createdExperiences,
-      { description: description, title: title },
-    ]);
+    setCreatedExperiences([{ description: description, title: title }]);
   };
 
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      console.log('render2 onCreateClick');
       onCreateClick(createdExperiences);
     }
   }, [createdExperiences]);

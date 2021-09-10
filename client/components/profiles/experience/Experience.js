@@ -1,32 +1,40 @@
 import Accordion from './ExperienceAccordion';
 import { EditExperience } from './EditExperience';
 import { CreateExperience } from './CreateExperience';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 export const Experience = ({ experiences, currentUser }) => {
   const [addMode, setAddMode] = useState(false);
   const [activeExperiences, setActiveExperiences] = useState(experiences);
 
   const onCreateClick = (createdExperiences) => {
-    setActiveExperiences([...experiences, ...createdExperiences]);
+    console.log('experience', experiences);
+    console.log('created', createdExperiences);
+    setActiveExperiences([...activeExperiences, ...createdExperiences]);
   };
+
+  const deleteAccordion = (chosenExperience) => {
+    const newExperiences = activeExperiences.filter(
+      (experience) => experience != chosenExperience
+    );
+    setActiveExperiences(newExperiences);
+  };
+
   const accordionList = activeExperiences.map((experience, id) => {
     return (
       <div className=" m-4" key={experience.title}>
         {/* <div className="row">
           <div className="col-3"> */}
         <Accordion
-          title={experience.title}
-          description={experience.description}
           experience={experience}
           currentUser={currentUser}
+          onDeleteAccordion={deleteAccordion}
         />
         {/* </div>
         </div> */}
       </div>
     );
   });
-
   return (
     <div className="row border">
       <h3 className="p-2">EXPERIENCE </h3>
