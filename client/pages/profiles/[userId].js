@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Router from 'next/router';
 
-import { Experience } from '../../components/profiles/Experience';
+import { Experience } from '../../components/profiles/experience/Experience';
 import EditProfile from '../../components/profiles/EditProfile';
 import Hobbys from '../../components/profiles/Hobbys';
 import ImagePanel from '../../components/profiles/ImagePanel';
@@ -24,14 +24,14 @@ const Profile = ({ profile, currentUser }) => {
       fieldName === '_id' ||
       fieldName === 'version' ||
       fieldName === 'hobbys' ||
-      fieldName === 'experience' ? null : (
+      fieldName === 'experiences' ? null : (
       <p
         key={Math.random(profile._id)}
         className="lead text-start fw-bold px-5"
       >
-        {`${text.slice(0, 1).toUpperCase() + text.slice(1)}
-        : 
-        ${profile[`${fieldName}`]}`}
+        {`${text.slice(0, 1).toUpperCase() + text.slice(1)} : ${
+          profile[`${fieldName} `] ? profile[`${fieldName} `] : ''
+        }`}
       </p>
     );
   });
@@ -41,7 +41,7 @@ const Profile = ({ profile, currentUser }) => {
       <div className="my-3 border-bottom border-dark"></div>
       <div className="row gx-5">
         {/* <div className="container"> */}
-        <div className="col-lg-6 mb-5">
+        <div className="col-xxl-6 mb-5">
           <div className="border">
             <div className="row gx-1">
               <div className="col-xl-5 d-flex justify-content-center align-items-center">
@@ -80,7 +80,7 @@ const Profile = ({ profile, currentUser }) => {
             </div>
           </div>
         </div>
-        <div className="col-6 mb-5 border border-muted">
+        <div className="col-xxl-6 mb-5 ">
           <Experience
             experiences={profile.experiences}
             currentUser={currentUser}

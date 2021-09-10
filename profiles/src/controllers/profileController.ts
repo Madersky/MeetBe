@@ -6,64 +6,64 @@ import { Profile } from '../models/profile';
 import { User } from '../models/user';
 import { BadRequestError } from '@meetbe/common';
 
-exports.createProfile = async (req: Request, res: Response) => {
-  console.log('CREATING PROFILE');
-  const {
-    aboutMe,
-    age,
-    birthdate,
-    profilePhoto,
-    hobbys,
-    hometown,
-    school,
-    profession,
-    experiences,
-    currentJob,
-    phoneNumber,
-  } = req.body;
+// exports.createProfile = async (req: Request, res: Response) => {
+//   console.log('CREATING PROFILE');
+//   const {
+//     aboutMe,
+//     age,
+//     birthdate,
+//     profilePhoto,
+//     hobbys,
+//     hometown,
+//     school,
+//     profession,
+//     experiences,
+//     currentJob,
+//     phoneNumber,
+//   } = req.body;
 
-  const existingProfile = await Profile.findById(req.currentUser!._id);
-  // userID: req.currentUser!.id,
+//   const existingProfile = await Profile.findById(req.currentUser!._id);
+//   // userID: req.currentUser!.id,
 
-  if (existingProfile) {
-    throw new BadRequestError('Profile already created');
-  }
-  const user = await User.findById(req.currentUser!._id);
+//   if (existingProfile) {
+//     throw new BadRequestError('Profile already created');
+//   }
+//   const user = await User.findById(req.currentUser!._id);
 
-  if (!user) {
-    throw new Error('User not found');
-  }
-  const profile = Profile.build({
-    _id: user._id,
-    user: user,
-    age: age,
-    birthdate: birthdate,
-    aboutMe: aboutMe,
-    profilePhoto: profilePhoto,
-    createdAt: new Date(Date.now()).toString(),
-    hobbys: hobbys,
-    hometown: hometown,
-    school: school,
-    profession: profession,
-    experiences: experiences,
-    currentJob: currentJob,
-    phoneNumber: phoneNumber,
-  });
+//   if (!user) {
+//     throw new Error('User not found');
+//   }
+//   const profile = Profile.build({
+//     _id: user._id,
+//     user: user,
+//     age: age,
+//     birthdate: birthdate,
+//     aboutMe: aboutMe,
+//     profilePhoto: profilePhoto,
+//     createdAt: new Date(Date.now()).toString(),
+//     hobbys: hobbys,
+//     hometown: hometown,
+//     school: school,
+//     profession: profession,
+//     experiences: experiences,
+//     currentJob: currentJob,
+//     phoneNumber: phoneNumber,
+//   });
 
-  console.log(profile);
+//   console.log(profile);
 
-  await profile.save();
+//   await profile.save();
 
-  // new ProfileCreatedPublisher(client).publish({
-  //   id: profile.id,
-  //   firstName: profile.firstName,
-  //   lastName : profile.lastName,
-  //   age: profile.age,
-  //   userId: profile.userId
-  // })
+//   // new ProfileCreatedPublisher(client).publish({
+//   //   id: profile.id,
+//   //   firstName: profile.firstName,
+//   //   lastName : profile.lastName,
+//   //   age: profile.age,
+//   //   userId: profile.userId
+//   // })
 
-  res.status(201).send({ profile: profile || null });
-};
+//   res.status(201).send({ profile: profile || null });
+// };
 
 exports.getAllProfiles = async (
   req: Request,
@@ -141,7 +141,7 @@ exports.patchExperience = async (req: Request, res: Response) => {
       {
         new: true,
         multi: true,
-        arrayFilters: [{ 'elem.title': { $eq: req.params.title } }],
+        arrayFilters: [{ 'elem.title': { $eq: req.body.oldTitle } }],
       }
     );
     if (!profile) {

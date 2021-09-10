@@ -20,18 +20,18 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
     const profile = Profile.build({
       _id: _id,
       user: user,
-      age: '',
-      birthdate: '',
-      aboutMe: '',
-      profilePhoto: '',
+      age: null,
+      birthdate: null,
+      aboutMe: null,
+      profilePhoto: null,
       createdAt: new Date(Date.now()).toString(),
-      hobbys: [''],
-      hometown: '',
-      school: '',
-      profession: '',
+      hobbys: [null],
+      hometown: null,
+      school: null,
+      profession: null,
       experiences: [{ description: 'Description', title: 'REACT' }],
-      currentJob: '',
-      phoneNumber: '',
+      currentJob: null,
+      phoneNumber: null,
     });
     await profile.save();
     console.log(user);

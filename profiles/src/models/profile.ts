@@ -5,19 +5,19 @@ import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 interface ProfileAttrs {
   _id: string;
   user: UserDoc;
-  age: string;
-  birthdate: string;
-  aboutMe: string;
+  age: any;
+  birthdate: any;
+  aboutMe: any;
   profilePhoto?: any;
-  createdAt: string;
-  hobbys: [string];
-  hometown: string;
-  school: string;
-  profession: string;
+  createdAt: any;
+  hobbys: [any];
+  hometown: any;
+  school: any;
+  profession: any;
   // Type annotations EXAMPLE OF USES experiences = [{description: "somesString"}]
-  experiences: { description: string; title: string }[];
-  currentJob: string;
-  phoneNumber: string;
+  experiences: { description: any; title: any }[];
+  currentJob: any;
+  phoneNumber: any;
 }
 
 interface ProfileModel extends mongoose.Model<ProfileDoc> {

@@ -1,5 +1,5 @@
-import UseRequest from '../../hooks/use-request';
-import CustomInput from '../CustomInput';
+import UseRequest from '../../../hooks/use-request';
+import CustomInput from '../../CustomInput';
 
 import { useState, useEffect, useRef } from 'react';
 import Router from 'next/router';
@@ -8,10 +8,16 @@ import Router from 'next/router';
 export const CreateExperience = ({ currentUser, onCreateClick }) => {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
-  const [experience, setExperience] = useState({});
+
+  // const [experience, setExperience] = useState({});
+
   const [createdExperiences, setCreatedExperiences] = useState([]);
   const [createExperienceRequest, createExperienceErrors] = UseRequest({
-    url: `/api/profiles/experience/${currentUser._id}`,
+    // TAKI NIE JEST BARDZIEJ SENSOWNY??
+    // WSKAZUJE NA KONKRETNEGO USERA I JEGO EXPERIENCE
+    // A NIE NA EXPERIENCE I DOPIERO JAKI USER
+    // url: `/api/profiles/${currentUser._id}experience`,
+    url: `/api/profiles/${currentUser._id}/experience`,
     method: 'post',
     body: {
       experience: {
@@ -26,20 +32,17 @@ export const CreateExperience = ({ currentUser, onCreateClick }) => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     createExperienceRequest();
-    setExperience({ description: description, title: title });
+    setCreatedExperiences([
+      ...createdExperiences,
+      { description: description, title: title },
+    ]);
   };
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      setCreatedExperiences([...createdExperiences, experience]);
-    }
-  }, [experience]);
 
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
+      console.log('render2 onCreateClick');
       onCreateClick(createdExperiences);
     }
   }, [createdExperiences]);

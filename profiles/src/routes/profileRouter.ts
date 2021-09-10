@@ -13,14 +13,12 @@ const validator = require('../controllers/profileValidator');
 const profileController = require('../controllers/profileController');
 const router = express.Router();
 // getAllProfiles, createProfile, getProfileByUserId, patchProfile, getProfileByEmail
-router
-  .route('/')
-  .get(requireAuth, profileController.getAllProfiles)
-  .post(
-    validator.validateProfile,
-    validateRequest,
-    profileController.createProfile
-  );
+router.route('/').get(requireAuth, profileController.getAllProfiles);
+// .post(
+//   validator.validateProfile,
+//   validateRequest,
+//   profileController.createProfile
+// );
 
 router
   .route('/id/:_id')
@@ -34,12 +32,10 @@ router
   .put(requireAuth, profileController.deleteProfileProperty);
 
 router
-  .route('/experience/:_id')
-  .post(requireAuth, validateRequest, profileController.createExperience);
-
-router
-  .route('/experience/:_id/:title')
+  .route('/:_id/experience')
+  .post(requireAuth, validateRequest, profileController.createExperience)
   .patch(requireAuth, validateRequest, profileController.patchExperience);
+
 router
   .route('/email/:email')
   .get(requireAuth, profileController.getProfileByEmail);

@@ -59,11 +59,8 @@ const Hobbys = ({ hobbys, currentUser }) => {
           <div className="row mb-5">
             {activeHobbys.map((hobby) => {
               return hobby ? (
-                <div className="col-6">
-                  <div
-                    key={hobby}
-                    className="bg-primary text-white text-center rounded m-2"
-                  >
+                <div className="col-6" key={hobby}>
+                  <div className="bg-primary text-white text-center rounded m-2">
                     {hobby}
                     <button
                       className="btn bi bi-patch-minus"

@@ -1,5 +1,5 @@
-import UseRequest from '../../hooks/use-request';
-import CustomInput from '../CustomInput';
+import UseRequest from '../../../hooks/use-request';
+import CustomInput from '../../CustomInput';
 
 import { useState } from 'react';
 import Router from 'next/router';
@@ -10,13 +10,14 @@ export const EditExperience = ({ experience, currentUser }) => {
   const [editMode, setEditMode] = useState(false);
 
   const [patchExperienceRequest, patchExperienceErrors] = UseRequest({
-    url: `/api/profiles/experience/${currentUser._id}/${experience.title}`,
+    url: `/api/profiles/${currentUser._id}/experience`,
     method: 'patch',
     body: {
       experience: {
         description,
         title,
       },
+      oldTitle: experience.title,
     },
     onSuccess: (responseData) => {
       // Router.reload();
