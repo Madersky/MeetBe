@@ -10,7 +10,7 @@ interface ProfileAttrs {
   aboutMe: any;
   profilePhoto?: any;
   createdAt: any;
-  hobbys: [any];
+  hobbys: any[];
   hometown: any;
   school: any;
   profession: any;

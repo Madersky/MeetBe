@@ -30,7 +30,7 @@ const Profile = ({ profile, currentUser }) => {
         className="lead text-start fw-bold px-5"
       >
         {`${text.slice(0, 1).toUpperCase() + text.slice(1)} : ${
-          profile[`${fieldName} `] ? profile[`${fieldName} `] : ''
+          profile[`${fieldName}`] ? profile[`${fieldName}`] : ''
         }`}
       </p>
     );

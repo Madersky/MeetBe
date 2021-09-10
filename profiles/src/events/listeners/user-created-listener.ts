@@ -25,7 +25,7 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
       aboutMe: null,
       profilePhoto: null,
       createdAt: new Date(Date.now()).toString(),
-      hobbys: [null],
+      hobbys: [],
       hometown: null,
       school: null,
       profession: null,
