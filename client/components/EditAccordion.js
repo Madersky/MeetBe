@@ -4,31 +4,16 @@ import CustomInput from '../../CustomInput';
 import { useState } from 'react';
 import Router from 'next/router';
 
-export const EditExperience = ({ experience, currentUser, visibility }) => {
+export const EditExperience = ({ currentUser, editDisplay, doRequest }) => {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [editMode, setEditMode] = useState(false);
 
-  const [patchExperienceRequest, patchExperienceErrors] = UseRequest({
-    url: `/api/profiles/${currentUser._id}/experience`,
-    method: 'patch',
-    body: {
-      experience: {
-        description,
-        title,
-      },
-      oldTitle: experience.title,
-    },
-    onSuccess: (responseData) => {
-      // Router.reload();
-    },
-  });
-
   const onFormSubmit = (e) => {
     e.preventDefault();
-    patchExperienceRequest();
+    doRequest();
   };
-  return visibility ? (
+  return editDisplay ? (
     <div>
       <button
         className="btn btn-secondary"

@@ -2,33 +2,14 @@ import { useState } from 'react';
 import UseRequest from '../../../hooks/use-request';
 import { EditExperience } from './EditExperience';
 
-const Accordion = ({
-  experience,
-  currentUser,
-  deleteAccordion,
-  editDisplay,
-}) => {
+// doRequest funkcja która bubluje do parenta i w parencie powinien być request
+const Accordion = ({ data, currentUser, editDisplay, doRequest }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [accordionTitle, setAccordionTitle] = useState(experience.title);
+  const [accordionTitle, setAccordionTitle] = useState(data.title);
   const [accordionDescription, setAccordionDescription] = useState(
-    experience.description
+    data.description
   );
-  const [deleteAccordionRequest, deleteAccordionErrors] = UseRequest({
-    url: `/api/profiles/id/${currentUser._id}`,
-    method: 'put',
-    body: {
-      tab: 'experiences',
-      value: {
-        title: accordionTitle,
-      },
-    },
-    onSuccess: () => {},
-  });
 
-  const onDeleteClick = () => {
-    deleteAccordionRequest();
-    deleteAccordion(experience);
-  };
   return (
     <div className="row">
       <div className="col-6">
@@ -40,7 +21,6 @@ const Accordion = ({
         >
           {accordionTitle}
         </button>
-        {deleteAccordionErrors}
       </div>
       <div className="col-1">
         <button className="btn btn-muted" onClick={onDeleteClick}>
@@ -52,11 +32,10 @@ const Accordion = ({
           <div className=" container border mb-3 p-2 rounded">
             {accordionDescription}
           </div>
-
-          <EditExperience
-            experience={experience}
+          <EditAccordion
             currentUser={currentUser}
             editDisplay={editDisplay}
+            doRequest={doRequest}
           />
         </div>
       </div>

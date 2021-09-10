@@ -1,15 +1,11 @@
 import Accordion from './ExperienceAccordion';
-import { EditExperience } from './EditExperience';
 import { CreateExperience } from './CreateExperience';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 export const Experience = ({ experiences, currentUser }) => {
   const [addMode, setAddMode] = useState(false);
   const [activeExperiences, setActiveExperiences] = useState(experiences);
-
   const createAccordion = (createdExperiences) => {
-    console.log('experience', experiences);
-    console.log('created', createdExperiences);
     setActiveExperiences([...activeExperiences, ...createdExperiences]);
   };
 
@@ -29,6 +25,7 @@ export const Experience = ({ experiences, currentUser }) => {
           experience={experience}
           currentUser={currentUser}
           deleteAccordion={deleteAccordion}
+          editDisplay={false}
         />
         {/* </div>
         </div> */}
