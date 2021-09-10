@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import Router from 'next/router';
 
 // TO SAMO CO W EditProfile, małe zmiany, możliwy refactor
-export const CreateExperience = ({ currentUser, onCreateClick }) => {
+export const CreateExperience = ({ currentUser, createAccordion }) => {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [createdExperiences, setCreatedExperiences] = useState([]);
@@ -32,7 +32,7 @@ export const CreateExperience = ({ currentUser, onCreateClick }) => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      onCreateClick(createdExperiences);
+      createAccordion(createdExperiences);
     }
   }, [createdExperiences]);
 

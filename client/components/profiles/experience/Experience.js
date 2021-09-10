@@ -7,7 +7,7 @@ export const Experience = ({ experiences, currentUser }) => {
   const [addMode, setAddMode] = useState(false);
   const [activeExperiences, setActiveExperiences] = useState(experiences);
 
-  const onCreateClick = (createdExperiences) => {
+  const createAccordion = (createdExperiences) => {
     console.log('experience', experiences);
     console.log('created', createdExperiences);
     setActiveExperiences([...activeExperiences, ...createdExperiences]);
@@ -28,7 +28,7 @@ export const Experience = ({ experiences, currentUser }) => {
         <Accordion
           experience={experience}
           currentUser={currentUser}
-          onDeleteAccordion={deleteAccordion}
+          deleteAccordion={deleteAccordion}
         />
         {/* </div>
         </div> */}
@@ -46,7 +46,7 @@ export const Experience = ({ experiences, currentUser }) => {
       <div className={`${addMode ? '' : 'collapse'}`}>
         <CreateExperience
           currentUser={currentUser}
-          onCreateClick={onCreateClick}
+          createAccordion={createAccordion}
         />
       </div>
     </div>
