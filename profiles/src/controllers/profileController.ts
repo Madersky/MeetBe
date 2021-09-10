@@ -209,7 +209,7 @@ exports.patchProfile = async (req: Request, res: Response) => {
   }
 };
 
-exports.deleteProfileProperty = async (req: Request, res: Response) => {
+exports.deleteProfilesHobby = async (req: Request, res: Response) => {
   try {
     const profile = await Profile.findById(req.params._id);
     if (!profile) {

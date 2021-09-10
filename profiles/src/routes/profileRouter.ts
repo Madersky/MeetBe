@@ -29,7 +29,7 @@ router
     validateRequest,
     profileController.patchProfile
   )
-  .put(requireAuth, profileController.deleteProfileProperty);
+  .put(requireAuth, profileController.deleteProfilesHobby);
 
 router
   .route('/:_id/experience')
