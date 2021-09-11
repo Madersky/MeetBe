@@ -1,18 +1,26 @@
-import UseRequest from '../../../hooks/use-request';
-import CustomInput from '../../CustomInput';
+import CustomInput from '../CustomInput';
 
-import { useState } from 'react';
-import Router from 'next/router';
+import { useState, useEffect, useRef } from 'react';
 
-export const EditExperience = ({ currentUser, editDisplay, doRequest }) => {
+export const EditAccordion = ({ editDisplay, onEditClick, data }) => {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [editMode, setEditMode] = useState(false);
+  const [newAccordion, setNewAccordion] = useState({});
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    doRequest();
+    setNewAccordion({ title, description });
   };
+
+  const isInitialMount = useRef(true);
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      onEditClick({ ...newAccordion, oldTitle: data.title }, 'update');
+    }
+  }, [newAccordion]);
   return editDisplay ? (
     <div>
       <button
@@ -32,10 +40,10 @@ export const EditExperience = ({ currentUser, editDisplay, doRequest }) => {
             setter={setDescription}
             placeholder="I was learning this for about 5 years"
             // Bellow is not working, to fixed
-            error={
-              patchExperienceErrors &&
-              patchExperienceErrors.message['description']
-            }
+            // error={
+            //   patchExperienceErrors &&
+            //   patchExperienceErrors.message['description']
+            // }
           />
           <CustomInput
             name="Add Title"
@@ -46,9 +54,9 @@ export const EditExperience = ({ currentUser, editDisplay, doRequest }) => {
             setter={setTitle}
             placeholder="FrontEnd"
             // Bellow is not working, to fixed
-            error={
-              patchExperienceErrors && patchExperienceErrors.message['title']
-            }
+            // error={
+            //   patchExperienceErrors && patchExperienceErrors.message['title']
+            // }
           />
           <button
             className="btn btn-primary"

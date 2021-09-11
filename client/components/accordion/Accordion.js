@@ -1,15 +1,19 @@
 import { useState } from 'react';
-import UseRequest from '../../../hooks/use-request';
-import { EditExperience } from './EditExperience';
-
+import { EditAccordion } from './EditAccordion';
 // doRequest funkcja która bubluje do parenta i w parencie powinien być request
-const Accordion = ({ data, currentUser, editDisplay, doRequest }) => {
+const Accordion = ({ data, editDisplay, doRequest }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [accordionTitle, setAccordionTitle] = useState(data.title);
   const [accordionDescription, setAccordionDescription] = useState(
     data.description
   );
 
+  const onEditClick = (editData, type) => {
+    doRequest(editData, type);
+  };
+  const onDeleteClick = () => {
+    doRequest(data, 'delete');
+  };
   return (
     <div className="row">
       <div className="col-6">
@@ -33,9 +37,9 @@ const Accordion = ({ data, currentUser, editDisplay, doRequest }) => {
             {accordionDescription}
           </div>
           <EditAccordion
-            currentUser={currentUser}
             editDisplay={editDisplay}
-            doRequest={doRequest}
+            onEditClick={onEditClick}
+            data={data}
           />
         </div>
       </div>

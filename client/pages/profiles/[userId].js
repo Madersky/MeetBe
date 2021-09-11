@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Router from 'next/router';
 
 import { Experience } from '../../components/profiles/experience/Experience';
+import { CustomExperience } from '../../components/accordion/customExperience';
 import EditProfile from '../../components/profiles/EditProfile';
 import Hobbys from '../../components/profiles/Hobbys';
 import ImagePanel from '../../components/profiles/ImagePanel';
@@ -85,6 +86,10 @@ const Profile = ({ profile, currentUser }) => {
             experiences={profile.experiences}
             currentUser={currentUser}
           />
+          {/* <CustomExperience
+            experiences={profile.experiences}
+            currentUser={currentUser}
+          /> */}
         </div>
       </div>
       <div className="row gx-5">
