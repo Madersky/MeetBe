@@ -2,7 +2,7 @@ import CustomInput from '../CustomInput';
 
 import { useState, useEffect, useRef } from 'react';
 
-export const EditAccordion = ({ editDisplay, onEditClick, data }) => {
+export const EditAccordionSection = ({ editDisplay, onEditClick, data }) => {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [editMode, setEditMode] = useState(false);

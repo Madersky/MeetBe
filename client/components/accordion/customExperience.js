@@ -1,19 +1,25 @@
 import Accordion from './Accordion';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useReducer } from 'react';
 import UseRequest from '../../hooks/use-request';
 
 export const CustomExperience = ({ experiences, currentUser }) => {
   const [activeExperiences, setActiveExperiences] = useState(experiences);
-  const [requestData, setRequestData] = useState({});
-  const [requestType, setRequestType] = useState('');
+  // const [requestData, setRequestData] = useState({});
+  // const [requestType, setRequestType] = useState('');
 
+  const [request, dispatch] = useReducer(
+    (state, action) => {
+      return action;
+    },
+    { data: {}, title: '' }
+  );
   const [deleteExperienceRequest, deleteExperienceErrors] = UseRequest({
     url: `/api/profiles/id/${currentUser._id}`,
     method: 'put',
     body: {
       tab: 'experiences',
       value: {
-        title: requestData.title,
+        title: request.data.title,
       },
     },
     onSucces: (responseData) => {},
@@ -24,18 +30,31 @@ export const CustomExperience = ({ experiences, currentUser }) => {
     method: 'patch',
     body: {
       experience: {
-        description: requestData.description,
-        title: requestData.title,
+        description: request.data.description,
+        title: request.data.title,
       },
-      oldTitle: requestData.oldTitle,
+      oldTitle: request.data.oldTitle,
+    },
+    onSuccess: (responseData) => {},
+  });
+
+  const [createExperienceRequest, createExperienceErrors] = UseRequest({
+    url: `/api/profiles/${currentUser._id}/experience`,
+    method: 'post',
+    body: {
+      experience: {
+        description: request.data.description,
+        title: request.data.title,
+      },
     },
     onSuccess: (responseData) => {},
   });
 
   const doRequest = (data, type) => {
-    setRequestData(data);
-    setRequestType(type);
-    console.log('doREqyest');
+    // setRequestData(data);
+    // setRequestType(type);
+    dispatch({ data: data, type: type });
+    // console.log('doREqyest');
   };
 
   const isInitialMount = useRef(true);
@@ -44,6 +63,36 @@ export const CustomExperience = ({ experiences, currentUser }) => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
+      // EXAMPLE WITH useReducer
+      if (request.type === 'delete') {
+        deleteExperienceRequest();
+        const newExperiences = activeExperiences.filter(
+          (experience) => experience != request.data
+        );
+        console.log('To jest newExperiences po delete', newExperiences);
+        setActiveExperiences([...newExperiences]);
+      } else if (request.type === 'update') {
+        patchExperienceRequest();
+        const newExperiences = activeExperiences.map((experience) => {
+          if (experience.title === request.data.oldTitle) {
+            delete request.data.oldTitle;
+            return request.data;
+          } else {
+            return experience;
+          }
+        });
+        console.log('To jest newExperiences po update', newExperiences);
+        setActiveExperiences([...newExperiences]);
+      } else if (request.type === 'create') {
+        createExperienceRequest();
+        const newExperiences = [
+          ...activeExperiences,
+          { title: request.data.title, description: request.data.description },
+        ];
+        console.log('To jest newExperiences po create', newExperiences);
+        setActiveExperiences(newExperiences);
+      }
+      // EXAMPLE WITH useState
       //   if (requestType === 'delete') {
       //     deleteExperienceRequest();
       //     const newExperiences = activeExperiences.filter(
@@ -64,7 +113,7 @@ export const CustomExperience = ({ experiences, currentUser }) => {
       //     setActiveExperiences([...newExperiences]);
       //   }
     }
-  }, [requestData]);
+  }, [request]);
 
   const accordionList = activeExperiences.map((experience) => {
     return (
@@ -76,7 +125,13 @@ export const CustomExperience = ({ experiences, currentUser }) => {
   return (
     <div className="row border">
       <h3 className="p-2">EXPERIENCE </h3>
-      <div className="">{accordionList}</div>
+      <div className="">
+        {accordionList.length !== 0 ? (
+          accordionList
+        ) : (
+          <Accordion data={null} doRequest={doRequest} />
+        )}
+      </div>
       {/* UPDATE EXPERIENCE FORM */}
     </div>
   );
