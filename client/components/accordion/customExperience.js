@@ -115,10 +115,24 @@ export const CustomExperience = ({ experiences, currentUser }) => {
     }
   }, [request]);
 
-  const accordionList = activeExperiences.map((experience) => {
+  const accordionList = activeExperiences.map((experience, index) => {
     return (
       <div className=" m-4" key={experience.title}>
-        <Accordion data={experience} editDisplay={true} doRequest={doRequest} />
+        {index === activeExperiences.length - 1 ? (
+          <Accordion
+            data={experience}
+            editDisplay={true}
+            doRequest={doRequest}
+            addDisplay={true}
+          />
+        ) : (
+          <Accordion
+            data={experience}
+            editDisplay={true}
+            doRequest={doRequest}
+            addDisplay={false}
+          />
+        )}
       </div>
     );
   });

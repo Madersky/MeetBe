@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { EditAccordionSection } from './EditAccordionSection';
 import { CreateAccordionSection } from './CreateAccordionSection';
 // doRequest funkcja która bubluje do parenta i w parencie powinien być request
-const Accordion = ({ data, editDisplay, doRequest }) => {
+const Accordion = ({ data, editDisplay, doRequest, addDisplay }) => {
   const [isOpen, setIsOpen] = useState(false);
   // const [accordionTitle, setAccordionTitle] = useState(data.title);
   // const [accordionDescription, setAccordionDescription] = useState(
@@ -51,7 +51,9 @@ const Accordion = ({ data, editDisplay, doRequest }) => {
       </div>
       <div className="row">
         <div className="col-12">
-          <CreateAccordionSection onCreateClick={onCreateClick} />
+          {addDisplay ? (
+            <CreateAccordionSection onCreateClick={onCreateClick} />
+          ) : null}
         </div>
       </div>
     </div>
