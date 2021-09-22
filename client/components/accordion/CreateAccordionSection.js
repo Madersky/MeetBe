@@ -2,27 +2,27 @@ import { useState, useEffect, useRef } from 'react';
 import CustomInput from '../CustomInput';
 
 export const CreateAccordionSection = ({ onCreateClick }) => {
-  const [addMode, setAddMode] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [newAccordion, setNewAccordion] = useState({});
+  const [newAccordionSection, setNewAccordionSection] = useState({});
   const isInitialMount = useRef(true);
 
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      onCreateClick({ ...newAccordion }, 'create');
+      onCreateClick({ ...newAccordionSection }, 'create');
     }
-  }, [newAccordion]);
+  }, [newAccordionSection]);
   const onFromSubmit = (e) => {
     e.preventDefault();
-    setNewAccordion({ title, description });
+    setNewAccordionSection({ title, description });
   };
 
   return (
     <div className="text-center">
-      <div className={`${addMode ? '' : 'collapse'} text-start mt-3`}>
+      <div className={`${isOpen ? '' : 'collapse'} text-start mt-3`}>
         <form onSubmit={onFromSubmit}>
           <CustomInput
             name="Add Title"
@@ -54,8 +54,8 @@ export const CreateAccordionSection = ({ onCreateClick }) => {
           <button className="btn btn-primary">Click to create section</button>
         </form>
       </div>
-      <button className="btn btn-muted" onClick={() => setAddMode(!addMode)}>
-        {addMode ? <p>close</p> : <i className="bi bi-plus-circle"></i>}
+      <button className="btn btn-muted" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? <p>close</p> : <i className="bi bi-plus-circle"></i>}
       </button>
     </div>
   );
