@@ -30,15 +30,13 @@ body {
 
 .navbar {
   position: fixed;
-  // display: grid;
-  // grid-template-rows: 10% 50% 30%;
-  // grid-template-columns: 100%;
 
   // FLEX dzieki teraz wiem juz o co chodzi :)
   display: flex;
-  align-items: space-between;
+  justify-content: space-between;
+  align-items: center;
   flex-flow: column;
-
+  padding: 0;
   top: 0;
   left: 0;
   width: var(--nav-width);
@@ -49,83 +47,55 @@ body {
   z-index: var(--z-fixed);
 
   &__list {
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
     &--top {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      align-items: center;
-      justify-content: center;
-      justify-items: stretch;
-      list-style: none;
-      font-size: 32px;
-      border-bottom: 1px solid white;
-
-      a {
-        color: white;
-      }
-    }
-
-    // &--mid {
-    //   height: 100%;
-    //   width: 100%;
-    //   margin: 0;
-    //   padding: 20px 0;
-    //   display: grid;
-    //   align-items: center;
-    //   justify-content: center;
-    //   justify-items: stretch;
-    //   list-style: none;
-    //   font-size: 24px;
-    // }
-
-    &--bot {
-      height: 100%;
-      margin: 0;
-      padding: 20px 0;
-      display: grid;
-      align-items: flex-end;
-      justify-content: center;
-      justify-items: stretch;
       list-style: none;
       font-size: 24px;
-    }
-  }
-  &__item {
-    transition: 0.5s;
-    width: 100%;
-    display: flex;
-
-    align-items: center;
-
-    p {
       padding: 0;
+      flex-grow: 0;
     }
-    i {
-      margin-right: 15px;
-    }
-  }
 
-  &__item:hover {
-    transform: scale(1.4);
-    transition: 0.5s;
+    &--mid {
+      list-style: none;
+      font-size: 24px;
+      padding: 0;
+      flex-grow: 10;
+      display: flex;
+      flex-flow: column;
+    }
+
+    &--bot {
+      list-style: none;
+      font-size: 24px;
+      padding: 0;
+      display: flex;
+      flex-grow: 1;
+      flex-flow: column;
+    }
+
+    &-item {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      i {
+        padding-right: 10px;
+        cursor: pointer;
+      }
+      p {
+        cursor: pointer;
+      }
+    }
   }
 
   &__link {
     display: flex;
+    justify-content: flex-start;
     align-items: center;
-    flex-grow: 1;
+  }
 
-    i {
-      margin-right: 15px;
+  &__logo {
+    &-icon {
+      // flex-grow: 1;
     }
   }
 }

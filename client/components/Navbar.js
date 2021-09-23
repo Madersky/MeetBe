@@ -5,9 +5,22 @@ import { motion } from 'framer-motion';
 const Navbar = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const variants = {
-    opened: { opacity: 1, width: '250px' },
+  const navVariants = {
+    opened: {
+      opacity: 1,
+      width: '250px',
+    },
     closed: { opacity: 1 },
+  };
+
+  const navListVariants = {
+    opened: { opacity: 1 },
+    closed: { opacity: 1 },
+  };
+
+  const pVariants = {
+    opened: { opacity: 1 },
+    closed: { opacity: 0 },
   };
 
   const NavButton = React.forwardRef(
@@ -15,7 +28,18 @@ const Navbar = ({ currentUser }) => {
       return (
         <a href={href} onClick={onClick} ref={ref} className="navbar__link">
           <i className={className}></i>
-          {isOpen ? <p>{label}</p> : ''}
+          {isOpen ? (
+            <motion.p
+              initial={false}
+              animate={isOpen ? 'opened' : 'closed'}
+              transition={{ delay: 0.5 }}
+              variants={pVariants}
+            >
+              {label}
+            </motion.p>
+          ) : (
+            ''
+          )}
         </a>
       );
     }
@@ -57,7 +81,7 @@ const Navbar = ({ currentUser }) => {
     .filter((linkConfig) => linkConfig)
     .map(({ label, href, icon }) => {
       return (
-        <li key={label} className="navbar__item">
+        <li key={label} className="navbar__list-item">
           <Link href={href}>
             <NavButton className={icon} label={label} />
           </Link>
@@ -103,20 +127,51 @@ const Navbar = ({ currentUser }) => {
     <motion.nav
       className="navbar"
       initial={false}
+      transition={{ type: 'spring' }}
       animate={isOpen ? 'opened' : 'closed'}
-      variants={variants}
+      variants={navVariants}
     >
-      <ul className="navbar__list--top">
-        <li className="navbar__list-item">
-          <i
+      <motion.ul
+        className="navbar__list--top"
+        initial={false}
+        animate={isOpen ? 'opened' : 'closed'}
+        variants={navListVariants}
+      >
+        <motion.li whileHover={{ scale: 1.1 }} className="navbar__list-item">
+          <motion.i
+            whileHover={{ scale: 1.1 }}
             className="bx bx-menu navbar__logo-icon"
             onClick={() => setIsOpen((isOpen) => !isOpen)}
           />
-          {isOpen ? <p>Menu</p> : ''}
-        </li>
+          {isOpen ? (
+            <motion.p
+              // animate={{ x: 100 }}
+              onClick={() => setIsOpen((isOpen) => !isOpen)}
+            >
+              Menu
+            </motion.p>
+          ) : (
+            ''
+          )}
+        </motion.li>
+      </motion.ul>
+      <motion.ul
+        className="navbar__list--mid"
+        initial={false}
+        animate={isOpen ? 'opened' : 'closed'}
+        variants={navListVariants}
+      >
         {links}
-      </ul>
-      <ul className="navbar__list--bot">{authLinks}</ul>
+      </motion.ul>
+      {/* <motion.ul className="navbar__list">ELUWINA</motion.ul> */}
+      <motion.ul
+        className="navbar__list--bot"
+        initial={false}
+        animate={isOpen ? 'opened' : 'closed'}
+        variants={navListVariants}
+      >
+        {authLinks}
+      </motion.ul>
     </motion.nav>
   );
 };
