@@ -37,75 +37,44 @@ const Profile = ({ profile, currentUser }) => {
     );
   });
   return (
-    <div className="container text-muted px-5">
-      <h1 className="display-2 text-center fst-italic mt-3">Profil</h1>
-      <div className="my-3 border-bottom border-dark"></div>
-      <div className="row gx-5">
-        {/* <div className="container"> */}
-        <div className="col-xxl-6 mb-5">
-          <div className="border">
-            <div className="row gx-1">
-              <div className="col-xl-5 d-flex justify-content-center align-items-center">
-                <ImagePanel
-                  profileImage={profile.profilePhoto || 'profile.jpg'}
-                />
-              </div>
-              <div className="col-lg-7 ">
-                <UploadImage />
-                <p className="lead text-start fw-bold px-2 pt-5">
-                  Firstname: {profile.user.firstname}
-                </p>
-                <p className="lead text-start fw-bold px-2">
-                  Lastname: {profile.user.lastname}
-                </p>
-                <p className="lead text-start fw-bold px-2">
-                  Email: {profile.user.email}{' '}
-                </p>
-                <div className={`${isOpen ? 'collapse' : ''}`} id="viewMore">
-                  {paragraphHiddenList}
-                </div>
-                <div className="text-center">
-                  <button
-                    className="btn btn-outline-muted border-0 text-decoration-underline"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#viewMore"
-                    aria-expanded="true"
-                    aria-controls="viewMore"
-                    onClick={() => setIsOpen(!isOpen)}
-                  >
-                    {`${isOpen ? 'View more info' : 'close'}`}
-                  </button>
-                </div>
-              </div>
-            </div>
+    <div className="profile">
+      <div className="profile__container">
+        <h1 className="">Profil</h1>
+
+        {/* <ImagePanel profileImage={profile.profilePhoto || 'profile.jpg'} /> */}
+
+        <div className="">
+          <UploadImage />
+          <p className="">Firstname: {profile.user.firstname}</p>
+          <p className="">Lastname: {profile.user.lastname}</p>
+          <p className="">Email: {profile.user.email} </p>
+          <div className={`${isOpen ? 'collapse' : ''}`}>
+            {paragraphHiddenList}
+          </div>
+          <div className="text-center">
+            <button
+              className=""
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {`${isOpen ? 'View more info' : 'close'}`}
+            </button>
           </div>
         </div>
-        <div className="col-xxl-6 mb-5 ">
-          {/* <Experience
+
+        {/* <Experience
             experiences={profile.experiences}
             currentUser={currentUser}
           /> */}
-          <CustomExperience
-            experiences={profile.experiences}
-            currentUser={currentUser}
-          />
-        </div>
-      </div>
-      <div className="row gx-5">
-        <div className="col-lg mb-5">
-          <div className="border pb-3">
-            <Hobbys hobbys={hobbys} currentUser={currentUser} />
-          </div>
-        </div>
-      </div>
-      <div className="row gx-5">
-        <div className="col-md mb-5">
-          <div className="border pb-3">
-            <p className="lead text-center pt-3">Edit profile</p>
-            <EditProfile profile={profile} currentUser={currentUser} />
-          </div>
-        </div>
+        <CustomExperience
+          experiences={profile.experiences}
+          currentUser={currentUser}
+        />
+
+        <Hobbys hobbys={hobbys} currentUser={currentUser} />
+
+        <p className="lead text-center pt-3">Edit profile</p>
+        <EditProfile profile={profile} currentUser={currentUser} />
       </div>
     </div>
   );

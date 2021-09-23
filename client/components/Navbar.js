@@ -1,49 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const Navbar = ({ currentUser }) => {
-  const NavButton = React.forwardRef(({ onClick, href, className }, ref) => {
-    return (
-      <a href={href} onClick={onClick} ref={ref} className="nav_link">
-        <i className={className}></i>
-        {/* <i className="bx bx-user nav_icon"></i> */}
-      </a>
-    );
-  });
+  const [isOpen, setIsOpen] = useState(false);
+
+  const variants = {
+    opened: { opacity: 1, width: '250px' },
+    closed: { opacity: 1 },
+  };
+
+  const NavButton = React.forwardRef(
+    ({ onClick, href, className, label }, ref) => {
+      return (
+        <a href={href} onClick={onClick} ref={ref} className="navbar__link">
+          <i className={className}></i>
+          {isOpen ? <p>{label}</p> : ''}
+        </a>
+      );
+    }
+  );
 
   const links = [
     currentUser && {
+      label: 'Home',
+      icon: 'bx bx-layer navbar__logo-icon"',
+      href: '/',
+    },
+
+    currentUser && {
       label: 'Dashboard',
-      icon: 'bx bx-grid-alt nav_icon',
+      icon: 'bx bx-grid-alt navbar__icon',
       href: '#',
     },
     currentUser && {
       label: 'Messages',
-      icon: 'bx bx-message-square-detail nav_icon',
+      icon: 'bx bx-message-square-detail navbar__icon',
       href: '#',
     },
     currentUser && {
       label: 'Bookmark',
-      icon: 'bx bx-bookmark nav_icon',
+      icon: 'bx bx-bookmark navbar__icon',
       href: '#',
     },
     currentUser && {
       label: 'Files',
-      icon: 'bx bx-folder nav_icon',
+      icon: 'bx bx-folder navbar__icon',
       href: '#',
     },
     currentUser && {
       label: 'Profile',
-      icon: 'bx bx-user nav_icon',
+      icon: 'bx bx-user navbar__icon',
       href: `/profiles/${currentUser._id}`,
     },
   ]
     .filter((linkConfig) => linkConfig)
     .map(({ label, href, icon }) => {
       return (
-        <li key={label} className="nav-item">
+        <li key={label} className="navbar__item">
           <Link href={href}>
-            <NavButton className={icon} />
+            <NavButton className={icon} label={label} />
           </Link>
         </li>
       );
@@ -51,56 +67,57 @@ const Navbar = ({ currentUser }) => {
 
   const authLinks = [
     currentUser && {
-      label: 'Signout',
-      icon: 'bx bx-log-out nav_icon',
+      label: 'Sign Out',
+      icon: 'bx bx-log-out navbar__icon',
       href: '/auth/signout',
     },
     !currentUser && {
-      label: 'Signin',
-      icon: 'bx bx-log-in nav_icon',
+      label: 'Sign In',
+      icon: 'bx bx-log-in navbar__icon',
       href: '/auth/signin',
     },
     !currentUser && {
-      label: 'Signup',
-      icon: 'bi bi-person-plus nav_icon',
+      label: 'Sign Up',
+      icon: 'bi bi-person-plus navbar__icon',
       href: '/auth/signup',
     },
   ]
     .filter((linkConfig) => linkConfig)
     .map(({ label, href, icon }) => {
       return (
-        <li key={href} className="nav-item">
+        <motion.li
+          className="navbar__list-item"
+          // initial={false}
+          // animate={isOpen ? 'opened' : 'closed'}
+          // variants={variants}
+          key={label}
+        >
           <Link href={href}>
-            <NavButton className={icon} />
+            <NavButton className={icon} label={label} />
           </Link>
-        </li>
+        </motion.li>
       );
     });
 
   return (
-    <div className="l-navbar" id="nav-bar">
-      <nav className="nav">
-        <div>
-          {/* <a href="/" className="nav_logo">
-            <i className="bx bx-layer nav_logo-icon"></i>
-            <span className="nav_logo-name">MeetBe</span>
-          </a> */}
-          <div className="nav_list">
-            <li>
-              <div className="nav_toggle ">
-                <i className="bx bx-menu nav_icon nav_logo-icon"></i>
-              </div>
-            </li>
-
-            <Link href="/">
-              <NavButton className="bx bx-layer nav_logo-icon" />
-            </Link>
-            {links}
-          </div>
-        </div>
-        <div className="nav_list">{authLinks}</div>
-      </nav>
-    </div>
+    <motion.nav
+      className="navbar"
+      initial={false}
+      animate={isOpen ? 'opened' : 'closed'}
+      variants={variants}
+    >
+      <ul className="navbar__list--top">
+        <li className="navbar__list-item">
+          <i
+            className="bx bx-menu navbar__logo-icon"
+            onClick={() => setIsOpen((isOpen) => !isOpen)}
+          />
+          {isOpen ? <p>Menu</p> : ''}
+        </li>
+        {links}
+      </ul>
+      <ul className="navbar__list--bot">{authLinks}</ul>
+    </motion.nav>
   );
 };
 

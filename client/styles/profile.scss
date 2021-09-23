@@ -1,5 +1,10 @@
-.more-information {
-  // transition: 2s;
-
-  background-color: rebeccapurple;
+.profile {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  &__container {
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+  }
 }
