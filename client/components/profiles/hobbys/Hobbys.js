@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import useRequest from '../../hooks/use-request';
-import CustomInput from '../CustomInput';
+import useRequest from '../../../hooks/use-request';
+import CustomInput from '../../CustomInput';
 
 const Hobbys = ({ hobbys, currentUser }) => {
   const [chosenHobby, setChosenHobby] = useState('');

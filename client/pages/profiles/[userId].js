@@ -4,9 +4,8 @@ import Router from 'next/router';
 import { Experience } from '../../components/profiles/experience/Experience';
 import { CustomExperience } from '../../components/accordion/customExperience';
 import EditProfile from '../../components/profiles/EditProfile';
-import Hobbys from '../../components/profiles/Hobbys';
+import Hobbys from '../../components/profiles/hobbys/Hobbys';
 import ImagePanel from '../../components/profiles/ImagePanel';
-import UploadImage from '../../components/profiles/UploadImage';
 
 const Profile = ({ profile, currentUser }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -26,10 +25,7 @@ const Profile = ({ profile, currentUser }) => {
       fieldName === 'version' ||
       fieldName === 'hobbys' ||
       fieldName === 'experiences' ? null : (
-      <p
-        key={Math.random(profile._id)}
-        className="lead text-start fw-bold px-5"
-      >
+      <p key={Math.random(profile._id)}>
         {`${text.slice(0, 1).toUpperCase() + text.slice(1)} : ${
           profile[`${fieldName}`] ? profile[`${fieldName}`] : ''
         }`}
@@ -39,19 +35,16 @@ const Profile = ({ profile, currentUser }) => {
   return (
     <div className="profile">
       <div className="profile__container">
-        <h1 className="">Profil</h1>
+        <div className="profile__basic-info">
+          <ImagePanel
+            profile={profile || 'profile.jpg'}
+            currentUser={currentUser}
+          />
+          <div className="profile__basic-info-section-basic">
+            <p className="">Firstname: {profile.user.firstname}</p>
+            <p className="">Lastname: {profile.user.lastname}</p>
+            <p className="">Email: {profile.user.email} </p>
 
-        {/* <ImagePanel profileImage={profile.profilePhoto || 'profile.jpg'} /> */}
-
-        <div className="">
-          <UploadImage />
-          <p className="">Firstname: {profile.user.firstname}</p>
-          <p className="">Lastname: {profile.user.lastname}</p>
-          <p className="">Email: {profile.user.email} </p>
-          <div className={`${isOpen ? 'collapse' : ''}`}>
-            {paragraphHiddenList}
-          </div>
-          <div className="text-center">
             <button
               className=""
               type="button"
@@ -60,21 +53,32 @@ const Profile = ({ profile, currentUser }) => {
               {`${isOpen ? 'View more info' : 'close'}`}
             </button>
           </div>
+          <div className="profile__basic-info-section-details">
+            <div
+              className={`${
+                isOpen ? 'profile__basic-info-section-details-collapse' : ''
+              }`}
+            >
+              {paragraphHiddenList}
+            </div>
+          </div>
         </div>
-
         {/* <Experience
             experiences={profile.experiences}
             currentUser={currentUser}
           /> */}
-        <CustomExperience
-          experiences={profile.experiences}
-          currentUser={currentUser}
-        />
-
-        <Hobbys hobbys={hobbys} currentUser={currentUser} />
-
-        <p className="lead text-center pt-3">Edit profile</p>
-        <EditProfile profile={profile} currentUser={currentUser} />
+        <div className="profile__experience">
+          <CustomExperience
+            experiences={profile.experiences}
+            currentUser={currentUser}
+          />
+        </div>
+        <div className="profile__hobbys">
+          <Hobbys hobbys={hobbys} currentUser={currentUser} />{' '}
+        </div>
+        <div className="profile__edit-profile">
+          <EditProfile profile={profile} currentUser={currentUser} />{' '}
+        </div>
       </div>
     </div>
   );

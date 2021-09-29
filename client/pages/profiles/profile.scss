@@ -1,0 +1,137 @@
+.profile {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    width: 95%;
+    margin-top: 35px;
+    flex-wrap: wrap;
+    column-gap: 25px;
+    row-gap: 25px;
+  }
+
+  &__basic-info {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    column-gap: 20px;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    // flex-direction: column;
+    flex: 1 45%;
+    justify-content: center;
+    // align-items: center;
+    border: 1px solid indigo;
+    border-radius: 5px;
+
+    &-image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    &-image {
+      display: flex;
+      flex: 1 45%;
+
+      img {
+        border-radius: 50%;
+      }
+      // margin: auto;
+      // justify-content: center;
+      // align-items: flex-start;
+    }
+    &-image-form {
+      position: relative;
+      display: flex;
+      margin-top: 20px;
+
+      width: fit-content;
+      align-self: center;
+      border-radius: 15px;
+      background-color: indigo;
+
+      justify-content: center;
+      align-items: center;
+
+      color: white;
+
+      &-container {
+        width: fit-content;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+
+        label {
+          padding: 10px;
+        }
+      }
+    }
+
+    &-image-form input[type='file'] {
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0;
+      width: 0px;
+    }
+
+    // &-image-submit {
+    //   display: flex;
+    //   margin-top: 20px;
+    //   width: fit-content;
+    //   align-self: center;
+    //   background-color: red;
+    // }
+
+    &-section-basic {
+      // width: 45%;
+      display: flex;
+      flex: 1 45%;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &-section-details {
+      // width: 45%;
+      display: flex;
+      flex: 1 100%;
+      // flex-direction: column;
+      justify-content: center;
+      padding-left: 20px;
+
+      &-collapse {
+        display: none;
+        width: fit-content;
+        p {
+          width: fit-content;
+        }
+      }
+    }
+
+    button {
+      width: fit-content;
+    }
+  }
+
+  &__experience {
+    display: flex;
+    flex: 1 45%;
+    justify-content: center;
+    // align-items: center;
+  }
+
+  &__hobbys {
+    display: flex;
+    flex: 1 45%;
+    justify-content: center;
+  }
+
+  &__edit-profile {
+    display: flex;
+    flex: 1 45%;
+    justify-content: center;
+  }
+}

@@ -1,9 +1,7 @@
 import buildClient from '../api/buildClient';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/navbar/Navbar';
 
-import '../styles/navbar.scss';
-import '../styles/profile.scss';
-
+import '../styles/main.scss';
 // const RenderNav = (currentUser) => {
 //   if (currentUser.id) {
 //     console.log(`jestem true`, currentUser);

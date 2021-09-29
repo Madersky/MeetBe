@@ -11,13 +11,13 @@ const CustomInput = ({
 }) => {
   return (
     <div>
-      <label className="form-label" htmlFor={id}>
+      <label className="" htmlFor={id}>
         {name}
       </label>
 
       <div className={className}>
         {iClass ? (
-          <span className="input-group-text">
+          <span className="">
             <i className={`bi ${iClass}`}></i>
           </span>
         ) : null}
@@ -25,15 +25,12 @@ const CustomInput = ({
         <input
           id={id}
           type={type}
-          className="form-control"
           value={value}
           onChange={(e) => setter(e.target.value)}
           placeholder={placeholder}
-          aria-label={id}
-          aria-describedby="basic-addon1"
         ></input>
       </div>
-      <p className="bg-danger text-white">{error}</p>
+      <p className="">{error}</p>
     </div>
   );
 };
