@@ -1,7 +1,3 @@
-import axios, { post } from 'axios';
-import { normalizeConfig } from 'next/dist/server/config-shared';
-import Image from 'next/image';
-import { Router } from 'next/router';
 import { useState, useEffect, useRef } from 'react';
 import UseRequest from '../../hooks/use-request';
 
@@ -81,11 +77,7 @@ const ImagePanel = ({ profile, currentUser }) => {
           }}
         ></img>
       </div>
-      <form
-        onSubmit={onSubmit}
-        className="profile__basic-info-image-form"
-        encType="multipart/form-data"
-      >
+      <form onSubmit={onSubmit} className="profile__basic-info-image-form">
         <div className="profile__basic-info-image-form-container">
           <label>
             {profilePhotoName}

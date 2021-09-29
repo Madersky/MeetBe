@@ -24,7 +24,8 @@ const Profile = ({ profile, currentUser }) => {
       fieldName === '_id' ||
       fieldName === 'version' ||
       fieldName === 'hobbys' ||
-      fieldName === 'experiences' ? null : (
+      fieldName === 'experiences' ||
+      fieldName === 'profilePhoto' ? null : (
       <p key={Math.random(profile._id)}>
         {`${text.slice(0, 1).toUpperCase() + text.slice(1)} : ${
           profile[`${fieldName}`] ? profile[`${fieldName}`] : ''

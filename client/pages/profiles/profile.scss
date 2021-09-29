@@ -93,13 +93,13 @@
       display: flex;
       flex: 1 45%;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
     }
 
     &-section-details {
       flex: 1 100%;
 
-      justify-content: center;
+      justify-content: flex-start;
 
       &-collapse {
         width: fit-content;

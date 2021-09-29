@@ -10,7 +10,6 @@ const EditProfile = ({ profile, currentUser }) => {
   const [school, setSchool] = useState('');
   const [birthdate, setBirthdate] = useState(profile.birthDate);
   const [aboutMe, setAboutMe] = useState('');
-  const [profilePhoto, setProfilePhoto] = useState('');
   const [hometown, setHometown] = useState('');
   const [profession, setProfession] = useState('');
   const [currentJob, setCurrentJob] = useState('');
@@ -26,7 +25,6 @@ const EditProfile = ({ profile, currentUser }) => {
       school: school || profile.school,
       birthdate: birthdate || profile.birthdate,
       aboutMe: aboutMe || profile.aboutMe,
-      profilePhoto: profilePhoto || profile.profilePhoto,
       hometown: hometown || profile.hometown,
       profession: profession || profile.profession,
       currentJob: currentJob || profile.currentJob,
@@ -141,21 +139,6 @@ const EditProfile = ({ profile, currentUser }) => {
           }
           iClass="bi-house-fill"
         />
-
-        <CustomInput
-          name="Profile Photo"
-          id="profilePhoto"
-          type="text"
-          className="input-group mb-3"
-          value={profilePhoto}
-          setter={setProfilePhoto}
-          placeholder="999999999"
-          error={
-            patchProfilesErrors && patchProfilesErrors.message['profilePhoto']
-          }
-          iClass="bi-house-fill"
-        />
-
         <button className="btn btn-primary text-center">Click to edit</button>
       </form>
     </div>
