@@ -7,8 +7,6 @@ const ImagePanel = ({ profile, currentUser }) => {
   const [photoUrl, setPhotoUrl] = useState(profile.profilePhoto);
   const isInitialMount = useRef(true);
 
-  console.log(`to jest profile.profilePhoto`, profile.profilePhoto);
-
   const [patchProfilePhotoRequest, patchProfilePhotoErrors] = UseRequest({
     url: `/api/profiles/${currentUser._id}/photo`,
     method: 'patch',

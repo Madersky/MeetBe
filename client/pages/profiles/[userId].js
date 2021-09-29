@@ -35,7 +35,7 @@ const Profile = ({ profile, currentUser }) => {
   });
   return (
     <div className="profile">
-      <div className="profile__container">
+      <div className="profile__container--left-side">
         <div className="profile__basic-info">
           <ImagePanel
             profile={profile || 'profile.jpg'}
@@ -69,6 +69,11 @@ const Profile = ({ profile, currentUser }) => {
             </div>
           )}
         </div>
+        <div className="profile__hobbys">
+          <Hobbys hobbys={hobbys} currentUser={currentUser} />{' '}
+        </div>
+      </div>
+      <div className="profile__container--right-side">
         {/* <Experience
             experiences={profile.experiences}
             currentUser={currentUser}
@@ -79,9 +84,7 @@ const Profile = ({ profile, currentUser }) => {
             currentUser={currentUser}
           />
         </div>
-        <div className="profile__hobbys">
-          <Hobbys hobbys={hobbys} currentUser={currentUser} />{' '}
-        </div>
+
         <div className="profile__edit-profile">
           <EditProfile profile={profile} currentUser={currentUser} />{' '}
         </div>

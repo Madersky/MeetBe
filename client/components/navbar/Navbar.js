@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
   const navVariants = {
     opened: {
       width: '250px',
