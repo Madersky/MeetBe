@@ -8,7 +8,7 @@ import Hobbys from '../../components/profiles/hobbys/Hobbys';
 import ImagePanel from '../../components/profiles/ImagePanel';
 
 const Profile = ({ profile, currentUser }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
   // const isInitialMount = useRef(true);
@@ -50,18 +50,23 @@ const Profile = ({ profile, currentUser }) => {
               type="button"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {`${isOpen ? 'View more info' : 'close'}`}
+              {`${isOpen ? 'close' : 'View more info'}`}
             </button>
           </div>
-          <div className="profile__basic-info-section-details">
+          {isOpen && (
             <div
-              className={`${
-                isOpen ? 'profile__basic-info-section-details-collapse' : ''
-              }`}
+              className={`profile__basic-info-section-details`}
+              style={isOpen ? { display: 'flex' } : { display: 'none' }}
             >
-              {paragraphHiddenList}
+              <div
+                className={`${
+                  isOpen ? 'profile__basic-info-section-details-collapse' : ''
+                }`}
+              >
+                {paragraphHiddenList}
+              </div>
             </div>
-          </div>
+          )}
         </div>
         {/* <Experience
             experiences={profile.experiences}
