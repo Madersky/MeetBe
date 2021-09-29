@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+// const fileUpload = require('express-fileupload');
 
 import { natsWrapper } from '../nats-wrapper';
 import { ProfileUpdatePublisher } from '../events/publishers/profile-update-publisher';
@@ -151,6 +152,25 @@ exports.patchExperience = async (req: Request, res: Response) => {
     res.status(200).send({ profile: profile || null });
   } catch (err) {
     res.status(400).send(`Error! ${err}`);
+  }
+};
+
+exports.patchProfilePhoto = async (req: Request, res: Response) => {
+  try {
+    const photoUrl = req.body.photoUrl;
+
+    const profile = await Profile.findByIdAndUpdate(req.params._id, {
+      profilePhoto: photoUrl,
+    });
+
+    if (!profile) {
+      throw new Error('Profile not found');
+    }
+
+    await profile.save();
+    res.status(200).send({ profile: profile || null });
+  } catch (err) {
+    res.status(402).send({ msg: `ERROR! patchProfilePhoto ${err}` });
   }
 };
 

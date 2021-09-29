@@ -23,7 +23,8 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
       age: null,
       birthdate: null,
       aboutMe: null,
-      profilePhoto: null,
+      profilePhoto:
+        'https://meetbe-images.s3.eu-central-1.amazonaws.com/profilePhotos/profile.jpg',
       createdAt: new Date(Date.now()).toString(),
       hobbys: [],
       hometown: null,

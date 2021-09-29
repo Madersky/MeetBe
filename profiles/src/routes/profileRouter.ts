@@ -32,6 +32,10 @@ router
   .put(requireAuth, profileController.deleteValueFromArrayProfile);
 
 router
+  .route('/:_id/photo')
+  .patch(requireAuth, profileController.patchProfilePhoto);
+
+router
   .route('/:_id/experience')
   .post(requireAuth, validateRequest, profileController.createExperience)
   .patch(requireAuth, validateRequest, profileController.patchExperience);
