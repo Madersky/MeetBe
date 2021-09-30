@@ -17,9 +17,7 @@ const Profile = ({ profile, currentUser }) => {
   return (
     <div className="profile">
       <div className="profile__container--left-side">
-        <div className="profile__basic-info">
-          <BasicInfo profile={profile} currentUser={currentUser} />
-        </div>
+        <BasicInfo profile={profile} currentUser={currentUser} />
         <div className="profile__hobbys">
           <Hobbys hobbys={hobbys} currentUser={currentUser} />{' '}
         </div>

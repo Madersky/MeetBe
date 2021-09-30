@@ -57,8 +57,10 @@ const ImagePanel = ({ profile, currentUser }) => {
   };
 
   const onChange = (e) => {
-    setProfilePhoto(e.target.files[0]);
-    setProfilePhotoName(e.target.files[0].name);
+    if (e.target.files[0]) {
+      setProfilePhoto(e.target.files[0]);
+      setProfilePhotoName(e.target.files[0].name);
+    }
   };
 
   return (
@@ -76,11 +78,11 @@ const ImagePanel = ({ profile, currentUser }) => {
         ></img>
       </div>
       <form onSubmit={onSubmit} className="image-form">
-        <div className="image-form-container">
+        <div className="image-form__container">
           <label>
             {profilePhotoName}
             <input
-              className="profile__basic-info-image-submit"
+              className="image-form__submit"
               type="file"
               name="photo"
               onChange={onChange}
