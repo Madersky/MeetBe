@@ -13,12 +13,25 @@ const BasicInfo = ({ profile, currentUser }) => {
     setIsButtonOpen(!isButtonOpen);
   };
 
+  // const basicVariants = {
+  //   open: { height: 'auto' },
+  //   closed: { height: 'auto', opacity: 1, backgroundColor: 'red' },
+  // };
+
   return (
-    <div className="basic-info">
-      <ImagePanel
-        profile={profile || 'profile.jpg'}
-        currentUser={currentUser}
-      />
+    <motion.div
+      className="basic-info"
+      transition={{ duration: 1 }}
+      // variants={basicVariants}
+      // initial=''
+      // animate="closed"
+    >
+      <div className="basic-info__section-photo">
+        <ImagePanel
+          profile={profile || 'profile.jpg'}
+          currentUser={currentUser}
+        />
+      </div>
       <div className="basic-info__section-basic">
         <p className="basic-info__text">Firstname: {profile.user.firstname}</p>
         <p className="basic-info__text">Lastname: {profile.user.lastname}</p>
@@ -35,6 +48,8 @@ const BasicInfo = ({ profile, currentUser }) => {
             </motion.button>
           )}
         </AnimatePresence>
+      </div>
+      <div className="basic-info__section-details">
         <Details
           isDetailsOpen={isDetailsOpen}
           setIsDetailsOpen={setIsDetailsOpen}
@@ -42,7 +57,7 @@ const BasicInfo = ({ profile, currentUser }) => {
           profile={profile}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

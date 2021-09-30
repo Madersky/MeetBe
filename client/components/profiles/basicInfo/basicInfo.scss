@@ -5,15 +5,23 @@
   align-items: center;
   border: 1px solid indigo;
   border-radius: 5px;
-  &__text {
+  flex-wrap: wrap;
+
+  &__section-photo {
+    display: flex;
+    flex: 1 45%;
   }
 
   &__section-basic {
     display: flex;
-    flex-flow: column;
+    flex: 1 45%;
+    flex-direction: column;
   }
 
   &__section-details {
+    display: flex;
+    flex: 1 100%;
+    flex-direction: column;
     &__collapse {
     }
   }

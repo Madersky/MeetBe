@@ -32,13 +32,19 @@ const Details = ({
     setIsDetailsOpen(!isDetailsOpen);
   };
 
+  const variants = {
+    exit: { opacity: 0, scaleY: 0, originY: 0, transition: { delay: 0.5 } },
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 },
+  };
   return (
     <AnimatePresence>
       {isDetailsOpen && (
         <motion.div
-          exit={{ opacity: 0 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          variants={variants}
+          exit="exit"
+          initial="hidden"
+          animate="visible"
           className={`basic-info__section-basic`}
         >
           {paragraphHiddenList}
