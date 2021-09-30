@@ -5,69 +5,20 @@ import { Experience } from '../../components/profiles/experience/Experience';
 import { CustomExperience } from '../../components/accordion/customExperience';
 import EditProfile from '../../components/profiles/EditProfile';
 import Hobbys from '../../components/profiles/hobbys/Hobbys';
-import ImagePanel from '../../components/profiles/ImagePanel';
+import BasicInfo from '../../components/profiles/basicInfo/BasicInfo';
 
 const Profile = ({ profile, currentUser }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
   // const isInitialMount = useRef(true);
 
   const hobbys = Array.from(profile.hobbys);
 
-  let fieldNames = Object.keys(profile);
-  const paragraphHiddenList = fieldNames.map((fieldName) => {
-    // split(/(?=[A-Z])/) - wrzuca do tablicy po napotkaniu dużej litery
-    const text = fieldName.split(/(?=[A-Z])/).join(' ');
-
-    return fieldName === 'user' ||
-      fieldName === '_id' ||
-      fieldName === 'version' ||
-      fieldName === 'hobbys' ||
-      fieldName === 'experiences' ||
-      fieldName === 'profilePhoto' ? null : (
-      <p key={Math.random(profile._id)}>
-        {`${text.slice(0, 1).toUpperCase() + text.slice(1)} : ${
-          profile[`${fieldName}`] ? profile[`${fieldName}`] : ''
-        }`}
-      </p>
-    );
-  });
   return (
     <div className="profile">
       <div className="profile__container--left-side">
         <div className="profile__basic-info">
-          <ImagePanel
-            profile={profile || 'profile.jpg'}
-            currentUser={currentUser}
-          />
-          <div className="profile__basic-info-section-basic">
-            <p className="">Firstname: {profile.user.firstname}</p>
-            <p className="">Lastname: {profile.user.lastname}</p>
-            <p className="">Email: {profile.user.email} </p>
-
-            <button
-              className=""
-              type="button"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {`${isOpen ? 'close' : 'View more info'}`}
-            </button>
-          </div>
-          {isOpen && (
-            <div
-              className={`profile__basic-info-section-details`}
-              style={isOpen ? { display: 'flex' } : { display: 'none' }}
-            >
-              <div
-                className={`${
-                  isOpen ? 'profile__basic-info-section-details-collapse' : ''
-                }`}
-              >
-                {paragraphHiddenList}
-              </div>
-            </div>
-          )}
+          <BasicInfo profile={profile} currentUser={currentUser} />
         </div>
         <div className="profile__hobbys">
           <Hobbys hobbys={hobbys} currentUser={currentUser} />{' '}

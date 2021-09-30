@@ -1,9 +1,21 @@
 .profile {
   display: flex;
+  flex-wrap: wrap;
   column-gap: 25px;
   width: 100%;
   margin-left: 30px;
   margin-right: 30px;
+  button {
+    background-color: indigo;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 2em;
+  }
   &__container {
     &--left-side {
       display: flex;
@@ -26,102 +38,109 @@
 
   &__basic-info {
     width: 100%;
-    display: flex;
+    // display: flex;
     padding: 10px;
-    column-gap: 20px;
-    row-gap: 20px;
-    flex-wrap: wrap;
     flex: 1 45%;
-    justify-content: center;
     border: 1px solid indigo;
     border-radius: 5px;
 
-    &-image-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-    &-image {
-      display: flex;
-      flex: 1 45%;
-      justify-content: center;
-      align-items: center;
+    // &-image-container {
+    //   display: flex;
+    //   flex-grow: 10;
+    //   align-items: center;
+    //   justify-content: center;
+    //   flex-direction: column;
+    // }
+    // &-image {
+    //   display: flex;
+    //   flex: 1 45%;
+    //   justify-content: center;
+    //   align-items: center;
 
-      img {
-        border-radius: 50%;
-      }
-      // margin: auto;
-      // justify-content: center;
-      // align-items: flex-start;
-    }
-    &-image-form {
-      position: relative;
-      display: flex;
-      margin-top: 20px;
-
-      width: fit-content;
-      align-self: center;
-      border-radius: 15px;
-      background-color: indigo;
-
-      justify-content: center;
-      align-items: center;
-
-      color: white;
-
-      &-container {
-        width: fit-content;
-        display: flex;
-        justify-items: center;
-        align-items: center;
-
-        label {
-          padding: 10px;
-        }
-      }
-    }
-
-    &-image-form input[type='file'] {
-      margin: 0;
-      padding: 0;
-      cursor: pointer;
-      opacity: 0;
-      width: 0px;
-    }
-
-    // &-image-submit {
+    //   img {
+    //     border-radius: 50%;
+    //   }
+    //   // margin: auto;
+    //   // justify-content: center;
+    //   // align-items: flex-start;
+    // }
+    // &-image-form {
+    //   position: relative;
     //   display: flex;
     //   margin-top: 20px;
+
     //   width: fit-content;
     //   align-self: center;
-    //   background-color: red;
+    //   border-radius: 15px;
+    //   background-color: indigo;
+
+    //   justify-content: center;
+    //   align-items: center;
+
+    //   color: white;
+    //   button {
+    //     background-color: indigo;
+    //     border: 1px solid pink;
+    //     padding: 5px 5px;
+    //     margin-right: 5px;
+    //     font-weight: bold;
+    //   }
+    //   &-container {
+    //     width: fit-content;
+    //     display: flex;
+    //     justify-items: center;
+    //     align-items: center;
+
+    //     label {
+    //       padding: 10px;
+    //     }
+    //   }
     // }
 
-    &-section-basic {
-      // width: 45%;
-      display: flex;
-      flex: 1 45%;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
+    // &-image-form input[type='file'] {
+    //   margin: 0;
+    //   padding: 0;
+    //   cursor: pointer;
+    //   opacity: 0;
+    //   width: 0px;
+    // }
 
-    &-section-details {
-      flex: 1 100%;
+    // // &-image-submit {
+    // //   display: flex;
+    // //   margin-top: 20px;
+    // //   width: fit-content;
+    // //   align-self: center;
+    // //   background-color: red;
+    // // }
+    // &-text {
+    //   // background-color: red;
+    // }
 
-      justify-content: flex-start;
+    // &-section-basic {
+    //   // width: 45%;
+    //   display: flex;
+    //   flex-grow: 7;
+    //   flex-flow: column;
+    //   // justify-content: center;
+    //   // align-items: center;
+    // }
 
-      &-collapse {
-        width: fit-content;
-        p {
-          width: fit-content;
-        }
-      }
-    }
+    // &-section-details {
+    //   flex: 1 100%;
 
-    button {
-      width: fit-content;
-    }
+    //   justify-content: flex-start;
+
+    //   &-collapse {
+    //     width: fit-content;
+    //     p {
+    //       width: fit-content;
+    //     }
+    //   }
+    // }
+
+    // button {
+    //   width: fit-content;
+    // }
   }
 
   &__experience {

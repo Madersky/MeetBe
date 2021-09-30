@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import UseRequest from '../../hooks/use-request';
+import UseRequest from '../../../hooks/use-request';
 
 const ImagePanel = ({ profile, currentUser }) => {
   const [profilePhoto, setProfilePhoto] = useState();
@@ -62,8 +62,8 @@ const ImagePanel = ({ profile, currentUser }) => {
   };
 
   return (
-    <div className="profile__basic-info-image-container">
-      <div className="profile__basic-info-image">
+    <div className="image-container">
+      <div className="image">
         <img
           src={photoUrl}
           style={{
@@ -75,8 +75,8 @@ const ImagePanel = ({ profile, currentUser }) => {
           }}
         ></img>
       </div>
-      <form onSubmit={onSubmit} className="profile__basic-info-image-form">
-        <div className="profile__basic-info-image-form-container">
+      <form onSubmit={onSubmit} className="image-form">
+        <div className="image-form-container">
           <label>
             {profilePhotoName}
             <input

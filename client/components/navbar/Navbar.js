@@ -117,7 +117,7 @@ const Navbar = ({ currentUser }) => {
     .filter((linkConfig) => linkConfig)
     .map(({ label, href, icon }) => {
       return (
-        <AnimatePresence>
+        <AnimatePresence key={label}>
           <li className="navbar__list-item--bot" key={label}>
             <Link href={href}>
               <NavButton className={icon} label={label} />
